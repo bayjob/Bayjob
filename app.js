@@ -12,6 +12,7 @@ var ajouterCandidat = require('./routes/ajouterCandidat');
 var ajouterCv = require('./routes/ajouterCv');
 var cv = require('./routes/cv');
 var rechercheOffres = require('./routes/rechercherOffres');
+var rechercheCvs = require('./routes/rechercheCvs');
 var ajouterRecruteur = require('./routes/ajouterRecruteur')
 var login = require('./routes/login');
 var logout = require('./routes/logout');
@@ -53,6 +54,7 @@ app.use('/ajouterCandidat', ajouterCandidat);
 app.use('/ajouterCv', ajouterCv);
 app.use('/cv', cv);
 app.use('/login',login);
+app.use('/rechercheCvs',rechercheCvs);
 app.use('/logout',logout);
 app.use('/rechercheOffres', rechercheOffres);
 app.use('/ajouterRecruteur', ajouterRecruteur);
