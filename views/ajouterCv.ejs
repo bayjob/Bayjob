@@ -1,0 +1,62 @@
+<%- include('include/header-connect') %>
+
+<section  class="page-title cyan darken-1 white-text">
+    <div class="container">
+        <div class="row">
+            <div id="logo-title" class="col s3 m1">
+                <i class="medium material-icons">search</i>
+            </div>
+
+            <div class="col s9 m8">
+                <h3><%=title%></h3>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="page-content" id="ajouterCV">
+    <div class="container">
+        <div class="row">
+            <h2 style="text-align: center">Veuillez remplir le formulaire ci-aprés svp.</h2>
+            <div class="col s12 m7 offset-m2">
+                <form method="post" action="#">
+                        <h3 style="text-align: center">CV</h3>
+                    <input type="text" name="titre" placeholder="Titre du CV">
+                        <h3 style="text-align: center">Formation</h3>
+                    <input type="text" name="IntituleDiplome" placeholder="Intitulé du diplôme passé">
+                    <input type="text" name="mention" placeholder="Mention">
+                    <input type="number" name="annee" placeholder="Année">
+                    <input type="text" name="etablissement"  placeholder="Etablissement">
+                    <input type="text" name="VilleDi" placeholder="Ville">
+                        <h3 style="text-align: center">Expérience Pro</h3>
+                    <input type="text" name="entreprise" placeholder="Entreprise">
+                    <select>
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="1">CDD</option>
+                        <option value="2">CDI</option>
+                        <option value="3">Apprentissage</option>
+                    </select>
+                    <input type="text" name="poste" placeholder="Poste">
+                    <input type="text" name="duree" placeholder="Duree">
+                    <input type="text" name="villeXp" placeholder="Ville">
+                        <h3 style="text-align: center">Missions</h3>
+                    <input type="text" name="intituleMission" placeholder="Intitulé de la mission">
+                        <h3 style="text-align: center">Competences</h3>
+                    <input type="text" name="intituleCompetence" placeholder="Intitulé de la compétence">
+                    <input type="text" name="niveauCompetence" placeholder="Niveau de maitrise de la compétence">
+                        <h3 style="text-align: center">Langue</h3>
+                    <input type="text" name="denominationLangue" placeholder="Langue">
+                    <input type="text" name="niveauLangue" placeholder="Niveau de langue">
+                        <h3 style="text-align: center">Centres d'interêt</h3>
+                    <input type="text" name="intituleInteret" placeholder="Intitulé">
+
+                    <input type="submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('include/footer') %>

@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var ajouterCandidat = require('./routes/ajouterCandidat');
+var ajouterCv = require('./routes/ajouterCv');
 var cv = require('./routes/cv');
 var rechercheOffres = require('./routes/rechercherOffres');
 var ajouterRecruteur = require('./routes/ajouterRecruteur')
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/ajouterCandidat', ajouterCandidat);
+app.use('/ajouterCv', ajouterCv);
 app.use('/cv', cv);
 app.use('/login',login);
 app.use('/rechercheOffres', rechercheOffres);

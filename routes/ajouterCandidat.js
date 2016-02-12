@@ -1,9 +1,14 @@
+/**
+ * Created by Antoine Delahaye on 08/02/2016.
+ */
 var models = require('../models');
 var express = require('express');
 var router = express.Router();
+
 router.get('/', function(req, res, next) {
-    res.render('ajouterCandidat', { title: 'Inscription' });
+    res.render('ajouterCandidat', { title: 'Inscription d\'un Candidat '});
 });
+
 router.post('/', function(req, res, next) {
     var candidat = models.Candidat.build({
         nom: req.body.nomCandidat,
@@ -21,7 +26,8 @@ router.post('/', function(req, res, next) {
     });
 
     candidat.save().then(function() {
-        res.send('ok added : ' + candidat.nom0);
+        res.render('login', { title:'Page de connexion', email: candidat.mail, mdp : candidat.mdp});
+        //res.send('ok added : ' + candidat.nom);
     })
 });
 module.exports = router;

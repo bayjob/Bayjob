@@ -1,31 +1,44 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title><%=title%></title>
-    <!--Import Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="/css/style.css" media="screen,projection"/>
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
-<form method="post" action="/ajouterCandidat">
-    <input type="text" name="nomCandidat" placeholder="Nom">
-    <input type="text" name="prenomCandidat" placeholder="Prenom">
-    <input type="date" name="dateNaissanceCandidat" placeholder="Date de Naissance">
-    <input type="text" name="telFixeCandidat" placeholder="Tel fixe">
-    <input type="text" name="telMobileCandidat" placeholder="Tel Portable">
-    <input type="text" name="adresseCandidat" placeholder="Adresse">
-    <input type="text" name="villeCandidat" placeholder="Ville">
-    <input type="text" name="cpCandidat" placeholder="Code Postal">
-    <input type="text" name="paysCandidat" placeholder="Pays">
-    <input type="text" name="mobiliteCandidat" placeholder="Mobilité">
-    <input type="text" name="mailCandidat" placeholder="Mail">
-    <input type="password" name="mdpCandidat" placeholder="Mot de passe">
-    <input type="submit">
-</form>
-</body>
-</html>
+<%- include('include/header-connect') %>
+
+<section  class="page-title cyan darken-1 white-text">
+    <div class="container">
+        <div class="row">
+            <div id="logo-title" class="col s3 m1">
+                <i class="medium material-icons">search</i>
+            </div>
+
+            <div class="col s9 m8">
+                <h3><%=title%></h3>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="page-content" id="rechercherOffres">
+    <div class="container">
+        <div class="row">
+            <h2 style="text-align: center">Veuillez remplir le formulaire ci-aprés svp.</h2>
+            <div class="col s12 m7 offset-m2">
+                <form method="post" action="/ajouterCandidat">
+                    <input type="text" name="nomCandidat" placeholder="Nom">
+                    <input type="text" name="prenomCandidat" placeholder="Prenom">
+                    <input type="date" name="dateNaissanceCandidat" min="1925-01-01" max="1998-02-11" class="datepicker" placeholder="Date de Naissance">
+                    <input type="text" name="telFixeCandidat" placeholder="Tel fixe">
+                    <input type="text" name="telMobileCandidat" placeholder="Tel Portable">
+                    <input type="text" name="adresseCandidat" placeholder="Adresse">
+                    <input type="text" name="villeCandidat" placeholder="Ville">
+                    <input type="text" name="cpCandidat" placeholder="Code Postal">
+                    <input type="text" name="paysCandidat" placeholder="Pays">
+                    <input type="text" name="mobiliteCandidat" placeholder="Mobilité">
+                    <input type="text" name="mailCandidat" placeholder="Mail">
+                    <input type="password" name="mdpCandidat" placeholder="Mot de passe">
+                    <input type="submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('include/footer') %>

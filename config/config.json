@@ -1,23 +1,23 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "bayjob_db",
-    "host": "127.0.0.1",
+    "username": "adelahay",
+    "password": "14101993",
+    "database": "test",
+    "host": "192.168.22.251",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "bayjob_db",
-    "host": "127.0.0.1",
+    "username": "adelahay",
+    "password": "14101993",
+    "database": "test",
+    "host": "192.168.22.251",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "bayjob_db",
-    "host": "127.0.0.1",
+    "username": "adelahay",
+    "password": "14101993",
+    "database": "test",
+    "host": "192.168.22.251",
     "dialect": "mysql"
   }
 }
