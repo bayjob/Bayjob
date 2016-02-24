@@ -1,0 +1,128 @@
+<%- include('include/header-connect') %>
+
+<section class="page-title cyan darken-1 white-text">
+    <div class="container">
+        <div class="row">
+            <div class="col s4 m2">
+                <div class="center-align">
+                    <p><img src="/img/avatar.png" width="110px" height="110px"/></p>
+                </div>
+            </div>
+
+            <div class="col s8 m6">
+                <h3><%= offre.Recruteur.nomEntreprise%> <%= offre.Recruteur.nomRecruteur %></h3>
+                <h5><%= offre.titre %></h5>
+            </div>
+
+            <div class="col s12 m2">
+                <p class="center-align"><span class="taux">78%</span><br/> de compatibilité</p>
+            </div>
+
+            <div class="col s6 m1">
+                <p class="center-align"><a style="margin-top: 20px;"
+                                           class="btn-floating btn-large waves-effect waves-light blue-grey darken-1"><i
+                                class="large material-icons">thumb_up</i></a></p>
+            </div>
+
+            <div class="col s6 m1">
+                <p class="center-align"><a style="margin-top: 20px;" class="btn-floating btn-large waves-effect waves-light white"><i
+                                class="large material-icons blue-grey-text text-darken-1">thumb_down</i></a></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="page-content" id="cv">
+    <div class="container">
+
+        <div class="row">
+            <div class="col s12 m10 offset-m1">
+
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                        <div class="collapsible-header active"><i class="material-icons">description</i>Description
+                            générale
+
+
+
+                        </div>
+                        <div class="collapsible-body">
+                            <div class="container">
+                                <h4>Competence</h4>
+
+                                <table>
+                                    <tbody>
+                                    <% for(var i = 0; i < offre.Competence_offres.length; i++) { %>
+                                    <tr>
+                                        <td><%= offre.Competence_offres[i].intitule %></td>
+                                        <td>
+                                            <% for(var j = 0; j < 5;j++){
+                                            if(j < offre.Competence_offres[i].niveau){ %>
+                                            <i class="material-icons">star</i>
+                                            <% }else{ %>
+                                            <i class="material-icons">star_border</i>
+                                            <% }
+                                            } %>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">school</i>Mission offre</div>
+                        <div class="collapsible-body">
+                            <table>
+                                <tbody>
+                                <% for(var i = 0; i < offre.Mission_offres.length; i++) { %>
+                                <tr>
+                                    <td><%= offre.Mission_offres[i].intitule %></td>
+
+                                </tr>
+                                <% } %>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">work</i>Résumé
+
+                        </div>
+                        <div class="collapsible-body">
+                            <h4>Résumé</h4>
+                            <%=offre.resume%>
+                            <h4>Temps de  travail</h4>
+                            <%=offre.tempDeTravail%>
+                            <h4> Lieux</h4>
+                            <%=offre.ville%>
+                            <h4>salaire</h4>
+                            <%=offre.salaire%>
+
+
+
+                        </div>
+                    </li>
+                    <li>
+
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!--<div class="col s12 m3">
+            <p><a class="waves-effect waves-light btn blue-grey darken-1"><i class="material-icons left">info</i>En savoir plus</a></p>
+        </div>-->
+    </div>
+    </div>
+
+
+</section>
+<%- include('include/footer') %>

@@ -20,7 +20,7 @@ router.post('/', function (req, res) {
     where:{mail: req.body.email}
   }).then(function(utilisateur) {
     if(utilisateur && req.body.email === utilisateur.mail && req.body.mdp === utilisateur.mdp){
-      req.session.user = utilisateur.mail;
+      req.session.user = utilisateur.id;
       req.session.type = utilisateur.type;
 
       //TEST

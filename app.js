@@ -17,6 +17,7 @@ var ajouterRecruteur = require('./routes/ajouterRecruteur')
 var login = require('./routes/login');
 var logout = require('./routes/logout');
 var ajouterOffre = require('./routes/ajouterOffre');
+var offre = require('./routes/offres');
 
 
 
@@ -58,6 +59,7 @@ app.use('/logout',logout);
 app.use('/rechercheOffres', rechercheOffres);
 app.use('/ajouterRecruteur', ajouterRecruteur);
 app.use('/ajouterOffre', ajouterOffre);
+app.use('/offre', offre);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
