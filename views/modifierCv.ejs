@@ -1,6 +1,6 @@
 <%- include('include/header') %>
 
-<section class="page-title cyan darken-1 white-text">
+<section class="page-title cyan darken-1 white-text" xmlns="http://www.w3.org/1999/html">
     <div class="container">
         <div class="row">
             <div class="col s4 m2">
@@ -22,6 +22,7 @@
 
         <div class="row">
             <div class="col s12 m10 offset-m1">
+                <form method="post" action="/modifierCv">
 
                 <ul class="collapsible" data-collapsible="accordion">
                     <li>
@@ -32,6 +33,8 @@
                             <div class="container">
                                 <h4>Résumé</h4>
                                     <input value="<%=cv.resume%>" type="text" name="resumeCv" >
+                                    <input value="<%=cv.resume%>" type="hidden" name="oldresume" >
+                                    <input value="<%=cvid%>" type="hidden" name="cvid" >
                                 <h4>Compétences</h4>
                                 <table>
                                     <tbody>
@@ -64,15 +67,17 @@
                                      style="border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 20px">
                                     <div class="col s12 m2">
                                         <input value="<%= cv.Formations[i].annee %>" type="number" name="anneeFormation" >
+                                        <input value="<%= cv.Formations[i].annee %>" type="hidden" name="oldanneeFormation" >
+                                        <input value="<%= cv.Formations[i].id %>" type="hidden" name="idformation" >
                                     </div>
                                     <div class="col s12 m10">
                                         <input style="font-weight:bold " value="<%= cv.Formations[i].intitule_diplome %>" type="text" name="intitulediplome" ><br/>
 
-                                        <div class="input-field col s4">
-                                            <input value="<%= cv.Formations[i].etablissement %>" type="text" name="etabli" >
-                                        </div>
                                         <div class="input-field col s6">
-                                            <input value="<%= cv.Formations[i].ville %>" type="text" name="etabli" >
+                                            <input value="<%= cv.Formations[i].etablissement %>" type="text" name="etablissement" >
+                                        </div>
+                                        <div class="input-field col s4">
+                                            <input value="<%= cv.Formations[i].ville %>" type="text" name="formation" >
                                         </div>
 
                                         <div class="input-field col s4">
@@ -81,6 +86,11 @@
                                         <div class="input-field col s4">
                                             <input value="<%= cv.Formations[i].mention %>" type="text" name="mention" >
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                        <button class="btn waves-effect waves-light blue-grey darken-1" type="submit" name="enregistrer">Enregistrer
+                                            <i class="material-icons right">send</i>
+                                        </button>
                                     </div>
                                 </div>
 
@@ -99,18 +109,38 @@
                                 <div class="row"
                                      style="border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 20px">
                                     <div class="col s12 m2">
-                                        <%- mois[cv.Experience_pros[i].datedebut.getMonth()] + " " + cv.Experience_pros[i].datedebut.getFullYear() + " - " + mois[cv.Experience_pros[i].datefin.getMonth()] + " " + cv.Experience_pros[i].datefin.getFullYear()%>
+
                                     </div>
                                     <div class="col s12 m10">
-                                        <strong><%= cv.Experience_pros[i].poste %></strong><br/>
-                                        <%= cv.Experience_pros[i].entreprise %> - <%= cv.Experience_pros[i].ville %>
+                                        <input style="font-weight: bold" value="<%= cv.Experience_pros[i].poste %>" type="text" name="exppro" ><br/>
+                                        <div class="input-field col s4">
+                                            <input value="<%= cv.Experience_pros[i].entreprise %>" type="text" name="entreprise" >
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <input value="<%= cv.Experience_pros[i].ville %>" type="text" name="villecontrat" >
+                                        </div>
                                         <br/>
-                                        Type de contrat : <%= cv.Experience_pros[i].Contrat_type.intitule %>
+                                        <div class="input-field col s4">
+                                            Type de contrat :
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <select name="contrattype">
+                                                <option value="" disabled selected><%= cv.Experience_pros[i].Contrat_type.intitule %></option>
+                                                <option value="1">CDD</option>
+                                                <option value="2">CDI</option>
+                                                <option value="3">Apprentissage</option>
+                                                <option value="4">Stage</option>
+                                            </select>
+
+                                         </div>
                                         <br/><br/>
-                                        Mission(s) :
+                                        <div class="col s12 m10">
+                                            Mission(s) :
+                                        </div>
+                                        </br>
                                         <ul>
                                             <% for(var j = 0; j < cv.Experience_pros[i].Mission_CVs.length; j++) { %>
-                                            <li><%= cv.Experience_pros[i].Mission_CVs[j].intitule %></li>
+                                            <li><input value="<%= cv.Experience_pros[i].Mission_CVs[j].intitule %>" type="text" name="intitulemission" ></li>
                                             <% } %>
                                         </ul>
                                     </div>
@@ -155,7 +185,7 @@
                                     <tbody>
                                     <% for(var i = 0; i < cv.Centre_interets.length; i++) { %>
                                     <tr>
-                                        <td><%= cv.Centre_interets[i].intitule %></td>
+                                        <td><input  value="<%= cv.Centre_interets[i].intitule %>" type="text" name="intitulediplome" ></td>
                                     </tr>
                                     <% } %>
                                     </tbody>
@@ -164,7 +194,12 @@
                         </div>
                     </li>
                 </ul>
-
+                <div class="row">
+                    <button class="btn waves-effect waves-light blue-grey darken-1" type="submit" name="enregistrer">Enregistrer
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+                </form>
             </div>
 
         </div>
