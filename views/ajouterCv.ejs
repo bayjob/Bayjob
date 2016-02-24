@@ -88,11 +88,11 @@
                         <label for="poste">Poste</label>
                     </div>
                     <div class="input-field col s12">
-                        <input name="datedebut" type="date" length="255">
+                        <input name="datedebut" type="date" class="datepicker">
                         <label for="datedebut">Date de début</label>
                     </div>
                     <div class="input-field col s12">
-                        <input name="datefin" type="date" length="255">
+                        <input name="datefin" type="date" class="datepicker">
                         <label for="datefin">Date de fin</label>
                     </div>
                     <div class="input-field col s12">
@@ -114,18 +114,21 @@
                         <h3 style="text-align: center">Missions</h3>
                     </div>
                     <div id="missionAdd" class="input-field col s12">
-                        <input name="intituleMission" type="text" length="255">
-                        <label for="intituleMission">Intitulé de la mission</label>
+                        <div class="input-field col s12">
+                            <input name="intituleMission" type="text" length="255">
+                            <label for="intituleMission">Intitulé de la mission</label>
+                         </div>
                         <script type="text/javascript" >
                             var div = document.getElementById('test');
-                            function addField() {
-                                missionAdd.innerHTML += '<input name="intituleMission+" type="text" length="255">'+
-                                        '<label for="intituleMission+">Intitulé de la mission</label>';
+                            function addFieldMission() {
+                                missionAdd.innerHTML += '<div class="input-field col s12">' +
+                                        '<input name="intituleMission+" type="text" length="255">'+
+                                        '<label for="intituleMission+">Intitulé de la mission</label></div>';
                             }
                         </script>
                     </div>
                     <div class="input-field col s12" >
-                        <button type="button" onclick="addField()" >+</button>
+                        <button type="button" onclick="addFieldMission()" >+</button>
                     </div>
                     </br>
                     </br>
@@ -144,7 +147,7 @@
                         </div>
                         <script type="text/javascript" >
                             var div = document.getElementById('test');
-                            function addField() {
+                            function addFieldCompetence() {
                                 competenceAdd.innerHTML += '<div class="input-field col s12"><input name="intituleCompetence" type="text" length="50">'+
                                         '<label for="intituleCompetence">Intitulé de la compétence</label></div>'+
                                         '<div class="input-field col s12"><input name="niveauCompetence" type="text" length="1">' +
@@ -152,22 +155,38 @@
                             }
                         </script>
                         <div class="input-field col s12" >
-                            <button type="button" onclick="addField()" >+</button>
+                            <button type="button" onclick="addFieldCompetence()" >+</button>
                         </div>
                     </div>
                     </br>
                     </br>
                     </br>
                     <div class="col s12 m7 offset-m2">
-                        <h3 style="text-align: center">Langue</h3>
+                        <h3 style="text-align: center">Langue(s)</h3>
                     </div>
-                    <div class="input-field col s12">
-                        <input name="denominationLangue" type="text" length="50">
-                        <label for="denominationLangue">Langue</label>
+                    <div  id="langueAdd" class="input-field col s12">
+                        <div class="input-field col s12">
+                            <input name="denominationLangue" type="text" length="50">
+                            <label for="denominationLangue">Langue</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input name="niveauLangue" type="text" length="1">
+                            <label for="niveauLangue">Niveau de maitrise de la Langue</label>
+                        </div>
+                        <script type="text/javascript" >
+                            var div = document.getElementById('test');
+                            function addFieldLangue() {
+                                langueAdd.innerHTML += ' <div class="input-field col s12">' +
+                                        '<input name="denominationLangue" type="text" length="50">' +
+                                        '<label for="denominationLangue">Langue</label></div>' +
+                                        '<div class="input-field col s12">' +
+                                        '<input name="niveauLangue" type="text" length="1">' +
+                                        '<label for="niveauLangue">Niveau de maitrise de la Langue</label></div>';
+                            }
+                        </script>
                     </div>
-                    <div class="input-field col s12">
-                        <input name="niveauLangue" type="text" length="1">
-                        <label for="niveauLangue">Niveau de maitrise de la Langue</label>
+                    <div class="input-field col s12" >
+                        <button type="button" onclick="addFieldLangue()" >+</button>
                     </div>
                     </br>
                     </br>
@@ -175,9 +194,22 @@
                     <div class="col s12 m7 offset-m2">
                         <h3 style="text-align: center">Centres d'interêt</h3>
                     </div>
-                    <div class="input-field col s12">
-                        <input name="intituleInteret" type="text" length="50">
-                        <label for="intituleInteret">Intitulé centre interet</label>
+                    <div  id="interetAdd" class="input-field col s12">
+                        <div class="input-field col s12">
+                            <input name="intituleInteret" type="text" length="50">
+                            <label for="intituleInteret">Intitulé centre interet</label>
+                        </div>
+                        <script type="text/javascript" >
+                            var div = document.getElementById('test');
+                            function addFieldInteret() {
+                                interetAdd.innerHTML += ' <div class="input-field col s12">' +
+                                        '<input name="intituleInteret" type="text" length="50">' +
+                                        '<label for="intituleInteret">Intitulé centre interet</label></div>';
+                            }
+                        </script>
+                    </div>
+                    <div class="input-field col s12" >
+                        <button type="button" onclick="addFieldInteret()" >+</button>
                     </div>
 
                     <div class="input-field col s12" >
