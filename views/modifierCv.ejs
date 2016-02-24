@@ -1,0 +1,180 @@
+<%- include('include/header') %>
+
+<section class="page-title cyan darken-1 white-text">
+    <div class="container">
+        <div class="row">
+            <div class="col s4 m2">
+                <div class="center-align">
+                    <p><img src="/img/avatar.png" width="110px" height="110px"/></p>
+                </div>
+            </div>
+
+            <div class="col s8 m6">
+                <h3><%= cv.Candidat.prenom %> <%= cv.Candidat.nom %></h3>
+                <h5><%= cv.titre %></h5>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="page-content" id="cv">
+    <div class="container">
+
+        <div class="row">
+            <div class="col s12 m10 offset-m1">
+
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                        <div class="collapsible-header active"><i class="material-icons">description</i>Description
+                            générale
+                        </div>
+                        <div class="collapsible-body">
+                            <div class="container">
+                                <h4>Résumé</h4>
+                                    <input value="<%=cv.resume%>" type="text" name="resumeCv" >
+                                <h4>Compétences</h4>
+                                <table>
+                                    <tbody>
+                                    <% for(var i = 0; i < cv.Competence_CVs.length; i++) { %>
+                                    <tr>
+                                        <td><%= cv.Competence_CVs[i].intitule %></td>
+                                        <td>
+                                            <% for(var j = 0; j < 5;j++){
+                                            if(j < cv.Competence_CVs[i].niveau){ %>
+                                            <i class="material-icons">star</i>
+                                            <% }else{ %>
+                                            <i class="material-icons">star_border</i>
+                                            <% }
+                                            } %>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">school</i>Formation</div>
+                        <div class="collapsible-body">
+                            <div class="container">
+
+                                <% for(var i = 0; i < cv.Formations.length; i++) { %>
+                                <div class="row"
+                                     style="border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 20px">
+                                    <div class="col s12 m2">
+                                        <input value="<%= cv.Formations[i].annee %>" type="number" name="anneeFormation" >
+                                    </div>
+                                    <div class="col s12 m10">
+                                        <input style="font-weight:bold " value="<%= cv.Formations[i].intitule_diplome %>" type="text" name="intitulediplome" ><br/>
+
+                                        <div class="input-field col s4">
+                                            <input value="<%= cv.Formations[i].etablissement %>" type="text" name="etabli" >
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <input value="<%= cv.Formations[i].ville %>" type="text" name="etabli" >
+                                        </div>
+
+                                        <div class="input-field col s4">
+                                            Mention
+                                        </div>
+                                        <div class="input-field col s4">
+                                            <input value="<%= cv.Formations[i].mention %>" type="text" name="mention" >
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <% } %>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">work</i>Expériences
+                            professionnelles
+                        </div>
+                        <div class="collapsible-body">
+                            <div class="container">
+
+                                <% for(var i = 0; i < cv.Experience_pros.length; i++) { %>
+                                <div class="row"
+                                     style="border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 20px">
+                                    <div class="col s12 m2">
+                                        <%- mois[cv.Experience_pros[i].datedebut.getMonth()] + " " + cv.Experience_pros[i].datedebut.getFullYear() + " - " + mois[cv.Experience_pros[i].datefin.getMonth()] + " " + cv.Experience_pros[i].datefin.getFullYear()%>
+                                    </div>
+                                    <div class="col s12 m10">
+                                        <strong><%= cv.Experience_pros[i].poste %></strong><br/>
+                                        <%= cv.Experience_pros[i].entreprise %> - <%= cv.Experience_pros[i].ville %>
+                                        <br/>
+                                        Type de contrat : <%= cv.Experience_pros[i].Contrat_type.intitule %>
+                                        <br/><br/>
+                                        Mission(s) :
+                                        <ul>
+                                            <% for(var j = 0; j < cv.Experience_pros[i].Mission_CVs.length; j++) { %>
+                                            <li><%= cv.Experience_pros[i].Mission_CVs[j].intitule %></li>
+                                            <% } %>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <% } %>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">chat</i>Langues</div>
+                        <div class="collapsible-body">
+                            <div class="container">
+
+                                <table>
+                                    <tbody>
+                                    <% for(var i = 0; i < cv.Langues.length; i++) { %>
+                                    <tr>
+                                        <td><%= cv.Langues[i].intitule %></td>
+                                        <td>
+                                            <% for(var j = 0; j < 5;j++){
+                                            if(j < cv.Langues[i].niveau){ %>
+                                            <i class="material-icons">star</i>
+                                            <% }else{ %>
+                                            <i class="material-icons">star_border</i>
+                                            <% }
+                                            } %>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">public</i>Centres d'intérêt</div>
+                        <div class="collapsible-body">
+                            <div class="container">
+
+                                <table>
+                                    <tbody>
+                                    <% for(var i = 0; i < cv.Centre_interets.length; i++) { %>
+                                    <tr>
+                                        <td><%= cv.Centre_interets[i].intitule %></td>
+                                    </tr>
+                                    <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!--<div class="col s12 m3">
+            <p><a class="waves-effect waves-light btn blue-grey darken-1"><i class="material-icons left">info</i>En savoir plus</a></p>
+        </div>-->
+    </div>
+    </div>
+
+
+</section>
+<%- include('include/footer') %>
