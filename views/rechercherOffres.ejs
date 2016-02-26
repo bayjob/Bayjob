@@ -1,6 +1,6 @@
 <%- include('include/header-connect') %>
 
-<section  class="page-title cyan darken-1 white-text">
+<section class="page-title cyan darken-1 white-text">
     <div class="container">
         <div class="row">
             <div id="logo-title" class="col s3 m1">
@@ -8,7 +8,7 @@
             </div>
 
             <div class="col s9 m8">
-                <h3><%=title%></h3>
+                <h3><%= title %></h3>
             </div>
         </div>
 
@@ -22,86 +22,91 @@
             <div class="col s12 m7 offset-m2">
 
                 <h4>Poste recherché</h4>
-                <div class="input-field col s12">
-                    <p>Intitulé du poste</p>
-                    <input placeholder="Mots-cles" id="intitulePoste" type="text" class="validate">
+                <% if(messageErr != null){%>
+                    <div id="messageErr" class="card-panel teal lighten-2"><%=messageErr%></div>
+                <%}%>
+                <form action="/rechercheOffres" method="post">
+                    <div class="input-field col s12">
+                        <p>Intitulé du poste</p>
+                        <input placeholder="Mots-cles" name="intitulePoste" type="text" class="validate">
 
-                </div>
+                    </div>
 
-                <div class="input-field col s12">
-                    <p>Lieu du poste</p>
-                    <input placeholder="Pays, région, département ou ville" id="lieu" type="text" class="validate">
+                    <div id="locationField" class="input-field col s12">
+                        <p>Lieu du poste</p>
+                        <input id="autocomplete" placeholder="Pays, région, département ou ville" onFocus="geolocate()" name="lieu" type="text" class="validate">
 
-                </div>
+                    </div>
 
-                <div class="input-field col s12">
-                    <form action="#">
-                        <p>Distance (en km)</p>
-                        <p class="range-field">
-                            <input type="range" id="distance" min="0" max="100" value="0" />
+                    <div id="address">
+                        <input type="hidden" name="ville" id="locality" disabled="true"/>
+                        <input type="hidden" name="region" id="administrative_area_level_1" disabled="true"/>
+                        <input type="hidden" name="departement" id="administrative_area_level_2" disabled="true"/>
+                        <input type="hidden" name="pays" id="country" disabled="true"/>
+                    </div>
+
+                    <h4>Niveau d'étude</h4>
+                    <div class="col s12">
+
+                        <p>
+                            <input type="checkbox" name="nivEtude" value="BAC+5" id="bac+5"/>
+                            <label for="bac+5">BAC +5</label>
                         </p>
-                    </form>
-                </div>
 
-                <h4>Niveau d'étude</h4>
-                <div class="col s12">
+                        <p>
+                            <input type="checkbox" name="nivEtude" value="BAC+4" id="bac+4"/>
+                            <label for="bac+4">BAC +4</label>
+                        </p>
 
-                    <p>
-                        <input type="checkbox" id="bac+5" />
-                        <label for="bac+5">BAC +5</label>
+                        <p>
+                            <input type="checkbox" name="nivEtude" value="BAC+3" id="bac+3"/>
+                            <label for="bac+3">BAC +3</label>
+                        </p>
+
+                        <p>
+                            <input type="checkbox" name="nivEtude" value="BAC+2" id="bac+2"/>
+                            <label for="bac+2">BAC +2</label>
+                        </p>
+
+                        <p>
+                            <input type="checkbox" name="nivEtude" value="BAC+1" id="bac+1"/>
+                            <label for="bac+1">BAC +1</label>
+                        </p>
+
+                        <p>
+                            <input type="checkbox" name="nivEtude" value="BAC" id="bac"/>
+                            <label for="bac">BAC</label>
+                        </p>
+
+                        <p>
+                            <input type="checkbox" name="nivEtude" value="BEP" id="bep"/>
+                            <label for="bep">BEP</label>
+                        </p>
+
+                        <p>
+                            <input type="checkbox" name="nivEtude" value="CAP" id="cap"/>
+                            <label for="cap">CAP</label>
+                        </p>
+                    </div>
+
+
+                    <div class="switch ">
+                        <h4>Adapté aux handicaps</h4>
+                        <label>
+                            Non
+                            <input type="checkbox" name="handicap">
+                            <span class="lever"></span>
+                            Oui
+                        </label>
+                    </div>
+
+
+                    <p class="center-align">
+                        <button type="submit" name="rechercher" class="waves-effect waves-light btn blue-grey darken-1">
+                            <i class="material-icons left">search</i>Rechercher
+                        </button>
                     </p>
-
-                    <p>
-                        <input type="checkbox" id="bac+4" />
-                        <label for="bac+4">BAC +4</label>
-                    </p>
-
-                    <p>
-                        <input type="checkbox" id="bac+3" />
-                        <label for="bac+3">BAC +3</label>
-                    </p>
-
-                    <p>
-                        <input type="checkbox" id="bac+2" />
-                        <label for="bac+2">BAC +2</label>
-                    </p>
-
-                    <p>
-                        <input type="checkbox" id="bac+1" />
-                        <label for="bac+1">BAC +1</label>
-                    </p>
-
-                    <p>
-                        <input type="checkbox" id="bac" />
-                        <label for="bac">BAC</label>
-                    </p>
-
-                    <p>
-                        <input type="checkbox" id="bep" />
-                        <label for="bep">BEP</label>
-                    </p>
-
-                    <p>
-                        <input type="checkbox" id="cap" />
-                        <label for="cap">CAP</label>
-                    </p>
-                </div>
-
-
-                <div class="switch ">
-                    <h4>Adapté aux handicaps</h4>
-                    <label>
-                        Non
-                        <input type="checkbox">
-                        <span class="lever"></span>
-                        Oui
-                    </label>
-                </div>
-
-
-
-
-                <p class="center-align"><a class="waves-effect waves-light btn blue-grey darken-1"><i class="material-icons left">search</i>Rechercher</a></p>
+                </form>
             </div>
 
             <div class="col s12 m3">
@@ -111,8 +116,11 @@
     </div>
 
 
-
 </section>
+
+<script src="/js/autocomplete-gmap.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvTewOiQvvKOS9RNOjYIN-qgE9NrcSKy4&signed_in=true&libraries=places&callback=initAutocomplete"
+        async defer></script>
 
 
 <%- include('include/footer') %>

@@ -13,6 +13,8 @@ module.exports = function(sequelize, DataTypes) {
         Experience_pro.belongsTo(models.CV);
         Experience_pro.belongsTo(models.Contrat_type);
         Experience_pro.hasMany(models.Mission_CV);
+        Experience_pro.belongsTo(models.Pays);
+
       }
     }
   });

@@ -22,22 +22,22 @@
             <form class="col s12 m8 offset-m3" action="/login" method="post">
                 <div class="row">
                     <div class="input-field col m8 s12">
-                        <input id="email" name="email" type="email" class="validate">
-                        <% if (this.email) { %>
-                            <label for="email"><%=email%></label>
+                        <% if (email != null) { %>
+                        <input  value="<%=email%>" id="email" name="email" type="email" class="validate">
                         <% } else { %>
-                            <label for="email">email</label>
+                        <input id="email" name="email" type="email" class="validate">
                         <% } %>
+                        <label for="email">email</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col m8 s12">
-                        <input id="mdp" name="mdp" type="password" class="validate">
-                        <% if (this.email) { %>
-                            <label for="mdp"><%=mdp%></label>
+                        <% if (mdp != null) { %>
+                        <input value="<%=mdp%>" id="mdp" name="mdp" type="password" class="validate" >
                         <% } else { %>
-                            <label for="mdp">Mot de passe</label>
+                        <input id="mdp" name="mdp" type="password" class="validate">
                         <% } %>
+                        <label for="mdp">Mot de passe</label>
                     </div>
                 </div>
 

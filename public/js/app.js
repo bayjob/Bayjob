@@ -18,4 +18,13 @@ $( document ).ready(function(){
     yearRange: '1908:1998'
   });
 
+
+  $('#select_pays').on('change',function(){
+    if(this.value != 72){
+      $('#select_departement').hide();
+    }else{
+      $('#select_departement').show();
+    }
+  });
+
 });

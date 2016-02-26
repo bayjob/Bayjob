@@ -1,0 +1,48 @@
+<%- include('include/header-connect') %>
+
+<section class="page-title cyan darken-1 white-text">
+    <div class="container">
+        <div class="row">
+            <div id="logo-title" class="col s3 m1">
+                <i class="medium material-icons">search</i>
+            </div>
+
+            <div class="col s9 m8">
+                <h3><%= title %></h3>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="page-content" id="rechercherOffres">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m7 offset-m2">
+
+                <h4>Résultat de la recherche</h4>
+
+                <ul class="collection">
+                    <% for(var i=0; i<offres.length;i++){%>
+                        <li class="collection-item avatar">
+                            <span class="title"><a href="/offre/<%=offres[i].id%>"><%=offres[i].titre%></a></span>
+                            <p><%=offres[i].Recruteur.nomEntreprise%> - <%=offres[i].ville%></p>
+                            <p><%=offres[i].resume%></p>
+                            <p><%=offres[i].dateEmission.getDate() + " " + mois[offres[i].dateEmission.getMonth()] + " " + offres[i].dateEmission.getFullYear()%></p>
+                        </li>
+                    <%}%>
+                </ul>
+            </div>
+
+            <div class="col s12 m3">
+                <!--<p><a class="waves-effect waves-light btn blue-grey darken-1"><i class="material-icons left">info</i>En savoir plus</a></p>-->
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+
+<%- include('include/footer') %>

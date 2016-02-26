@@ -6,7 +6,14 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-    res.render('ajouterCv', { title: 'AJout d\'un Cv'});
+    var Pays;
+
+    models.Pays.findAll({
+        attributes: ['id','intitule']
+    }).then(function(pays){
+        Pays = pays;
+        res.render('ajouterCv', { title: 'AJout d\'un Cv', pays:Pays});
+    });
 });
 
 router.post('/', function(req, res, next) {
@@ -22,8 +29,10 @@ router.post('/', function(req, res, next) {
 
     var entreprisenom = req.body.entreprise;
     var posteentreprise = req.body.poste;
-    var dureeposte = req.body.duree;
+    var dureeposte = null;
     var villeposte = req.body.villeXp;
+    var paysposte = req.body.pays;
+    var contrattypeid = req.body.contrattype;
 
     var intitulemission = req.body.intituleMission;
 
@@ -55,7 +64,8 @@ router.post('/', function(req, res, next) {
         poste: posteentreprise,
         duree: dureeposte,
         ville: villeposte,
-        ContratTypeId: parseInt("1"), // to change
+        Payid: paysposte,
+        ContratTypeId: parseInt(contrattypeid), // to change
         CVId: cv.id
     });
 
@@ -81,34 +91,26 @@ router.post('/', function(req, res, next) {
         CVId: cv.id
     });
 
-
-    cv.save().then(function(){
-        res.send('ok added : ' );
+    cv.save();
+    experience_pro.save().then(function() {
+        experience_pro.setCV(cv);
+    });
+    formation.save().then(function() {
+        formation.setCV(cv);
+    });
+    mission_CV.save().then(function() {
+        mission_CV.setExperience_pro(experience_pro);
+    });
+    competence_CV.save().then(function() {
+        competence_CV.setCV(cv);
+    });
+    langue.save().then(function() {
+        langue.setCV(cv);
+    });
+    centre_interet.save().then(function() {
+        centre_interet.setCV(cv);
     });
 
-    experience_pro.save().then(function(){
-        res.send('ok added : ' );
-    });
-
-    formation.save().then(function(){
-        res.send('ok added : ' );
-    });
-
-    mission_CV.save().then(function(){
-        res.send('ok added : ' );
-    });
-    competence_CV.save().then(function(){
-        res.send('ok added : ' );
-    });
-    langue.save().then(function(){
-        res.send('ok added : ' );
-    });
-    centre_interet.save().then(function(){
-        res.send('ok added : ' );
-    });
-    mission_CV.save().then(function(){
-        res.send('ok added : ' );
-    });
 
 
 

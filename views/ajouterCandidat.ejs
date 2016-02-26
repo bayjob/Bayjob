@@ -1,6 +1,6 @@
 <%- include('include/header-connect') %>
 
-<section  class="page-title cyan darken-1 white-text">
+<section class="page-title cyan darken-1 white-text" xmlns="http://www.w3.org/1999/html">
     <div class="container">
         <div class="row">
             <div id="logo-title" class="col s3 m1">
@@ -19,22 +19,107 @@
 <section class="page-content" id="rechercherOffres">
     <div class="container">
         <div class="row">
+
             <h2 style="text-align: center">Veuillez remplir le formulaire ci-aprés svp.</h2>
             <div class="col s12 m7 offset-m2">
                 <form method="post" action="/ajouterCandidat">
+
+                    <% if (nom != null) { %>
+                    <input value="<%=nom%>" type="text" name="nomCandidat">
+                    <% } else { %>
                     <input type="text" name="nomCandidat" placeholder="Nom">
+                    <% } %>
+
+                    <% if (prenom != null) { %>
+                    <input value="<%=prenom%>" type="text" name="prenomCandidat">
+                    <% } else { %>
                     <input type="text" name="prenomCandidat" placeholder="Prenom">
-                    <input type="date" name="dateNaissanceCandidat" min="1925-01-01" max="1998-02-11" class="datepicker" placeholder="Date de Naissance">
+                    <% } %>
+
+                    <% if (dateNaissance != null) { %>
+                    <input  value="<%=dateNaissance%>" type="date" name="dateNaissanceCandidat" class="datepicker">
+                    <% } else { %>
+                    <input type="date" name="dateNaissanceCandidat" class="datepicker" placeholder="Date de Naissance">
+                    <% } %>
+
+                    <% if (telFixe != null) { %>
+                    <input value="<%=telFixe%>" type="text" name="telFixeCandidat">
+                    <% } else { %>
                     <input type="text" name="telFixeCandidat" placeholder="Tel fixe">
+                    <% } %>
+
+                    <% if (telMobile != null) { %>
+                    <input value="<%=telMobile%>" type="text" name="telMobileCandidat">
+                    <% } else { %>
                     <input type="text" name="telMobileCandidat" placeholder="Tel Portable">
+                    <% } %>
+
+                    <% if (adresse != null) { %>
+                    <input value="<%=adresse%>" type="text" name="adresseCandidat" >
+                    <% } else { %>
                     <input type="text" name="adresseCandidat" placeholder="Adresse">
+                    <% } %>
+
+                    <% if (ville != null) { %>
+                    <input value="<%=ville%>" type="text" name="villeCandidat" >
+                    <% } else { %>
                     <input type="text" name="villeCandidat" placeholder="Ville">
+                    <% } %>
+
+                    <% if (cp != null) { %>
+                    <input value="<%=cp%>" type="text" name="cpCandidat" >
+                    <% } else { %>
                     <input type="text" name="cpCandidat" placeholder="Code Postal">
-                    <input type="text" name="paysCandidat" placeholder="Pays">
+                    <% } %>
+
+                    <select id="select_pays" name="pays">
+                        <option value="72" selected="selected">France </option>
+                        <% for(var i = 0; i<pays.length; i++) {%>
+                        <option value="<%=pays[i].id%>"><%=pays[i].intitule%></option>
+                        <%}%>
+                    </select>
+
+                    <div id="select_departement">
+                        <select  name="dep">
+                            <% for(var i = 0; i<departement.length; i++) {%>
+                            <option value="<%=departement[i].id%>"><%=departement[i].intitule%></option>
+                            <%}%>
+                        </select>
+                    </div>
+
+
+                    <% if (mobilite != null) { %>
+                    <input value="<%=mobilite%>" type="text" name="mobiliteCandidat" >
+                    <% } else { %>
                     <input type="text" name="mobiliteCandidat" placeholder="Mobilité">
+                    <% } %>
+
+                    <% if (errornum == null) { %>
                     <input type="text" name="mailCandidat" placeholder="Mail">
                     <input type="text" name="confirmationMailCandidat" placeholder="Confirmation Mail">
                     <input type="password" name="mdpCandidat" placeholder="Mot de passe">
+                    <input type="password" name="confirmationMdpCandidat" placeholder="Confirmation Mot de passe">
+                    <% } else if (errornum == '1') { %>
+                    <input value="<%=mail%>" type="text" name="mailCandidat" >
+                    <input value="<%=mail%>" type="text" name="confirmationMailCandidat">
+                    Les mots de passe sont différents !!
+                    <input type="password" name="mdpCandidat" placeholder="Mot de passe" class="invalid">
+                    <input type="password" name="confirmationMdpCandidat" placeholder="Confirmation Mot de passe" class="invalid">
+                    <% } else if (errornum == '2') { %>
+                    Les adresses Email sont différentes !!
+                    <input type="text" name="mailCandidat" placeholder="Mail" class="invalid">
+                    <input type="text" name="confirmationMailCandidat" placeholder="Confirmation Mail" class="invalid">
+                    // bon mdp
+                    <input value="<%=mdp%>" type="password" name="mdpCandidat" >
+                    <input value="<%=mdp%>" type="password" name="confirmationMdpCandidat">
+                    <% } else if (errornum == '3') { %>
+                    Les adresses Email sont différentes !!
+                    <input type="text" name="mailCandidat" placeholder="Mail" class="invalid">
+                    <input type="text" name="confirmationMailCandidat" placeholder="Confirmation Mail" class="invalid">
+                    Les mots de passe sont différents !!
+                    <input type="password" name="mdpCandidat" placeholder="Mot de passe" class="invalid">
+                    <input type="password" name="confirmationMdpCandidat" placeholder="Confirmation Mot de passe" class="invalid">
+                    <% } %>
                     <input type="submit">
                 </form>
             </div>

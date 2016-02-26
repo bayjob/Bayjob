@@ -7,6 +7,8 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 Departement.belongsTo(models.Region);
+                Departement.hasMany(models.Candidat);
+                Departement.hasMany(models.Recruteur);
             }
         }
     });

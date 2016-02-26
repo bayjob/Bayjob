@@ -25,7 +25,7 @@
 
             <div class="col s12 m7 offset-m2">
                 <form method="post" action="#">
-                    <div class="input-field col s12">
+                    <div  id="test" class="input-field col s12">
                         <input name="titre" type="text" length="255">
                         <label for="titre">Titre du CV</label>
                     </div>
@@ -36,7 +36,9 @@
                     </br>
                     </br>
                     </br>
-                    <!--    <h3 style="text-align: center">Formation</h3> -->
+                    <div class="col s12 m7 offset-m2">
+                        <h3 style="text-align: center">Formation</h3>
+                    </div>
                     <div class="input-field col s12">
                         <input name="IntituleDiplome" type="text" length="255">
                         <label for="IntituleDiplome">Intitulé du diplôme passé</label>
@@ -45,15 +47,15 @@
                         <input name="mention" type="text" length="255">
                         <label for="mention">Mention</label>
                     </div>
-                    
+
                     <div class="input-field col s12">
                         <input name="annee" type="number" length="255">
                         <label for="annee">Annee</label>
                     </div>
-                    <p>
+                    <div class="input-field col s12">
                         <input type="checkbox" id="encours" />
                         <label for="encours">En cours?</label>
-                    </p>
+                    </div>
                     <div class="input-field col s12">
                         <input name="etablissement" type="text" length="255">
                         <label for="etablissement">Etablissement</label>
@@ -65,26 +67,25 @@
                     </br>
                     </br>
                     </br>
-                    <!--     <h3 style="text-align: center">Expérience Pro</h3> -->
+                    <div class="col s12 m7 offset-m2">
+                        <h3 style="text-align: center">Expérience Pro</h3>
+                    </div>
                     <div class="input-field col s12">
                         <input name="entreprise" type="text" length="255">
                         <label for="entreprise">Entreprise</label>
                     </div>
                     <div class="input-field col s12">
-                        <select>
+                        <select name="contrattype">
                             <option value="" disabled selected>Type de contrat</option>
                             <option value="1">CDD</option>
                             <option value="2">CDI</option>
                             <option value="3">Apprentissage</option>
+                            <option value="4">Stage</option>
                         </select>
                     </div>
                     <div class="input-field col s12">
                         <input name="poste" type="text" length="255">
                         <label for="poste">Poste</label>
-                    </div>
-                    <div class="input-field col s12">
-                        <input name="duree" type="text" length="255">
-                        <label for="duree">Duree</label>
                     </div>
                     <div class="input-field col s12">
                         <input name="datedebut" type="date" length="255">
@@ -98,20 +99,44 @@
                         <input name="villeXp" type="text" length="255">
                         <label for="villeXp">Ville</label>
                     </div>
-                    </br>
-                    </br>
-                    </br>
-                    <!--    <h3 style="text-align: center">Missions</h3> -->
                     <div class="input-field col s12">
-                        <input name="intituleMission" type="text" length="255">
-                        <label for="intituleMission">Intitulé de la mission</label>
+                        <select name="pays">
+                            <option value="72" selected="selected">France </option>
+                            <% for(var i = 0; i<pays.length; i++) {%>
+                            <option value="<%=pays[i].id%>"><%=pays[i].intitule%></option>
+                            <%}%>
+                        </select>
                     </div>
                     </br>
                     </br>
                     </br>
-                    <!--     <h3 style="text-align: center">Competences</h3> -->
+                    <div class="col s12 m7 offset-m2">
+                        <h3 style="text-align: center">Missions</h3>
+                    </div>
                     <div class="input-field col s12">
-                        <input name="intituleCompetence" type="date" length="50">
+                        <input name="intituleMission" type="text" length="255">
+                        <label for="intituleMission">Intitulé de la mission</label>
+
+                    </div>
+                    <script type="text/javascript" >
+                        var div = document.getElementById('test');
+                        function addField() {
+                            div.innerHTML += '<div class="input-field col s12"> <input name="intituleMission+" type="text" length="255">'+
+                                    '<label for="intituleMission+">Intitulé de la mission</label> </div>';
+                        }
+                    </script>
+
+                    <div class="input-field col s12" >
+                        <button type="button" onclick="addField()" >+</button>
+                    </div>
+                    </br>
+                    </br>
+                    </br>
+                    <div class="col s12 m7 offset-m2 ">
+                        <h3 style="text-align: center">Competences</h3>
+                    </div>
+                    <div class="input-field col s12">
+                        <input name="intituleCompetence" type="text" length="50">
                         <label for="intituleCompetence">Intitulé de la compétence</label>
                     </div>
                     <div class="input-field col s12">
@@ -121,9 +146,11 @@
                     </br>
                     </br>
                     </br>
-                     <!--    <h3 style="text-align: center">Langue</h3> -->
+                    <div class="col s12 m7 offset-m2">
+                        <h3 style="text-align: center">Langue</h3>
+                    </div>
                     <div class="input-field col s12">
-                        <input name="denominationLangue" type="date" length="50">
+                        <input name="denominationLangue" type="text" length="50">
                         <label for="denominationLangue">Langue</label>
                     </div>
                     <div class="input-field col s12">
@@ -133,17 +160,22 @@
                     </br>
                     </br>
                     </br>
-                     <!--    <h3 style="text-align: center">Centres d'interêt</h3> -->
+                    <div class="col s12 m7 offset-m2">
+                        <h3 style="text-align: center">Centres d'interêt</h3>
+                    </div>
                     <div class="input-field col s12">
-                        <input name="intituleInteret" type="text" length="1">
+                        <input name="intituleInteret" type="text" length="50">
                         <label for="intituleInteret">Intitulé centre interet</label>
                     </div>
 
-                    <div class="row" >
+                    <div class="input-field col s12" >
                         <button class="btn waves-effect waves-light blue-grey darken-1" type="submit" name="valider">Valider
                             <i class="material-icons right">send</i>
                         </button>
                     </div>
+
+
+
                 </form>
             </div>
         </div>

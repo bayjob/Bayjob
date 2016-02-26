@@ -7,6 +7,7 @@ module.exports = function(sequelize, DataTypes) {
             associate: function(models) {
                 Pays.hasMany(models.Recruteur);
                 Pays.hasMany(models.Candidat);
+                Pays.hasMany(models.Experience_pro);
             }
         }
     });
