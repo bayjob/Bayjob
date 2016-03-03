@@ -1,4 +1,4 @@
-<%- include('include/header-connect') %>
+<%- include('include/header') %>
 
 <section class="page-title cyan darken-1 white-text">
     <div class="container">
@@ -18,16 +18,47 @@
                 <p class="center-align"><span class="taux">78%</span><br/> de compatibilité</p>
             </div>
 
+            <!------------------------------------------------------------------------------------------->
+            <!-- GESTION DES BOUTONS DE VALIDATION DES CHOIX et de MODIFICATION du CV >
+            <!------------------------------------------------------------------------------------------->
+
+            <!-- Vérification si l'utilisateur est connecté -->
+            <% if(session.user != null){
+
+            /*Vérification si l'utilisateur connecté est l'auteur du CV : si c'est le cas, on fait apparaitre
+              un bouton de modification du CV au lieu des boutons de validation*/
+            if(cv.Candidat.UtilisateurId === session.user){ %>
+            <div class="col s6 m2">
+                <p class="center-align">
+
+                    <a style="margin-top: 20px;"
+                       class="btn-floating btn-large waves-effect waves-light blue-grey darken-1">
+                        <i class="large material-icons">mode_edit</i>
+                    </a>
+                </p>
+            </div>
+
+            <!-- si l'utilisateur est un recruteur (différent d'un candidat) on affichage les boutons de validation -->
+            <% }else if(session.type != "C"){ %>
+            <input type="hidden" name="utilisateurSession" value="<%= session.user %>">
+            <input type="hidden" name="CVId" value="<%= cv.id %>">
             <div class="col s6 m1">
-                <p class="center-align"><a style="margin-top: 20px;"
-                   class="btn-floating btn-large waves-effect waves-light blue-grey darken-1"><i
-                            class="large material-icons">thumb_up</i></a></p>
+                <p class="center-align">
+                    <a href="#selectionOffre" style="margin-top: 20px;"
+                       class="btn-floating btn-large waves-effect waves-light blue-grey darken-1 modal-trigger">
+                        <i class="large material-icons">thumb_up</i>
+                    </a>
+
+                </p>
             </div>
 
             <div class="col s6 m1">
-                <p class="center-align"><a style="margin-top: 20px;" class="btn-floating btn-large waves-effect waves-light white"><i
-                            class="large material-icons blue-grey-text text-darken-1">thumb_down</i></a></p>
+                <p class="center-align"><a id="btnRefuserCV" style="margin-top: 20px;"
+                                           class="btn-floating btn-large waves-effect waves-light white"><i
+                                class="large material-icons blue-grey-text text-darken-1">thumb_down</i></a></p>
             </div>
+            <% }
+            } %>
         </div>
     </div>
 </section>
@@ -37,9 +68,6 @@
 
         <div class="row">
             <div class="col s12 m10 offset-m1">
-                <%if(cv.Candidat.UtilisateurId === session.user){%>
-                    <p class="center-align"><a class="waves-effect waves-light btn">Modifier le CV</a></p>
-                <%}%>
 
                 <ul class="collapsible" data-collapsible="accordion">
                     <li>
@@ -50,7 +78,7 @@
                             <div class="container">
                                 <h4>Résumé</h4>
 
-                                <%=cv.resume%>
+                                <%= cv.resume %>
 
                                 <h4>Compétences</h4>
                                 <table>
@@ -107,7 +135,11 @@
                                 <div class="row"
                                      style="border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 20px">
                                     <div class="col s12 m2">
+<<<<<<< HEAD
                                         <!-- mois[cv.Experience_pros[i].datedebut.getMonth()] + " " + cv.Experience_pros[i].datedebut.getFullYear() + " - " + mois[cv.Experience_pros[i].datefin.getMonth()] + " " + cv.Experience_pros[i].datefin.getFullYear()-->
+=======
+                                        <%- mois[cv.Experience_pros[i].datedebut.getMonth()] + " " + cv.Experience_pros[i].datedebut.getFullYear() + " - " + mois[cv.Experience_pros[i].datefin.getMonth()] + " " + cv.Experience_pros[i].datefin.getFullYear() %>
+>>>>>>> bayjob/master
                                     </div>
                                     <div class="col s12 m10">
                                         <strong><%= cv.Experience_pros[i].poste %></strong><br/>
@@ -185,7 +217,27 @@
 
 
 </section>
+
+<!-- Modal Structure -->
+<div id="selectionOffre" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>Selection d'une offre</h4>
+
+        <p>Veuillez choisir une offre correspondante au CV</p>
+        <select name="listeOffresCV">
+            <option value="" disabled selected>Choisissez une offre</option>
+        <%for(var i=0; i<offreUtilisateurConnecte.length;i++){%>
+            <option value="<%=offreUtilisateurConnecte[i].id%>"><%=offreUtilisateurConnecte[i].titre%></option>
+        <%}%>
+        </select>
+    </div>
+    <div class="modal-footer">
+        <a href="#" id="btnAccepterCV" class=" modal-action modal-close waves-effect waves-green btn-flat">Valider</a>
+    </div>
+</div>
+
 <%- include('include/footer') %>
+<script type="text/javascript" src="/js/cv-event.js"></script>
 
 
 

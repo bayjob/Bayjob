@@ -8,16 +8,27 @@ var session = require('express-session');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+
+//Routes de l'espace candidat
+var espaceCandidat = require('./routes/espaceCandidat');
 var ajouterCandidat = require('./routes/ajouterCandidat');
 var ajouterCv = require('./routes/ajouterCv');
 var modifierCv = require('./routes/modifierCv');
 var cv = require('./routes/cv');
 var rechercheOffres = require('./routes/rechercherOffres');
-var ajouterRecruteur = require('./routes/ajouterRecruteur')
-var login = require('./routes/login');
-var logout = require('./routes/logout');
+
+//Routes de l'espace candidat
+var ajouterRecruteur = require('./routes/ajouterRecruteur');
 var ajouterOffre = require('./routes/ajouterOffre');
 var offre = require('./routes/offres');
+
+//Routes de l'authentification
+var login = require('./routes/login');
+var logout = require('./routes/logout');
+
+//Routes des notifications
+var notification = require('./routes/notification');
+
 
 
 
@@ -34,32 +45,49 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//Gestion des sessions
 app.use(session({
   secret: '2C44-4D44-WppQ38S',
   resave: true,
   saveUninitialized: true
 }));
 
+var test = function(req, res, next){
+  console.log("test");
+  return next();
+};
+
 // Authentication and Authorization Middleware
-var auth = function(req, res, next) {
-  if (req.session && req.session.user === "amy" && req.session.admin)
+/*var auth = function(req, res, next) {
+  if (req.session && req.session.user)
     return next();
   else
     return res.sendStatus(401);
-};
+};*/
 
 app.use('/', routes);
 app.use('/users', users);
+
+//Espace candidat
+app.use('/espaceCandidat', espaceCandidat);
 app.use('/ajouterCandidat', ajouterCandidat);
 app.use('/ajouterCv', ajouterCv);
 app.use('/modifierCv', modifierCv);
 app.use('/cv', cv);
-app.use('/login',login);
-app.use('/logout',logout);
 app.use('/rechercheOffres', rechercheOffres);
+
+//Espace recruteur
 app.use('/ajouterRecruteur', ajouterRecruteur);
 app.use('/ajouterOffre', ajouterOffre);
 app.use('/offre', offre);
+
+//Authentification
+app.use('/login',login);
+app.use('/logout',logout);
+
+//Notification
+app.use('/notification', notification);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

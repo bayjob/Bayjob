@@ -12,6 +12,7 @@ module.exports = function(sequelize, DataTypes) {
         CV.hasMany(models.Experience_pro);
         CV.hasMany(models.Formation);
         CV.hasMany(models.Competence_CV);
+        CV.hasMany(models.Notification);
       }
     }
   });

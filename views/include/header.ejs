@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><%=title%></title>
+    <title>Bayjob - <%=title%></title>
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
@@ -20,21 +20,52 @@
         <div class="container">
             <a href="/" class="brand-logo"><i class="material-icons left">work</i>Bayjob</a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="#" class='dropdown-button'  data-activates='dropdownRecherche'><i class="material-icons left">search</i>Recherche<i class="material-icons right">arrow_drop_down</i></a></li>
-                <li><a href="/login" ><i class="material-icons left">perm_identity</i>Connexion</a></li>
-            </ul>
 
-            <ul id='dropdownRecherche' class='dropdown-content'>
-                <li><a href="/rechercheOffres">Offre</a></li>
-                <li><a href="#!">Candidat</a></li>
-            </ul>
+            <%if(locals.session && locals.session.user){%>
+                <!-- menu à afficher si l'utilisateur est connecté -->
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="#" class='dropdown-button'  data-activates='dropdownRecherche'><i class="material-icons left">search</i>Recherche<i class="material-icons right">arrow_drop_down</i></a></li>
+                    <li><a href="#" ><i class="material-icons left">chat</i>Notification</a></li>
+                    <li><a href="#" class='dropdown-button'  data-activates='dropdownUser'><i class="material-icons left">perm_identity</i><%=session.mail%><i class="material-icons right">arrow_drop_down</i></a></li>
+                </ul>
 
-            <ul class="side-nav" id="mobile-demo">
-                <li><a href="#" ><i class="material-icons left">search</i>Recherche</a></li>
-                <li><a href="#" ><i class="material-icons left">perm_identity</i>Connexion</a></li>
+                <ul id='dropdownRecherche' class='dropdown-content'>
+                    <li><a href="/rechercheOffres">Offre</a></li>
+                    <li><a href="#!">Candidat</a></li>
+                </ul>
 
-            </ul>
+                <ul id='dropdownUser' class='dropdown-content'>
+                    <%if(session.type === "C"){%>
+                        <li><a href="/espaceCandidat">Espace candidat</a></li>
+                    <%}else{%>
+                        <li><a href="/espaceRecruteur">Espace recruteur</a></li>
+                    <%}%>
+
+                    <li><a href="/logout">Déconnexion</a></li>
+                </ul>
+
+                <ul class="side-nav" id="mobile-demo">
+                    <li><a href="#" ><i class="material-icons left">search</i>Recherche</a></li>
+                    <li><a href="#" ><i class="material-icons left">chat</i>Notification</a></li>
+                    <li><a href="#" ><i class="material-icons left">perm_identity</i>Déconnexion</a></li>
+                </ul>
+            <%}else{%>
+                <!-- menu à afficher si l'utilisateur n'est pas connecté -->
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="#" class='dropdown-button'  data-activates='dropdownRecherche'><i class="material-icons left">search</i>Recherche<i class="material-icons right">arrow_drop_down</i></a></li>
+                    <li><a href="/login" ><i class="material-icons left">perm_identity</i>Connexion</a></li>
+                </ul>
+
+                <ul id='dropdownRecherche' class='dropdown-content'>
+                    <li><a href="/rechercheOffres">Offre</a></li>
+                    <li><a href="#!">Candidat</a></li>
+                </ul>
+
+                <ul class="side-nav" id="mobile-demo">
+                    <li><a href="#" ><i class="material-icons left">search</i>Recherche</a></li>
+                    <li><a href="#" ><i class="material-icons left">perm_identity</i>Connexion</a></li>
+                </ul>
+            <%}%>
         </div>
     </div>
 </nav>

@@ -19,6 +19,7 @@ module.exports = function(sequelize, DataTypes) {
         Offre.belongsTo(models.Niveau_etude);
         Offre.hasMany(models.Mission_offre);
         Offre.hasMany(models.Competence_offre);
+        Offre.hasMany(models.Notification);
       }
     }
   });

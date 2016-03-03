@@ -1,0 +1,55 @@
+<%- include('include/header') %>
+
+
+<section class="page-title cyan darken-1 white-text">
+  <div class="container">
+    <div class="row">
+      <div id="logo-title" class="col s3 m1">
+        <i class="medium material-icons">perm_identity</i>
+      </div>
+
+      <div class="col s9 m8">
+        <h3><%= title %></h3>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="page-content" id="rechercherOffres">
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m6">
+        <h4>Informations du candidat</h4>
+
+        <blockquote>
+          <h5><%=candidat.prenom + " " + candidat.nom%></h5>
+          <p><strong>Adresse : </strong><%=candidat.adresse%> - <%=candidat.cp + " " + candidat.ville%></p>
+          <p><strong>T&eacute;l fixe : </strong><%=candidat.telFixe%><br/>
+            <strong>T&eacute;l mobile : </strong><%=candidat.telMobile%>
+            <p class="right-align"><a class="waves-effect waves-light btn"><i class="material-icons left">edit</i>Modifier les informations</a></p>
+        </blockquote>
+      </div>
+      <div class="col s12 m6">
+        <h4>Mes CV</h4>
+
+        <ul class="collection">
+
+          <% for(var i=0; i<candidat.CVs.length;i++){%>
+          <li class="collection-item avatar">
+            <img src="/img/avatar.png" width="42px" height="42px" alt="" class="circle">
+            <span class="title"><a href="/cv/<%=candidat.CVs[i].id%>"><%=candidat.CVs[i].titre%></a></span>
+            <p>Date de cr&eacute;ation : <%=candidat.CVs[i].createdAt.getDate() + " " + mois[candidat.CVs[i].createdAt.getMonth()] + " " + candidat.CVs[i].createdAt.getFullYear()%></p>
+            <p>Derni&egrave;re mise &agrave; jour : <%=candidat.CVs[i].updatedAt.getDate() + " " + mois[candidat.CVs[i].updatedAt.getMonth()] + " " + candidat.CVs[i].updatedAt.getFullYear()%></p>
+          </li>
+          <%}%>
+        </ul>
+        <p class="right-align"><a class="waves-effect waves-light btn"><i class="material-icons left">add</i>Ajouter un CV</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<%- include('include/footer') %>

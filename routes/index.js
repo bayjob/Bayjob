@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Bayjob' });
+  res.render('index', { title: 'Bayjob', session: req.session});
 });
 
 router.get('/test', function(req, res) {

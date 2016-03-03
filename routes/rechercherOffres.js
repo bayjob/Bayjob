@@ -7,7 +7,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('rechercherOffres', { title: 'Recherche d\'offres', messageErr:null });
+    res.render('rechercherOffres', { title: 'Recherche d\'offres', messageErr:null, session: req.session});
 });
 
 /* Action exécutée lorsque l'utilisateur lance la recherche d'une offre */
@@ -72,7 +72,7 @@ router.post('/', function (req, res) {
             var mois = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
 
             //Affichage de la page de resultats
-            res.render('resultatRechercheOffre', {title: 'Résultat de recherche d\'offres', offres: offres, mois: mois });
+            res.render('resultatRechercheOffre', {title: 'Résultat de recherche d\'offres', offres: offres, mois: mois, session: req.session});
             console.log(JSON.stringify(offres));
         });
     }
