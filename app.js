@@ -13,6 +13,7 @@ var users = require('./routes/users');
 var espaceCandidat = require('./routes/espaceCandidat');
 var ajouterCandidat = require('./routes/ajouterCandidat');
 var ajouterCv = require('./routes/ajouterCv');
+var modifierCv = require('./routes/modifierCv');
 var cv = require('./routes/cv');
 var rechercheOffres = require('./routes/rechercherOffres');
 
@@ -72,6 +73,7 @@ app.use('/users', users);
 app.use('/espaceCandidat', espaceCandidat);
 app.use('/ajouterCandidat', ajouterCandidat);
 app.use('/ajouterCv', ajouterCv);
+app.use('/modifierCv', modifierCv);
 app.use('/cv', cv);
 app.use('/rechercheOffres', rechercheOffres);
 

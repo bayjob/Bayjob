@@ -7,10 +7,7 @@
 
 var placeSearch, autocomplete;
 var componentForm = {
-    locality: 'long_name',
-    administrative_area_level_1: 'short_name',
-    administrative_area_level_2: 'short_name',
-    country: 'long_name'
+    locality: 'long_name'
 };
 
 function initAutocomplete() {
@@ -18,7 +15,7 @@ function initAutocomplete() {
     // location types.
     autocomplete = new google.maps.places.Autocomplete(
         /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
-        {types: ['geocode']});
+        {types: ['cities']});
 
     // When the user selects an address from the dropdown, populate the address
     // fields in the form.
