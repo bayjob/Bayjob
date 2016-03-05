@@ -13,6 +13,7 @@ module.exports = function(sequelize, DataTypes) {
         CV.hasMany(models.Formation);
         CV.hasMany(models.Competence_CV);
         CV.hasMany(models.Notification);
+        CV.belongsTo(models.Niveau_etude);
       }
     }
   });
