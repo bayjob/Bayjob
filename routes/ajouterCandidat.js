@@ -3,6 +3,7 @@
  */
 var models = require('../models');
 var express = require('express');
+var crypto = require('crypto');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
@@ -33,7 +34,6 @@ router.post('/', function(req, res, next) {
         adresse: req.body.adresseCandidat,
         ville: req.body.villeCandidat,
         cp: req.body.cpCandidat,
-        pays: req.body.pays,
         mobilite: req.body.mobiliteCandidat
     });
 
@@ -57,7 +57,7 @@ router.post('/', function(req, res, next) {
     if (err == 0 ) {
         var utilisateur = models.Utilisateur.build({
             mail: req.body.mailCandidat,
-            mdp: req.body.mdpCandidat,
+            mdp: crypto.createHash('md5').update(req.body.mdpCandidat).digest("hex"),
             type: "C"
         });
     } else if (err == 1) {
@@ -83,8 +83,10 @@ router.post('/', function(req, res, next) {
 
     candidat.save().then(function() {
         utilisateur.setCandidat(candidat);
-        console.log(candidat.pays);
-        res.render('login', { title:'Page de connexion', email: utilisateur.mail, mdp : utilisateur.mdp});
+        candidat.setDepartement(req.body.dep);
+        candidat.setPay(req.body.pays);
+        //console.log(candidat.pays);
+        res.render('login', { title:'Page de connexion', email: utilisateur.mail, mdp : utilisateur.mdp, message:null});
     })
 });
 module.exports = router;

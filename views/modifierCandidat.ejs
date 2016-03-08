@@ -20,9 +20,9 @@
     <div class="container">
 
         <div class="row">
-            <h2 style="text-align: center">Veuillez remplir le formulaire ci-aprés svp.</h2>
+            <h2 style="text-align: center">Formulaire de modification</h2>
             <div class="col s12 m10 offset-m1">
-                <form method="post" action="/ajouterCandidat">
+                <form method="post" action="/modifierCandidat">
                     <ul class="collapsible" data-collapsible="accordion">
                         <li>
                             <div class="collapsible-header active"><i class="material-icons">description</i>Description
@@ -92,7 +92,13 @@
 
                                     <div  class="input-field col s10">
                                         <% if (ville != null) { %>
-                                        <input value="<%=ville%>" type="text" name="villeCandidat" >
+
+                                        <div id="locationField" class="input-field col s10">
+                                            <input id="autocomplete" value="<%=ville%>" onFocus="geolocate()" name="lieu" type="text" class="validate">
+                                        </div>
+                                        <div id="address">
+                                            <input type="hidden" name="villeCandidat" id="locality" disabled="false"/>
+                                        </div>
                                         <% } else { %>
                                     </div>
 
@@ -114,7 +120,7 @@
 
                                     <div  class="input-field col s10">
                                         <select id="select_pays" name="pays">
-                                            <option value="72" selected="selected">France </option>
+                                            <option value="<%=paysusr%>" selected="selected"><%=paysusr%> </option>
                                             <% for(var i = 0; i<pays.length; i++) {%>
                                             <option value="<%=pays[i].id%>"><%=pays[i].intitule%></option>
                                             <%}%>
@@ -123,6 +129,7 @@
 
                                     <div id="select_departement" class="input-field col s10">
                                         <select  name="dep">
+                                            <option value=<%=departementusr%> ><%=departementusr%> </option>
                                             <% for(var i = 0; i<departement.length; i++) {%>
                                             <option value="<%=departement[i].id%>"><%=departement[i].intitule%></option>
                                             <%}%>
@@ -143,6 +150,8 @@
                             <div class="collapsible-header"><i class="material-icons">perm_identity</i>Information de connexion</div>
                             <div id="parent" class="collapsible-body">
                                 <div class="container">
+                                    <input type="hidden" name="mail" value="<%=mail%>">
+                                    <input type="hidden" name="mdp" value="<%=mdp%>">
                                     <% if (errornum == null) { %>
                                     <table>
                                         <tbody>
@@ -220,10 +229,17 @@
                             </div>
                         </li>
                     </ul>
+                    <div id="elements_Candidat">
+                    </div>
                     <div class="row center-align">
-                        <button class="btn waves-effect waves-light" type="submit" name="enregistrer">Enregistrer
-                            <i class="material-icons right">send</i>
-                        </button>
+                        <p class="center-align">
+                            <div class="row center-align">
+                                <a href="#modalmdp" class="modal-trigger  btn-floating btn-large waves-effect waves-light red"><i class="material-icons">done</i></a>
+                            </div>
+                            <button class="btn waves-effect waves-light disabled" type="submit" name="enregistrer" >Enregistrer
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </p>
                     </div>
                 </form>
             </div>
@@ -231,8 +247,29 @@
     </div>
 </section>
 
+<!-- Fenêtre modale de confirmation de changement d'identifiants -->
+<div id="modalmdp" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>Veuillez saisir ci-dessous votre mot de passe actuel afin de confirmer les changements</h4>
+        <div class="row"
+             style="border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 20px">
+            <div id="modaldata" class="input-field col s12">
+                <div class="input-field col s12">
+                    <input name="mdpancien" type="password" length="50">
+                    <label for="mdpancien">Veuillez saisir votre mot de passe actuel</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row center-align modal-footer">
+        <a href="#!" id="testmdp"  class="modal-action modal-close btn-floating btn-large waves-effect waves-light red"><i class="material-icons">done</i></a>
+    </div>
+</div>
+
 <script src="/js/autocomplete-AjoutCandidat.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvTewOiQvvKOS9RNOjYIN-qgE9NrcSKy4&signed_in=true&libraries=places&callback=initAutocomplete"
         async defer></script>
 
 <%- include('include/footer') %>
+
+<script type="text/javascript" src="/js/modifiercandidat-event.js"></script>
