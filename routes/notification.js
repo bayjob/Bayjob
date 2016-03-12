@@ -5,12 +5,13 @@ var router = express.Router();
 /* GET home page. */
 router.post('/accepterCV', function(req, res, next) {
   var notification = models.Notification.build({
-    utilisateurSession:req.body.utilisateurSession,
-    reponse:0,
+    //UtilisateurId:req.body.utilisateurSession,
+    reponse:null,
     choix:1
   });
 
   notification.save().then(function() {
+    notification.setUtilisateur(req.body.utilisateurSession);
     notification.setCV(req.body.CVId);
     notification.setOffre(req.body.OffreId);
   });
