@@ -19,13 +19,13 @@ router.get('/', function(req, res, next) {
             cvsUser.push(notifUtilisateur[i].CVId);
         }
 
-        console.log(cvsUser);
+        console.log(notifUtilisateur);
 
         if(cvsUser.length==0){
             models.CV.findOne({
                 attributes: ['id']
             }).then(function(cv){;
-                console.log(cv.id)
+                console.log(cv.id);
                 res.redirect('/cv/' + cv.id);
             });
         }else{
@@ -33,7 +33,7 @@ router.get('/', function(req, res, next) {
                 attributes: ['id'],
                 where: {id: {
                     $notIn: cvsUser
-                }},
+                }}
             }).then(function(cv){;
                 console.log(cv.id);
                 res.redirect('/cv/' + cv.id);

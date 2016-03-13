@@ -12,10 +12,11 @@ router.post('/accepterCV', function(req, res, next) {
   notification.save().then(function() {
     notification.setUtilisateur(req.body.utilisateurSession);
     notification.setCV(req.body.CVId);
-    notification.setOffre(req.body.OffreId);
+    notification.setOffre(req.body.listeOffresCV);
 
-    res.send('ok');
+
   });
+  res.redirect('/cv');
 });
 
 router.post('/refuserCV', function(req, res, next) {
@@ -28,7 +29,7 @@ router.post('/refuserCV', function(req, res, next) {
     notification.setUtilisateur(req.body.utilisateurSession);
     notification.setCV(req.body.CVId);
 
-    res.send('ok');
+    res.redirect('/cv');
   });
 });
 
