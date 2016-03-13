@@ -8,6 +8,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
+
   if(req.session && req.session.user){
     var notifications;
 
@@ -27,7 +28,7 @@ router.get('/', function(req, res, next) {
     }).then(function(candidat){
       //Liste des mois
       var mois = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
-      console.log(JSON.stringify(notifications));
+      console.log(JSON.stringify(candidat));
       res.render('espaceCandidat', { title: 'Espace candidat', candidat: candidat, mois:mois, session: req.session, notifications:notifications});
     });
   }else{

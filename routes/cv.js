@@ -5,6 +5,48 @@ var models  = require('../models');
 var express = require('express');
 var router = express.Router();
 
+router.get('/', function(req, res, next) {
+    var cvs;
+    var cvsUser = [];
+
+    models.Notification.findAll({
+        attributes: ['CVId'],
+        where: {UtilisateurId:req.session.user}
+    }).then(function(notifUtilisateur){
+        cvs = notifUtilisateur;
+
+        for(var i=0;i<notifUtilisateur.length;i++){
+            cvsUser.push(notifUtilisateur[i].CVId);
+        }
+
+        console.log(cvsUser);
+
+        if(cvsUser.length==0){
+            models.CV.findOne({
+                attributes: ['id']
+            }).then(function(cv){;
+                console.log(cv.id)
+                res.redirect('/cv/' + cv.id);
+            });
+        }else{
+            models.CV.findOne({
+                attributes: ['id'],
+                where: {id: {
+                    $notIn: cvsUser
+                }},
+            }).then(function(cv){;
+                console.log(cv.id);
+                res.redirect('/cv/' + cv.id);
+            });
+        }
+
+    });
+
+
+
+
+});
+
 /* GET home page. */
 router.get('/:idCv', function(req, res, next) {
     var notifExist = 0;

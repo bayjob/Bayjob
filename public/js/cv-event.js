@@ -14,8 +14,10 @@ $(document).ready(function(){
                 type: 'POST',
                 dataType: 'html', // On désire recevoir du HTML
                 data: 'utilisateurSession=' + utilisateurSession + '&CVId=' + CVId + '&OffreId=' + OffreId,
-                success: function (code_html, statut) { // code_html contient le HTML renvoyé
-                    //alert(code_html);
+                success:function (response) { // code_html contient le HTML renvoyé
+                    if(response == 'ok'){
+                        window.location.replace("/cv");
+                    }
                 }
             });
     });
@@ -24,15 +26,16 @@ $(document).ready(function(){
     $('#btnRefuserCV').click(function(){
         var utilisateurSession = $('input[name=utilisateurSession]').val();
         var CVId = $('input[name=CVId]').val();
-        var OffreId = $('select[name=listeOffresCV]').val();
 
         $.ajax({
             url: '/notification/refuserCV',
             type: 'POST',
             dataType: 'html', // On désire recevoir du HTML
             data: 'utilisateurSession=' + utilisateurSession + '&CVId=' + CVId,
-            success: function (code_html, statut) { // code_html contient le HTML renvoyé
-                //alert(code_html);
+            success: function (response) { // code_html contient le HTML renvoyé
+                if(response == 'ok'){
+                    window.location.replace("/cv");
+                }
             }
         });
     });
