@@ -86,7 +86,7 @@ router.post('/', function(req, res, next) {
         candidat.setDepartement(req.body.dep);
         candidat.setPay(req.body.pays);
         //console.log(candidat.pays);
-        res.render('login', { title:'Page de connexion', email: utilisateur.mail, mdp : utilisateur.mdp, message:null});
+        res.render('login', { title:'Page de connexion', email: utilisateur.mail, mdp : utilisateur.mdp, message:""});
     })
 });
 module.exports = router;
