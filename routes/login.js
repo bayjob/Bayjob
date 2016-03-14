@@ -19,7 +19,7 @@ router.post('/', function (req, res) {
   models.Utilisateur.findOne({
     where:{mail: req.body.email}
   }).then(function(utilisateur) {
-    if(utilisateur && req.body.email === utilisateur.mail && req.body.mdp === utilisateur.mdp){
+    if(utilisateur && req.body.email === utilisateur.mail && crypto.createHash('md5').update(req.body.mdp).digest("hex") === utilisateur.mdp){
       req.session.user = utilisateur.id;
       req.session.mail = utilisateur.mail;
       req.session.type = utilisateur.type;

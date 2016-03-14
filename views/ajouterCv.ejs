@@ -6,180 +6,305 @@
             <div id="logo-title" class="col s3 m1">
                 <i class="medium material-icons">search</i>
             </div>
-
             <div class="col s9 m8">
                 <h3><%=title%></h3>
             </div>
         </div>
-
     </div>
-
 </section>
 
 <section class="page-content" id="ajouterCV">
     <div class="container">
         <div class="row">
-            <h2 style="text-align: center">Veuillez remplir le formulaire ci-aprés svp.</h2>
-
-            <!-- <h3 style="text-align: center">CV</h3>-->
-
-            <div class="col s12 m7 offset-m2">
-                <form method="post" action="#">
-                    <div  id="test" class="input-field col s12">
-                        <input name="titre" type="text" length="255">
-                        <label for="titre">Titre du CV</label>
-                    </div>
-                    <div class="input-field col s12">
-                        <textarea name="resumecv" class="materialize-textarea" length="255  "></textarea>
-                        <label for="resumecv">Résumé du CV</label>
-                    </div>
-                    </br>
-                    </br>
-                    </br>
-                    <div class="col s12 m7 offset-m2">
-                        <h3 style="text-align: center">Formation</h3>
-                    </div>
-                    <div class="input-field col s12">
-                        <input name="IntituleDiplome" type="text" length="255">
-                        <label for="IntituleDiplome">Intitulé du diplôme passé</label>
-                    </div>
-                    <div class="input-field col s12">
-                        <input name="mention" type="text" length="255">
-                        <label for="mention">Mention</label>
-                    </div>
-
-                    <div class="input-field col s12">
-                        <input name="annee" type="number" length="255">
-                        <label for="annee">Annee</label>
-                    </div>
-                    <div class="input-field col s12">
-                        <input type="checkbox" id="encours" />
-                        <label for="encours">En cours?</label>
-                    </div>
-                    <div class="input-field col s12">
-                        <input name="etablissement" type="text" length="255">
-                        <label for="etablissement">Etablissement</label>
-                    </div>
-                    <div class="input-field col s12">
-                        <input name="VilleDi" type="text" length="255">
-                        <label for="VilleDi">Ville</label>
-                    </div>
-                    </br>
-                    </br>
-                    </br>
-                    <div class="col s12 m7 offset-m2">
-                        <h3 style="text-align: center">Expérience Pro</h3>
-                    </div>
-                    <div class="input-field col s12">
-                        <input name="entreprise" type="text" length="255">
-                        <label for="entreprise">Entreprise</label>
-                    </div>
-                    <div class="input-field col s12">
-                        <select name="contrattype">
-                            <option value="" disabled selected>Type de contrat</option>
-                            <option value="1">CDD</option>
-                            <option value="2">CDI</option>
-                            <option value="3">Apprentissage</option>
-                            <option value="4">Stage</option>
-                        </select>
-                    </div>
-                    <div class="input-field col s12">
-                        <input name="poste" type="text" length="255">
-                        <label for="poste">Poste</label>
-                    </div>
-                    <div class="input-field col s12">
-                        <input name="datedebut" type="date" length="255">
-                        <label for="datedebut">Date de début</label>
-                    </div>
-                    <div class="input-field col s12">
-                        <input name="datefin" type="date" length="255">
-                        <label for="datefin">Date de fin</label>
-                    </div>
-                    <div class="input-field col s12">
-                        <input name="villeXp" type="text" length="255">
-                        <label for="villeXp">Ville</label>
-                    </div>
-                    <div class="input-field col s12">
-                        <select name="pays">
-                            <option value="72" selected="selected">France </option>
-                            <% for(var i = 0; i<pays.length; i++) {%>
-                            <option value="<%=pays[i].id%>"><%=pays[i].intitule%></option>
-                            <%}%>
-                        </select>
-                    </div>
-                    </br>
-                    </br>
-                    </br>
-                    <div class="col s12 m7 offset-m2">
-                        <h3 style="text-align: center">Missions</h3>
-                    </div>
-                    <div class="input-field col s12">
-                        <input name="intituleMission" type="text" length="255">
-                        <label for="intituleMission">Intitulé de la mission</label>
-
-                    </div>
-                    <script type="text/javascript" >
-                        var div = document.getElementById('test');
-                        function addField() {
-                            div.innerHTML += '<div class="input-field col s12"> <input name="intituleMission+" type="text" length="255">'+
-                                    '<label for="intituleMission+">Intitulé de la mission</label> </div>';
-                        }
-                    </script>
-
-                    <div class="input-field col s12" >
-                        <button type="button" onclick="addField()" >+</button>
-                    </div>
-                    </br>
-                    </br>
-                    </br>
-                    <div class="col s12 m7 offset-m2 ">
-                        <h3 style="text-align: center">Competences</h3>
-                    </div>
-                    <div class="input-field col s12">
-                        <input name="intituleCompetence" type="text" length="50">
-                        <label for="intituleCompetence">Intitulé de la compétence</label>
-                    </div>
-                    <div class="input-field col s12">
-                        <input name="niveauCompetence" type="text" length="1">
-                        <label for="niveauCompetence">Niveau de maitrise de la compétence</label>
-                    </div>
-                    </br>
-                    </br>
-                    </br>
-                    <div class="col s12 m7 offset-m2">
-                        <h3 style="text-align: center">Langue</h3>
-                    </div>
-                    <div class="input-field col s12">
-                        <input name="denominationLangue" type="text" length="50">
-                        <label for="denominationLangue">Langue</label>
-                    </div>
-                    <div class="input-field col s12">
-                        <input name="niveauLangue" type="text" length="1">
-                        <label for="niveauLangue">Niveau de maitrise de la Langue</label>
-                    </div>
-                    </br>
-                    </br>
-                    </br>
-                    <div class="col s12 m7 offset-m2">
-                        <h3 style="text-align: center">Centres d'interêt</h3>
-                    </div>
-                    <div class="input-field col s12">
-                        <input name="intituleInteret" type="text" length="50">
-                        <label for="intituleInteret">Intitulé centre interet</label>
+            <div class="col s12 m10 offset-m1">
+                <form id="elform" method="post" action="/ajouterCV">
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <!-- PARTIE DESCRIPTION GENERALE DU CV >
+                        <!------------------------------------->
+                        <li>
+                            <div class="collapsible-header active"><i class="material-icons">description</i>Description
+                                générale
+                            </div>
+                            <div class="collapsible-body">
+                                <div id="infogenerales" class="container">
+                                    <h4>Titre du CV</h4>
+                                    <input name="titre" type="text" length="255">
+                                    <h4>Résumé</h4>
+                                    <textarea name="resumecv" class="materialize-textarea" length="255  "></textarea>
+                                    <h4>Compétences</h4>
+                                </div>
+                                <div class="input-field col s12">
+                                    <p class="center-align">
+                                        <a href="#modalCompetence" class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <!----------------------------------------->
+                        <!-- FIN PARTIE DESCRIPTION GENERALE DU CV >
+                        <!------ DEBUT DESCRIPTION FORMATION DU CV >
+                        <------------------------------------------>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">school</i>Formation</div>
+                            <div id="parent" class="collapsible-body">
+                                <div class="input-field col s12">
+                                    <p class="center-align">
+                                        <a href="#modalFormation" class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <!------------------------------------------>
+                        <!-- FIN PARTIE DESCRIPTION FORMATION DU CV >
+                        <!--------- DEBUT DESCRIPTION EXP PRO DU CV >
+                        <------------------------------------------->
+                        <li id="elli">
+                            <div class="collapsible-header"><i class="material-icons">work</i>Expériences
+                                professionnelles
+                            </div>
+                            <div id="parent" class="collapsible-body">
+                                <div class="input-field col s12">
+                                    <p class="center-align">
+                                        <a href="#modalExpPro" class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <!---------------------------------------->
+                        <!-- FIN PARTIE DESCRIPTION EXP PRO DU CV >
+                        <!-------- DEBUT DESCRIPTION LANGUE DU CV >
+                        <----------------------------------------->
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">chat</i>Langues</div>
+                            <div class="collapsible-body">
+                                <div class="input-field col s12">
+                                    <p class="center-align">
+                                        <a href="#modalLangue" class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <!------------------------------------------>
+                        <!----- FIN PARTIE DESCRIPTION LANGUE DU CV >
+                        <!-- DEBUT DESCRIPTION CENTRE INTERET DU CV >
+                        <------------------------------------------->
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">chat</i>Centre d'Interet</div>
+                            <div class="collapsible-body">
+                                <div class="container">
+                                    <p class="center-align">
+                                        <a href="#modalInteret" class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <!----------------------------------------------->
+                    <!-- FIN PARTIE DESCRIPTION Centre Interet DU CV >
+                    <!------------- DEBUT DIV RECEPTION HIDDEN INPUT >
+                    <------------------------------------------------>
+                    <div id="elements_CV">
                     </div>
 
-                    <div class="input-field col s12" >
-                        <button class="btn waves-effect waves-light blue-grey darken-1" type="submit" name="valider">Valider
+                    <div class="row">
+                        <button class="btn waves-effect waves-light blue-grey darken-1" type="submit" name="enregistrer">Enregistrer
                             <i class="material-icons right">send</i>
                         </button>
                     </div>
-
-
-
                 </form>
             </div>
+
         </div>
     </div>
 </section>
 
+<!-- Fenêtre modale de Compétence -->
+<div id="modalCompetence" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>Compétence</h4>
+        <div class="row"
+             style="border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 20px">
+            <div class="input-field col s12">
+                <div class="input-field col s12">
+                    <input name="intituleCompetence" type="text" length="50">
+                    <label for="intituleCompetence">Intitulé de la compétence</label>
+                </div>
+                <div class="input-field col s4">
+                    <select name="niveauCompetence">
+                        <option value="" disabled selected>Niveau de maitrise</option>
+                        <option value="1">nul</option>
+                        <option value="2">Intermédiaire</option>
+                        <option value="3">Bon</option>
+                        <option value="4">Pro</option>
+                        <option value="5">Expert</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+    <a href="#!" id="btn_ajout_competence" class=" modal-action modal-close waves-effect waves-green btn-flat">Ajouter</a>
+    </div>
+</div>
+
+<!-- Fenêtre modale de la formation -->
+<div id="modalFormation" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>Formation</h4>
+        <div class="row"
+             style="border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 20px">
+            <div class="input-field col s12">
+                <div class="input-field col s12">
+                    <input name="IntituleDiplome" type="text" length="255">
+                    <label for="IntituleDiplome">Intitulé du diplôme passé</label>
+                </div>
+                <div class="input-field col s12">
+                    <input name="mention" type="text" length="255">
+                    <label for="mention">Mention</label>
+                </div>
+
+                <div class="input-field col s12">
+                    <input name="annee" type="number" length="255">
+                    <label for="annee">Annee</label>
+                </div>
+                <div class="input-field col s12">
+                    <input name="encours" type="checkbox" id="encours" />
+                    <label for="encours">En cours?</label>
+                </div>
+                <div class="input-field col s12">
+                    <input name="etablissement" type="text" length="255">
+                    <label for="etablissement">Etablissement</label>
+                </div>
+                <div class="input-field col s12">
+                    <input name="VilleDi" type="text" length="255">
+                    <label for="VilleDi">Ville</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" id="btn_ajout_formation" class=" modal-action modal-close waves-effect waves-green btn-flat">Ajouter</a>
+    </div>
+</div>
+
+<!-- Fenêtre modale de l'expérience professionnelle -->
+<div id="modalExpPro" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>Expérience professionnelle</h4>
+        <div class="row"
+             style="border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 20px">
+            <div class="input-field col s12">
+                <div class="input-field col s12">
+                    <input name="entreprise" type="text" length="255">
+                    <label for="entreprise">Entreprise</label>
+                </div>
+                <div class="input-field col s12">
+                    <select name="contrattype">
+                        <option value="" disabled selected>Type de contrat</option>
+                        <option value="1">CDD</option>
+                        <option value="2">CDI</option>
+                        <option value="3">Apprentissage</option>
+                        <option value="4">Stage</option>
+                    </select>
+                </div>
+                <div class="input-field col s12">
+                    <input name="poste" type="text" length="255">
+                    <label for="poste">Poste</label>
+                </div>
+                <div class="input-field col s12">
+                    <input name="datedebut" type="date" class="datepicker">
+                    <label for="datedebut">Date de début</label>
+                </div>
+                <div class="input-field col s12">
+                    <input name="datefin" type="date" class="datepicker">
+                    <label for="datefin">Date de fin</label>
+                </div>
+                <div class="input-field col s12">
+                    <input name="villeXp" type="text" length="255">
+                    <label for="villeXp">Ville</label>
+                </div>
+                <div class="input-field col s12">
+                    <select name="pays">
+                        <option value="72" selected="selected">France </option>
+                        <% for(var i = 0; i<pays.length; i++) {%>
+                        <option value="<%=pays[i].id%>"><%=pays[i].intitule%></option>
+                        <%}%>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <h4>Missions</h4>
+        <div class="row"
+             style="border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 20px">
+            <div class="input-field col s12">
+                <div class="input-field col s12">
+                    <input name="intituleMission1" type="text" length="255">
+                    <label for="intituleMission1">Intitulé de la mission</label>
+                </div>
+                <div class="input-field col s12">
+                    <input name="intituleMission2" type="text" length="255">
+                    <label for="intituleMission2">Intitulé de la mission</label>
+                </div>
+                <div class="input-field col s12">
+                    <input name="intituleMission3" type="text" length="255">
+                    <label for="intituleMission3">Intitulé de la mission</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" id="btn_ajout_Exppro" class=" modal-action modal-close waves-effect waves-green btn-flat">Ajouter</a>
+    </div>
+</div>
+
+<!-- Fenêtre modale de Langue -->
+<div id="modalLangue" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>Langue</h4>
+        <div class="row"
+             style="border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 20px">
+            <div id class="input-field col s12">
+                <div class="input-field col s12">
+                    <input name="denominationLangue" type="text" length="50">
+                    <label for="denominationLangue">Langue</label>
+                </div>
+                <div class="input-field col s12">
+                    <select name="niveauLangue">
+                        <option value="" disabled selected>Niveau de maitrise</option>
+                        <option value="1">Debutant (Niveau A1/A2) </option>
+                        <option value="2">Bonnes notions (Niveau B1)</option>
+                        <option value="3">Moyen (Niveau B2 - Base)</option>
+                        <option value="4">Courant (Niveau C1)</option>
+                        <option value="5">Natif (Niveau C2)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" id="btn_ajout_Langue" class=" modal-action modal-close waves-effect waves-green btn-flat">Ajouter</a>
+    </div>
+</div>
+
+<!-- Fenêtre modale du Centre d'interet -->
+<div id="modalInteret" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>Centre d'Interet</h4>
+        <div class="row"
+             style="border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 20px">
+            <div class="input-field col s12">
+                <div id class="input-field col s12">
+                    <input name="intituleInteret" type="text" length="50">
+                    <label for="intituleInteret">Intitulé centre interet</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" id="btn_ajout_Interet" class=" modal-action modal-close waves-effect waves-green btn-flat">Ajouter</a>
+    </div>
+</div>
+
+
 <%- include('include/footer') %>
+<script type="text/javascript" src="/js/ajoutercv-event.js"></script>
