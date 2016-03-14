@@ -16,24 +16,22 @@ $(document).ready(function(){
         /**
          * Action du Bouton de la fenêtre modale de la formation
          */
+        $('#elements_CV').append('<input type="hidden" name="tailleformation" value="' + $("input[id=tailleformation]").val() + '">');
         $('a').click(function(event) {
             var id= this.id;
-            var inti ="Formation["+id+"].anneeFormation]";
-            var intitule = $('input[name=inti]').val();
-            /*var mention = $('input[name=mention]').val();
-            var annee = $('input[name=annee]').val();
-            var encours = $('input[name=encours]').val();
-            var etablissement = $('input[name=etablissement]').val();
-            var ville = $('input[name=ville]').val();*/
-            alert('<input type="hidden" name="formation[' + id + '][intitule]" value="' + intitule + '">');
-            $('#elements_CV').append('jkdcndlkc,d');
-            $('#elements_CV').append('<input type="hidden" name="formation[' + id + '][intitule]" value="' + intitule + '">');
-           /* $('#elements_CV').append('<input type="hidden" name="formation[' + formationIncrement + '][mention]" value="' + mention + '">');
-            $('#elements_CV').append('<input type="hidden" name="formation[' + formationIncrement + '][annee]" value="' + annee + '">');
-            $('#elements_CV').append('<input type="hidden" name="formation[' + formationIncrement + '][encours]" value="' + encours+ '">');
-            $('#elements_CV').append('<input type="hidden" name="formation[' + formationIncrement + '][etablissement]" value="' + etablissement+ '">');
-            $('#elements_CV').append('<input type="hidden" name="formation[' + formationIncrement + '][ville]" value="' + ville + '">');
-            formationIncrement=formationIncrement+1;*/
+            var idforma ='Formation_'+id+'_idformation';
+            var annee ='Formation_'+id+'_anneeFormation';
+            var intitule ='Formation_'+id+'_intitulediplome';
+            var etablissement ='Formation_'+id+'_etablissement';
+            var ville ='Formation_'+id+'_ville';
+            var mention ='Formation_'+id+'_mention';
+
+            $('#elements_CV').append('<input type="hidden" name="formation[' + id + '][id]" value="' + $("input[id="+idforma+"]").val() + '">');
+            $('#elements_CV').append('<input type="hidden" name="formation[' + id + '][annee]" value="' + $("input[id="+annee+"]").val() + '">');
+            $('#elements_CV').append('<input type="hidden" name="formation[' + id + '][intitule]" value="' + $("input[id="+intitule+"]").val() + '">');
+            $('#elements_CV').append('<input type="hidden" name="formation[' + id + '][etablissement]" value="' + $("input[id="+etablissement+"]").val() + '">');
+            $('#elements_CV').append('<input type="hidden" name="formation[' + id + '][ville]" value="' + $("input[id="+ville+"]").val() + '">');
+            $('#elements_CV').append('<input type="hidden" name="formation[' + id + '][mention]" value="' + $("input[id="+mention+"]").val() + '">');
         });
            // $('.error').stop().fadeIn(400).delay(2000).fadeOut(400);
             //alert($('button[id=btn_rec_forma]').val());
