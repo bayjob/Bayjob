@@ -25,7 +25,7 @@ router.post('/', function(req, res, next) {
     var cv = models.CV.build({
         titre: titrecv,
         resume: resumecv,
-        CandidatId: parseInt("1") // to change
+        CandidatId: req.session.user // to change
     });
     cv.save().then(function(){
         if (req.body.competence != undefined){

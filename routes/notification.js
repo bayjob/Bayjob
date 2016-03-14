@@ -4,32 +4,28 @@ var router = express.Router();
 
 /* GET home page. */
 router.post('/accepterCV', function(req, res, next) {
-  var notification = models.Notification.build({
+  var notification = models.Notification.create({
     reponse:null,
-    choix:1
+    choix:1,
+    UtilisateurId:req.body.utilisateurSession,
+    CVId:req.body.CVId,
+    OffreId:req.body.listeOffresCV
+  }).then(function() {
+    res.redirect('/cv');
+    next();
   });
-
-  notification.save().then(function() {
-    notification.setUtilisateur(req.body.utilisateurSession);
-    notification.setCV(req.body.CVId);
-    notification.setOffre(req.body.listeOffresCV);
-
-
-  });
-  res.redirect('/cv');
 });
 
 router.post('/refuserCV', function(req, res, next) {
-  var notification = models.Notification.build({
+  var notification = models.Notification.create({
     reponse:null,
-    choix:0
-  });
-
-  notification.save().then(function() {
-    notification.setUtilisateur(req.body.utilisateurSession);
-    notification.setCV(req.body.CVId);
-
+    choix:0,
+    UtilisateurId:req.body.utilisateurSession,
+    CVId:req.body.CVId,
+    OffreId:req.body.listeOffresCV
+  }).then(function() {
     res.redirect('/cv');
+    next();
   });
 });
 

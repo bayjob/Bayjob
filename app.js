@@ -12,7 +12,9 @@ var users = require('./routes/users');
 //Routes de l'espace candidat
 var espaceCandidat = require('./routes/espaceCandidat');
 var ajouterCandidat = require('./routes/ajouterCandidat');
+var modifierCandidat = require('./routes/modifierCandidat');
 var ajouterCv = require('./routes/ajouterCv');
+var modifierCv = require('./routes/modifierCv');
 var cv = require('./routes/cv');
 var rechercheOffres = require('./routes/rechercherOffres');
 
@@ -62,11 +64,11 @@ var test = function(req, res, next){
 
 // Authentication and Authorization Middleware
 /*var auth = function(req, res, next) {
-  if (req.session && req.session.user)
-    return next();
-  else
-    return res.sendStatus(401);
-};*/
+ if (req.session && req.session.user)
+ return next();
+ else
+ return res.sendStatus(401);
+ };*/
 
 app.use('/', routes);
 app.use('/users', users);
@@ -74,7 +76,9 @@ app.use('/users', users);
 //Espace candidat
 app.use('/espaceCandidat', espaceCandidat);
 app.use('/ajouterCandidat', ajouterCandidat);
+app.use('/modifierCandidat', modifierCandidat);
 app.use('/ajouterCv', ajouterCv);
+app.use('/modifierCv', modifierCv);
 app.use('/cv', cv);
 app.use('/rechercheCvs',rechercheCvs);
 app.use('/rechercheOffres', rechercheOffres);
