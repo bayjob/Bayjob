@@ -47,8 +47,44 @@
         <p class="right-align"><a href="ajouterCv" class="waves-effect waves-light btn"><i class="material-icons left">add</i>Ajouter un CV</a></p>
       </div>
     </div>
+    <div class="row">
+      <div class="col s12 m12">
+        <h4>Notifications</h4>
+
+        <ul class="collection">
+
+          <% for(var i=0; i<notifications.length;i++){%>
+          <li class="collection-item avatar">
+            <div class="row">
+              <div class="col s12 m6">
+                <img src="/img/avatar.png" width="42px" height="42px" alt="" class="circle">
+                <span class="title"><a href="/offre/<%=notifications[i].OffreId%>"><%=notifications[i].Utilisateur.Recruteur.nomEntreprise%></a></span>
+                <p>Date de cr&eacute;ation : <%=notifications[i].createdAt.getDate() + " " + mois[notifications[i].createdAt.getMonth()] + " " + notifications[i].createdAt.getFullYear()%></p>
+                <p>Derni&egrave;re mise &agrave; jour : <%=notifications[i].updatedAt.getDate() + " " + mois[notifications[i].updatedAt.getMonth()] + " " + notifications[i].updatedAt.getFullYear()%></p>
+
+              </div>
+
+              <div class="col s12 m6">
+                <div class="right-align">
+                  <%if(notifications[i].reponse==null){%>
+                  <a class="waves-effect waves-light btn black" href="/notification/accepterOffreNotif/<%=notifications[i].id%>"><i class="material-icons left">thumb_up</i>Accepter</a>
+                  <a class="waves-effect waves-light btn red" href="/notification/refuserOffreNotif/<%=notifications[i].id%>"><i class="material-icons left">thumb_down</i>Refuser</a>
+                  <%} else if(notifications[i].reponse==true){%>
+                  Acceptée<br/>Contacter l'entreprise : <a href="mailto:<%=notifications[i].Utilisateur.mail%>"><%=notifications[i].Utilisateur.mail%></a>
+                  <%}else{%>
+                  Refusée
+                  <%}%>
+                </div>
+              </div>
+            </div>
+          </li>
+          <%}%>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
 
 <%- include('include/footer') %>
+<script type="text/javascript" src="/js/espaceCandidat-event.js"></script>

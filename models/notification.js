@@ -1,7 +1,7 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var Notification = sequelize.define('Notification', {
-    utilisateurSession: DataTypes.STRING,
+    //utilisateurSession: DataTypes.STRING,
     choix:DataTypes.BOOLEAN,
     reponse:DataTypes.BOOLEAN
   }, {
@@ -9,6 +9,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         Notification.belongsTo(models.CV);
         Notification.belongsTo(models.Offre);
+        Notification.belongsTo(models.Utilisateur);
       }
     }
   });

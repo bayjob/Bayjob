@@ -38,6 +38,5 @@ router.post('/', function (req, res) {
       res.render('login', {title: 'Connexion',email:null,mdp:null, message:message});
     }
   });
-
 });
 module.exports = router;
