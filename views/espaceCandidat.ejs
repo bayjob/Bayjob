@@ -28,9 +28,8 @@
           <p><strong>Adresse : </strong><%=candidat.adresse%> - <%=candidat.cp + " " + candidat.ville%></p>
           <p><strong>T&eacute;l fixe : </strong><%=candidat.telFixe%><br/>
             <strong>T&eacute;l mobile : </strong><%=candidat.telMobile%>
-            <p class="right-align"><a class="waves-effect waves-light btn"><i class="material-icons left">edit</i>Modifier les informations</a></p>
+            <p class="right-align"><a href="/modifierCandidat" class="waves-effect waves-light btn"><i class="material-icons left">edit</i>Modifier les informations</a></p>
         </blockquote>
-      </div>
       <div class="col s12 m6">
         <h4>Mes CV</h4>
 
@@ -45,7 +44,7 @@
           </li>
           <%}%>
         </ul>
-        <p class="right-align"><a class="waves-effect waves-light btn"><i class="material-icons left">add</i>Ajouter un CV</a></p>
+        <p class="right-align"><a href="ajouterCv" class="waves-effect waves-light btn"><i class="material-icons left">add</i>Ajouter un CV</a></p>
       </div>
     </div>
   </div>
