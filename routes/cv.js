@@ -33,7 +33,7 @@ router.get('/', function(req, res, next) {
 
         console.log(cvsUser);
 
-        if(cvsUser.length==0){
+        if(cvsUser.length==0 && cvs.length == 0){
             models.CV.findOne({
                 attributes: ['id']
             }).then(function(cv){
@@ -52,6 +52,8 @@ router.get('/', function(req, res, next) {
                 });
             });
             console.log("condition1");
+        }else if(cvsUser.length==0 && cvs.length != 0){
+            res.redirect('/espaceCandidat');
         }else{
             models.CV.findOne({
                 attributes: ['id'],

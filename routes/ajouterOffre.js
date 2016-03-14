@@ -1,13 +1,13 @@
 /**
  * Created by Soufiane on 09/02/2016.
  */
-var models  = require('../models');
+var models = require('../models');
 var express = require('express');
 var session = require('express-session');
 var router = express.Router();
 var sess;
 
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
 
     var NiveauEtude;
     var Departement;
@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 
         attributes: ['id', 'intitule']
 
-    }).then(function(departement){
+    }).then(function (departement) {
         Departement = departement;
     });
 
@@ -24,38 +24,43 @@ router.get('/', function(req, res, next) {
 
         attributes: ['id', 'intitule']
 
-    }).then(function(NE){
+    }).then(function (NE) {
         NiveauEtude = NE;
     });
 
-     models.Contrat_type.findAll({
+    models.Contrat_type.findAll({
 
-         attributes: ['id', 'intitule']
-         
-    }).then(function(contrat){
+        attributes: ['id', 'intitule']
 
-         res.render('ajouterOffre', { title: 'Ajoutez votre offre' , contrat : contrat, NiveauEtud: NiveauEtude, Departement : Departement});
+    }).then(function (contrat) {
+
+        res.render('ajouterOffre', {
+            title: 'Ajoutez votre offre',
+            contrat: contrat,
+            NiveauEtud: NiveauEtude,
+            Departement: Departement
+        });
     });
 
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', function (req, res, next) {
 
-// Recuperation de l'identifiant du recruteur à partir de la session
+// Recuperation de l'identifiant du recruteur ï¿½ partir de la session
 
     var recId;
     sess = req.session;
     models.Recruteur.findOne({
 
-        where:{mail: sess.user}
+        where: {mail: sess.user}
 
-    }).then(function(rec){
+    }).then(function (rec) {
 
         recId = rec;
         console.log(recId);
     });
 
-    // Récupération des données envoyées via le formulaire
+    // Rï¿½cupï¿½ration des donnï¿½es envoyï¿½es via le formulaire
 
     var handicapBool = true;
     var titre = req.body.titre;
@@ -72,39 +77,38 @@ router.post('/', function(req, res, next) {
     var dep = req.body.departement;
 
 
-
-    if(handicap == "on") {
+    if (handicap == "on") {
         handicapBool = true;
     } else {
         handicapBool = false;
     }
 
-    // Création de l'offre
+    // Crï¿½ation de l'offre
 
     var offre = models.Offre.build({
 
-        titre : titre,
-        xpRequise : xpRequise,
-        resume : resume,
-        tempDeTravail : tempDeTravail,
-        salaire : salaire,
-        ville : ville,
-        dateEmission : dateEmission,
-        handicap : handicapBool,
-        mail : mail,
-        ContratTypeId : contrat,
-        NiveauEtudeId : NE,
-        DepartementId : dep
+        titre: titre,
+        xpRequise: xpRequise,
+        resume: resume,
+        tempDeTravail: tempDeTravail,
+        salaire: salaire,
+        ville: ville,
+        dateEmission: dateEmission,
+        handicap: handicapBool,
+        mail: mail,
+        ContratTypeId: contrat,
+        NiveauEtudeId: NE,
+        DepartementId: dep
 
     });
 
     // Insertion de l'offre
 
-    offre.save().then(function() {
+    offre.save().then(function () {
 
         offre.setRecruteur(recId);
         res.send('ok added : ' + offre.titre + "  " + contrat);
-        console.log("après : " +recId);
+        console.log("aprï¿½s : " + recId);
     })
 });
 

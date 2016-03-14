@@ -4,6 +4,14 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/:idOffres', function(req, res, next) {
+    var cvsUtilisateurConnecte = null;
+
+    //Récupération des offres de l'utilisateur connecté
+    models.CV.findAll({
+        include : {model: models.Candidat, where : {UtilisateurId: req.session.user}}
+    }).then(function(cvs){
+        cvsUtilisateurConnecte = cvs;
+    });
 
 
     models.Offre.findOne({
@@ -20,8 +28,8 @@ router.get('/:idOffres', function(req, res, next) {
         console.log(JSON.stringify(offre));
 
         //Liste des mois
-        var mois = ["Janvier","F�vrier","Mars","Avril","Mai","Juin","Juillet","Ao�t","Septembre","Octobre","Novembre","D�cembre"];
-        res.render('offre', { title: 'offre', offre: offre, mois: mois});
+        var mois = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
+        res.render('offre', { title: 'offre', offre: offre, mois: mois, session:req.session, cvsUtilisateurConnecte:cvsUtilisateurConnecte});
     });
 
 

@@ -1,4 +1,4 @@
-<%- include('include/header-connect') %>
+<%- include('include/header') %>
 
 <section class="page-title cyan darken-1 white-text">
     <div class="container">
@@ -11,7 +11,7 @@
 
             <div class="col s8 m6">
                 <h3><%= offre.titre %></h3>
-                <h5><%= offre.Recruteur.nomEntreprise%> <%= offre.Recruteur.nomRecruteur %></h5>
+                <h5><%= offre.Recruteur.nomEntreprise %> <%= offre.Recruteur.nomRecruteur %></h5>
             </div>
 
             <div class="col s12 m2">
@@ -19,16 +19,48 @@
                 </p>
             </div>
 
-            <div class="col s6 m1">
-                <p class="center-align"><a style="margin-top: 20px;"
-                                           class="btn-floating btn-large waves-effect waves-light blue-grey darken-1"><i
-                                class="large material-icons">thumb_up</i></a></p>
-            </div>
+            <!------------------------------------------------------------------------------------------->
+            <!-- GESTION DES BOUTONS DE VALIDATION DES CHOIX et de MODIFICATION de l'offre >
+            <!------------------------------------------------------------------------------------------->
 
-            <div class="col s6 m1">
-                <p class="center-align"><a style="margin-top: 20px;" class="btn-floating btn-large waves-effect waves-light white"><i
-                                class="large material-icons blue-grey-text text-darken-1">thumb_down</i></a></p>
-            </div>
+            <!-- Vérification si l'utilisateur est connecté -->
+            <% if(session.user != null){
+                /*Vérification si l'utilisateur connecté est l'auteur de l'offre : si c'est le cas, on fait apparaitre
+                 un bouton de modification de l'offre au lieu des boutons de validation*/
+            if(offre.Recruteur.UtilisateurId === session.user){ %>
+                <div class="col s6 m2">
+                    <p class="center-align">
+
+                        <a href="/modifierCV/<%= offre.id %>" style="margin-top: 20px;"
+                           class="btn-floating btn-large waves-effect waves-light blue-grey darken-1">
+                            <i class="large material-icons">mode_edit</i>
+                        </a>
+                    </p>
+                </div>
+            <% }else if(session.type != "R"){ %>
+                <div class="col s6 m1">
+                    <p class="center-align">
+                        <a href="#selectionCV" style="margin-top: 20px;"
+                           class="btn-floating btn-large waves-effect waves-light blue-grey darken-1 modal-trigger tooltipped"
+                           data-position="bottom" data-delay="50" data-tooltip="Accepter cette offre">
+                            <i class="large material-icons">thumb_up</i>
+                        </a>
+                    </p>
+                </div>
+
+                <div class="col s6 m1">
+                    <p class="center-align">
+                    <form method="post" action="/notification/refuserOffre">
+                        <input type="hidden" name="utilisateurSession" value="<%= session.user %>">
+                        <input type="hidden" name="OffreId" value="<%= offre.id %>">
+                        <button type="submit" style="margin-top: 20px;"
+                                class="btn-floating btn-large waves-effect waves-light white tooltipped"
+                                data-position="bottom" data-delay="50" data-tooltip="Refuser cette offre"><i
+                                    class="large material-icons blue-grey-text text-darken-1">thumb_down</i></button>
+                    </form>
+                    </p>
+                </div>
+            <%}}%>
         </div>
     </div>
 </section>
@@ -45,12 +77,11 @@
                             g&eacute;n&eacute;rale
 
 
-
                         </div>
                         <div class="collapsible-body">
                             <div class="container">
                                 <h4>R&eacute;sum&eacute;</h4>
-                                <%=offre.resume%>
+                                <%= offre.resume %>
                                 <h4>Competence</h4>
 
                                 <table>
@@ -78,18 +109,18 @@
                         <div class="collapsible-header"><i class="material-icons">school</i>Mission offre</div>
                         <div class="collapsible-body">
                             <div class="container" style="margin-bottom: 20px;">
-                            <table>
-                                <tbody>
-                                <% for(var i = 0; i < offre.Mission_offres.length; i++) { %>
-                                <tr>
-                                    <td><%= offre.Mission_offres[i].intitule %></td>
+                                <table>
+                                    <tbody>
+                                    <% for(var i = 0; i < offre.Mission_offres.length; i++) { %>
+                                    <tr>
+                                        <td><%= offre.Mission_offres[i].intitule %></td>
 
-                                </tr>
-                                <% } %>
-                                </tbody>
-                            </table>
+                                    </tr>
+                                    <% } %>
+                                    </tbody>
+                                </table>
 
-                        </div>
+                            </div>
                         </div>
                     </li>
                     <li>
@@ -98,20 +129,18 @@
                         </div>
                         <div class="collapsible-body">
                             <div class="container" style="margin-bottom: 20px;">
-                            <h4>Temps de  travail</h4>
-                            <%=offre.tempDeTravail%>
-                            <h4> Lieux</h4>
-                            <%=offre.ville%>
-                            <h4>salaire</h4>
-                            <%=offre.salaire%>
+                                <h4>Temps de travail</h4>
+                                <%= offre.tempDeTravail %>
+                                <h4> Lieux</h4>
+                                <%= offre.ville %>
+                                <h4>salaire</h4>
+                                <%= offre.salaire %>
 
-                        </div>
+                            </div>
 
                         </div>
                     </li>
                     <li>
-
-
                     </li>
 
                 </ul>
@@ -128,4 +157,28 @@
 
 
 </section>
+
+<!-- Modal Structure -->
+<div id="selectionCV" class="modal modal-fixed-footer">
+    <form action="/notification/accepterOffre" method="post">
+        <div class="modal-content">
+            <h4>Selection d'une offre</h4>
+
+            <p>Veuillez choisir un CV correspondant à l'offre</p>
+            <select name="listeCVsOffre">
+                <option value="" disabled selected>Choisissez un CV</option>
+                <% for(var i = 0; i < cvsUtilisateurConnecte.length;i++){ %>
+                <option value="<%= cvsUtilisateurConnecte[i].id %>"><%= cvsUtilisateurConnecte[i].titre %></option>
+                <% } %>
+            </select>
+        </div>
+        <div class="modal-footer">
+            <input type="hidden" name="utilisateurSession" value="<%= session.user %>">
+            <input type="hidden" name="OffreId" value="<%= offre.id %>">
+            <input type="submit" class=" modal-action modal-close waves-effect waves-green btn-flat" value="Valider"/>
+        </div>
+    </form>
+</div>
+
 <%- include('include/footer') %>
+<script type="text/javascript" src="/js/cv-offre-event.js"></script>
