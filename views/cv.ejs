@@ -25,13 +25,13 @@
             <!-- Vérification si l'utilisateur est connecté -->
             <% if(session.user != null){
 
-            /*Vérification si l'utilisateur connecté est l'auteur du CV : si c'est le cas, on fait apparaitre
-              un bouton de modification du CV au lieu des boutons de validation*/
+                /*Vérification si l'utilisateur connecté est l'auteur du CV : si c'est le cas, on fait apparaitre
+                 un bouton de modification du CV au lieu des boutons de validation*/
             if(cv.Candidat.UtilisateurId === session.user){ %>
             <div class="col s6 m2">
                 <p class="center-align">
 
-                    <a style="margin-top: 20px;"
+                    <a href="/modifierCV/<%= cv.id %>" style="margin-top: 20px;"
                        class="btn-floating btn-large waves-effect waves-light blue-grey darken-1">
                         <i class="large material-icons">mode_edit</i>
                     </a>
@@ -44,7 +44,8 @@
             <div class="col s6 m1">
                 <p class="center-align">
                     <a href="#selectionOffre" style="margin-top: 20px;"
-                       class="btn-floating btn-large waves-effect waves-light blue-grey darken-1 modal-trigger tooltipped" data-position="bottom" data-delay="50" data-tooltip="Accepter ce CV">
+                       class="btn-floating btn-large waves-effect waves-light blue-grey darken-1 modal-trigger tooltipped"
+                       data-position="bottom" data-delay="50" data-tooltip="Accepter ce CV">
                         <i class="large material-icons">thumb_up</i>
                     </a>
 
@@ -57,8 +58,9 @@
                         <input type="hidden" name="utilisateurSession" value="<%= session.user %>">
                         <input type="hidden" name="CVId" value="<%= cv.id %>">
                         <button type="submit" style="margin-top: 20px;"
-                       class="btn-floating btn-large waves-effect waves-light white tooltipped" data-position="bottom" data-delay="50" data-tooltip="Refuser ce CV"><i
-                                class="large material-icons blue-grey-text text-darken-1">thumb_down</i></button>
+                                class="btn-floating btn-large waves-effect waves-light white tooltipped"
+                                data-position="bottom" data-delay="50" data-tooltip="Refuser ce CV"><i
+                                    class="large material-icons blue-grey-text text-darken-1">thumb_down</i></button>
                     </form>
                 </p>
             </div>
@@ -228,16 +230,16 @@
             <p>Veuillez choisir une offre correspondante au CV</p>
             <select name="listeOffresCV">
                 <option value="" disabled selected>Choisissez une offre</option>
-            <%for(var i=0; i<offreUtilisateurConnecte.length;i++){%>
-                <option value="<%=offreUtilisateurConnecte[i].id%>"><%=offreUtilisateurConnecte[i].titre%></option>
-            <%}%>
+                <% for(var i = 0; i < offreUtilisateurConnecte.length;i++){ %>
+                <option value="<%= offreUtilisateurConnecte[i].id %>"><%= offreUtilisateurConnecte[i].titre %></option>
+                <% } %>
             </select>
         </div>
         <div class="modal-footer">
 
-                <input type="hidden" name="utilisateurSession" value="<%= session.user %>">
-                <input type="hidden" name="CVId" value="<%= cv.id %>">
-                <input type="submit" class=" modal-action modal-close waves-effect waves-green btn-flat" value="Valider"/>
+            <input type="hidden" name="utilisateurSession" value="<%= session.user %>">
+            <input type="hidden" name="CVId" value="<%= cv.id %>">
+            <input type="submit" class=" modal-action modal-close waves-effect waves-green btn-flat" value="Valider"/>
 
 
         </div>
@@ -245,7 +247,7 @@
 </div>
 
 <%- include('include/footer') %>
-<script type="text/javascript" src="/js/cv-event.js"></script>
+<script type="text/javascript" src="/js/cv-offre-event.js"></script>
 
 
 

@@ -16,6 +16,7 @@ module.exports = function(sequelize, DataTypes) {
         Recruteur.hasMany(models.Offre);
         Recruteur.belongsTo(models.Departement);
         Recruteur.belongsTo(models.Pays);
+        Recruteur.belongsTo(models.Utilisateur);
       }
     }
   });
