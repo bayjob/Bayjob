@@ -21,13 +21,15 @@ router.get('/:idCv', function(req, res, next) {
             {model: models.Formation}
         ]
     }).then(function(cv){
-        console.log(JSON.stringify(cv));
+        //console.log(JSON.stringify(cv));
         res.render('modifierCv', { title: 'Modification du CV', cv: cv, mois: mois, session: req.session, cvid: cv.id});
     });
 });
 
 
 router.post('/', function (req, res) {
+    console.log((JSON.stringify(req.body)));
+
     models.CV.findOne( {
         where:{id: req.body.cvid},
         include:[{model: models.Competence_CV},
@@ -45,27 +47,28 @@ router.post('/', function (req, res) {
         }
     });
 
-
+    var i;
     var tailleformation = req.body.tailleformation;
-    console.log(req.body);
-
-   /* for (var i = 0; i< req.body.idformation.length;i++){
+   for ( i = 0; i< tailleformation;i++){
+       console.log(i+"test")
+       console.log(req.body.formation[i].id+ " YOOO"); // undefined
         models.Formation.findOne( {
-            where:{cvId: req.body.cvid, id:req.body.idformation[i]},
+            where:{cvId: req.body.cvid, id:req.body.formation[i].id},
             include:[{model: models.CV}]
         }).then(function(formation) {
-                var i=0;
-               // console.log(req.body.oldanneeFormation[i] + " et voici la nouvelle année "+ req.body.anneeFormation[i]);
-                if (req.body.oldanneeFormation[i] != req.body.anneeFormation[i]){
+            //var i=0;
+            var yo = "req.body.Formation_"+i+"_anneeFormation";
+            console.log(yo + " et voici la nouvelle année "+ req.body.formation[i].annee);
+               /* if (req.body.oldanneeFormation[i] != req.body.anneeFormation[i]){
                     console.log(req.body.oldanneeFormation[i] + " et voici la nouvelle année "+ req.body.anneeFormation[i]);
                     formation.update({
                         annee: parseInt(req.body.anneeFormation[i])
                     });
-                }
-                i++;
+                }*/
+               // i++;
         });
         global = global+1;
-    }*/
+    }
 
 });
 
