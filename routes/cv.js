@@ -9,7 +9,7 @@ var router = express.Router();
 var mois = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
 
 router.get('/', function(req, res, next) {
-    var cvs;
+
     var cvsUser = [];
 
     var offreUtilisateurConnecte = null;
@@ -25,7 +25,6 @@ router.get('/', function(req, res, next) {
         attributes: ['CVId'],
         where: {UtilisateurId:req.session.user}
     }).then(function(notifUtilisateur){
-        cvs = notifUtilisateur;
 
         for(var i=0;i<notifUtilisateur.length;i++){
             cvsUser.push(notifUtilisateur[i].CVId);
@@ -33,11 +32,10 @@ router.get('/', function(req, res, next) {
 
         console.log(cvsUser);
 
-        if(cvsUser.length==0 && cvs.length == 0){
+        if(cvsUser.length==0 && notifUtilisateur.length == 0){
             models.CV.findOne({
                 attributes: ['id']
             }).then(function(cv){
-                console.log(cv.id);
                 models.CV.findOne({
                     where:{id: cv.id},
                     include:[{model: models.Competence_CV},
@@ -51,8 +49,7 @@ router.get('/', function(req, res, next) {
                     res.render('cv', { title: 'CV', cv: cv, mois: mois, session: req.session, offreUtilisateurConnecte: offreUtilisateurConnecte});
                 });
             });
-            console.log("condition1");
-        }else if(cvsUser.length==0 && cvs.length != 0){
+        }else if(cvsUser.length==0 && notifUtilisateur.length != 0){
             res.redirect('/espaceCandidat');
         }else{
             models.CV.findOne({
@@ -61,7 +58,6 @@ router.get('/', function(req, res, next) {
                     $notIn: cvsUser
                 }}
             }).then(function(cv){;
-                console.log(cv.id);
                 models.CV.findOne({
                     where:{id: cv.id},
                     include:[{model: models.Competence_CV},
@@ -75,16 +71,9 @@ router.get('/', function(req, res, next) {
                     res.render('cv', { title: 'CV', cv: cv, mois: mois, session: req.session, offreUtilisateurConnecte: offreUtilisateurConnecte});
                 });
             });
-            console.log("condition2");
+
         }
     });
-
-        /*models.query("SELECT id from cvs where id not in (select CVId from notifications where UtilisateurId=" + req.session.user + ")", { model: models.CV })
-        .then(function(cvs) {
-            console.log(JSON.stringify(cvs));
-        });*/
-
-
 });
 
 /* GET home page. */

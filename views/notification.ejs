@@ -30,14 +30,22 @@
                         <div class="row">
                             <div class="col s12 m6">
                                 <img src="/img/avatar.png" width="42px" height="42px" alt="" class="circle">
-                                <span class="title"><a
-                                            href="/offre/<%= notifications[i].OffreId %>"><%= notifications[i].Utilisateur.Recruteur.nomEntreprise %></a></span>
+                                <%if(session.type === 'C'){%>
+                                    <span class="title"><a
+                                            href="/offre/<%= notifications[i].OffreId %>"><%= notifications[i].Offre.titre%>&nbsp;-&nbsp;<%= notifications[i].Utilisateur.Recruteur.nomEntreprise %></a></span>
+                                    <p>Int&eacute;r&eacute;ss&eacute;e par le CV : <a href="/cv/<%= notifications[i].CV.id%>" ><%= notifications[i].CV.titre%></a></p>
+                                <%}else{%>
+                                    <span class="title"><a
+                                            href="/cv/<%= notifications[i].CVId %>"><%= notifications[i].Utilisateur.Candidat.prenom %>&nbsp;<%= notifications[i].Utilisateur.Candidat.nom %></a></span>
+                                    <p>Int&eacute;r&eacute;ss&eacute; par l'offre : <a href="/offre/<%= notifications[i].Offre.id%>" ><%= notifications[i].Offre.titre%></a></p>
+                                <%}%>
+
 
                                 <p>Date de cr&eacute;ation
-                                    : <%= notifications[i].createdAt.getDate() + " " + mois[notifications[i].createdAt.getMonth()] + " " + notifications[i].createdAt.getFullYear() %></p>
+                                    : <%= notifications[i].createdAt.getDate()%>&nbsp;<%=mois[notifications[i].createdAt.getMonth()]%>&nbsp;<%=notifications[i].createdAt.getFullYear()%>&nbsp;à&nbsp;<%=notifications[i].createdAt.getHours()%>:<%=notifications[i].createdAt.getMinutes()%></p>
 
                                 <p>Derni&egrave;re mise &agrave; jour
-                                    : <%= notifications[i].updatedAt.getDate() + " " + mois[notifications[i].updatedAt.getMonth()] + " " + notifications[i].updatedAt.getFullYear() %></p>
+                                    : <%= notifications[i].updatedAt.getDate()%>&nbsp;<%=mois[notifications[i].updatedAt.getMonth()]%>&nbsp;<%=notifications[i].updatedAt.getFullYear()%>&nbsp;à&nbsp;<%=notifications[i].updatedAt.getHours()%>:<%=notifications[i].updatedAt.getMinutes()%></p>
 
                             </div>
 
@@ -45,14 +53,21 @@
                                 <div class="right-align">
                                     <% if(notifications[i].reponse == null){ %>
                                     <a class="waves-effect waves-light btn black"
-                                       href="/notification/accepterOffreNotif/<%= notifications[i].id %>"><i
+                                       href="/notification/accepterNotif/<%= notifications[i].id %>"><i
                                                 class="material-icons left">thumb_up</i>Accepter</a>
                                     <a class="waves-effect waves-light btn red"
-                                       href="/notification/refuserOffreNotif/<%= notifications[i].id %>"><i
+                                       href="/notification/refuserNotif/<%= notifications[i].id %>"><i
                                                 class="material-icons left">thumb_down</i>Refuser</a>
                                     <% } else if(notifications[i].reponse == true){ %>
+                                    <%
+                                    if(session.type === 'R'){%>
+                                    Acceptée<br/>Contacter le candidat : <a
+                                            href="mailto:<%= notifications[i].Utilisateur.mail %>"><%= notifications[i].Utilisateur.mail %></a>
+                                    <%}else{%>
                                     Acceptée<br/>Contacter l'entreprise : <a
                                             href="mailto:<%= notifications[i].Utilisateur.mail %>"><%= notifications[i].Utilisateur.mail %></a>
+                                    <%}%>
+
                                     <% }else{ %>
                                     Refusée
                                     <% } %>
