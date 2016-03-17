@@ -91,6 +91,7 @@
                                 <table>
                                     <tbody>
                                     <% for(var i = 0; i < cv.Competence_CVs.length; i++) { %>
+                                    <%if (cv.Competence_CVs[i].intitule != null){%>
                                     <tr>
                                         <td><%= cv.Competence_CVs[i].intitule %></td>
                                         <td>
@@ -103,7 +104,7 @@
                                             } %>
                                         </td>
                                     </tr>
-                                    <% } %>
+                                    <% }} %>
                                     </tbody>
                                 </table>
                             </div>
@@ -141,9 +142,22 @@
                                 <% for(var i = 0; i < cv.Experience_pros.length; i++) { %>
                                 <div class="row"
                                      style="border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 20px">
-                                    <div class="col s12 m2">
-                                        <%- mois[cv.Experience_pros[i].datedebut.getMonth()] + " " + cv.Experience_pros[i].datedebut.getFullYear() + " - " + mois[cv.Experience_pros[i].datefin.getMonth()] + " " + cv.Experience_pros[i].datefin.getFullYear() %>
-                                    </div>
+                                    <%console.log(cv.Experience_pros[i].datedebut + "date debut")%>
+                                    <%if (cv.Experience_pros[i].datedebut != null){%>
+                                    <%if ( cv.Experience_pros[i].datefin != null){%>
+                                        <div class="col s12 m2">
+                                            <%- mois[cv.Experience_pros[i].datedebut.getMonth()] + " " + cv.Experience_pros[i].datedebut.getFullYear() + " - " + mois[cv.Experience_pros[i].datefin.getMonth()] + " " + cv.Experience_pros[i].datefin.getFullYear() %>
+                                        </div>
+                                    <%}else{%>
+                                        <div class="col s12 m2 " style="font-size: 10px" >
+                                            Date de fin Manquante !
+                                        </div>
+                                   <% }
+                                    } else {%>
+                                        <div class="col s12 m2" style="font-size: 10px">
+                                            Date de debut Manquante !
+                                        </div>
+                                    <%}%>
                                     <div class="col s12 m10">
                                         <strong><%= cv.Experience_pros[i].poste %></strong><br/>
                                         <%= cv.Experience_pros[i].entreprise %> - <%= cv.Experience_pros[i].ville %>

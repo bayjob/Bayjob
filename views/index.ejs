@@ -34,7 +34,7 @@
                   <div class="card-content white-text">
                     <span class="card-title"><%= offres[i].titre %></span>
                       <h6 style="text-decoration: underline"><%= offres[i].Recruteur.nomEntreprise%> <%= offres[i].Recruteur.nomRecruteur %></h6>
-                    <p ><%=offres[i].resume.substring(0, 150);%>...</p>
+                    <p ><%=offres[i].resume.substring(0, 150)%>...</p>
                   </div>
                   <div class="card-action">
                     <a href="/offre/<%=offres[i].id%>">Suite de l'offre</a>
@@ -55,12 +55,14 @@
                 <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
                         <span class="card-title"><%= cvs[i].titre %></span>
-                        <p ><%=cvs[i].resume.substring(0, 150);%>...</p>
+                        <p ><%=cvs[i].resume.substring(0, 150)%>...</p>
                         </br>
                         <% for (var j = 0; j <cvs[i].Competence_CVs.length;j++){
-                             if(cvs[i].Competence_CVs.length > 0){%>
+                             if(cvs[i].Competence_CVs.length > 0){
+                                if(cvs[i].Competence_CVs[j].intitule != null){%>
                             <p><i class="tiny material-icons">code</i>&nbsp;&nbsp;<%=cvs[i].Competence_CVs[j].intitule %></p>
                             <%}
+                            }
                         }%>
 
                     </div>

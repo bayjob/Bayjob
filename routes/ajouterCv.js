@@ -12,22 +12,40 @@ router.get('/', function(req, res, next) {
         attributes: ['id','intitule']
     }).then(function(pays){
         Pays = pays;
-        res.render('ajouterCv', { title: 'AJout d\'un Cv', pays:Pays, session: req.session});
+        models.Niveau_etude.findAll({
+            attributes: ['id','intitule']
+        }).then(function(niveau){
+            niveauEtude = niveau;
+            res.render('ajouterCv', { title: 'AJout d\'un Cv', pays:Pays,niveau: niveauEtude ,session: req.session});
+        });
     });
 });
 
 router.post('/', function(req, res, next) {
     console.log(JSON.stringify(req.body));
-
+    var candidatId;
     var titrecv = req.body.titre;
+    console.log( req.session.user + " id candidat");
     var resumecv = req.body.resumecv;
+    var etudeniveau = req.body.niveauetude;
+
+    models.Candidat.findOne({
+        where: {UtilisateurId:  req.session.user}
+    }).then(function (rec) {
+
+        candidatId = rec;
+        console.log(candidatId);
+    });
 
     var cv = models.CV.build({
         titre: titrecv,
         resume: resumecv,
-        CandidatId: req.session.user // to change
+        CandidatId: candidatId,
+        NiveauEtudeId:etudeniveau
     });
     cv.save().then(function(){
+        cv.setCandidat(candidatId);
+        //cv.setNiveauEtude(etudeniveau);
         if (req.body.competence != undefined){
             for(var i = 0; i<req.body.competence.length;i++){
                 var intitulecompetence = req.body.competence[i].intitule;
@@ -65,8 +83,8 @@ router.post('/', function(req, res, next) {
                 });
 
                 formation.save().then(function () {
-                    formation.setCV(cv);
-                });
+                    formation.setCV(cv)
+                });;
             }
         }
 
@@ -143,9 +161,9 @@ router.post('/', function(req, res, next) {
                 });
             }
         }
+        res.redirect("/espaceCandidat");
     });
 
-    res.redirect("/espaceCandidat");
 
 });
 module.exports = router;
