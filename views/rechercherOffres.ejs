@@ -47,46 +47,12 @@
 
                     <h4>Niveau d'étude</h4>
                     <div class="col s12">
-
+                        <% for(var i = 0; i<niveauEtude.length; i++) {%>
                         <p>
-                            <input type="checkbox" name="nivEtude" value="BAC+5" id="bac+5"/>
-                            <label for="bac+5">BAC +5</label>
+                            <input type="checkbox" name="nivEtude" value="<%=niveauEtude[i].id%>" id="<%=niveauEtude[i].id%>"/>
+                            <label for="<%=niveauEtude[i].id%>"><%=niveauEtude[i].intitule%></label>
                         </p>
-
-                        <p>
-                            <input type="checkbox" name="nivEtude" value="BAC+4" id="bac+4"/>
-                            <label for="bac+4">BAC +4</label>
-                        </p>
-
-                        <p>
-                            <input type="checkbox" name="nivEtude" value="BAC+3" id="bac+3"/>
-                            <label for="bac+3">BAC +3</label>
-                        </p>
-
-                        <p>
-                            <input type="checkbox" name="nivEtude" value="BAC+2" id="bac+2"/>
-                            <label for="bac+2">BAC +2</label>
-                        </p>
-
-                        <p>
-                            <input type="checkbox" name="nivEtude" value="BAC+1" id="bac+1"/>
-                            <label for="bac+1">BAC +1</label>
-                        </p>
-
-                        <p>
-                            <input type="checkbox" name="nivEtude" value="BAC" id="bac"/>
-                            <label for="bac">BAC</label>
-                        </p>
-
-                        <p>
-                            <input type="checkbox" name="nivEtude" value="BEP" id="bep"/>
-                            <label for="bep">BEP</label>
-                        </p>
-
-                        <p>
-                            <input type="checkbox" name="nivEtude" value="CAP" id="cap"/>
-                            <label for="cap">CAP</label>
-                        </p>
+                        <%}%>
                     </div>
 
 

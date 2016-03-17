@@ -7,7 +7,12 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('rechercherOffres', { title: 'Recherche d\'offres', messageErr:null, session: req.session});
+    models.Niveau_etude.findAll({
+        attributes: ['id','intitule']
+    }).then(function(niveau){
+        niveauEtude = niveau;
+        res.render('rechercherOffres', { title: 'Recherche d\'offres', messageErr:null,niveauetude:niveauEtude, session: req.session});
+    });
 });
 
 /* Action exécutée lorsque l'utilisateur lance la recherche d'une offre */
@@ -39,7 +44,7 @@ router.post('/', function (req, res) {
 
     //Critère pour le niveau d'etude
     if(req.body.nivEtude){
-        niv_etude = {intitule: req.body.nivEtude};
+        niv_etude = {id: req.body.nivEtude};
     }else{
         niv_etude = null;
     }

@@ -7,24 +7,29 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('rechercheCvs', { title: 'Recherche d\'Cvs', messageErr:null });
+    models.Niveau_etude.findAll({
+        attributes: ['id','intitule']
+    }).then(function(niveau){
+        niveauEtude = niveau;
+        res.render('rechercheCvs', { title: 'Recherche d\'Cvs', messageErr:null, session: req.session, niveauetude:niveauEtude});
+    });
 });
 
 
 router.post('/', function (req, res) {
     console.log(req.body);
 
-    //Critère pour le niveau d'etude
+    //Critere pour le niveau d'etude
     if(req.body.nivEtude){
-        var niv_etude = {intitule: req.body.nivEtude};
+        var niv_etude = {id: req.body.nivEtude};
     }else{
         var niv_etude = null;
     }
 
-    //Vérification s'il y a au moins un critère selectionné
+    //Verification s'il y a au moins un critere selectionne
     if( niv_etude == null){
-        //Envoie d'un message d'avertissement : Veuillez selectionner au mois un critère
-        res.render('rechercheCvs', { title: 'Recherche d\'Cvs', messageErr:"Veuillez selectionner au mois un critère" });
+        //Envoie d'un message d'avertissement : Veuillez selectionner au mois un critere
+        res.render('rechercheCvs', { title: 'Recherche d\'Cvs', messageErr:"Veuillez selectionner au mois un critÃ©re" });
     }else {
 
         var criteres_cv = {};
@@ -35,10 +40,10 @@ router.post('/', function (req, res) {
         //Execution de la requete de type SELECT
         models.CV.findAll(criteres_cv).then(function(Cvs){
             //Liste des mois
-            var mois = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
+            var mois = ["Janvier","FÃ©vrier","Mars","Avril","Mai","Juin","Juillet","AoÃ»t","Septembre","Octobre","Novembre","DÃ©cembre"];
 
             //Affichage de la page de resultats
-            res.render('resultatRechercheCvs', {title: 'Résultat de recherche d\'Cvs', CV: Cvs, mois: mois });
+            res.render('resultatRechercheCvs', {title: 'RÃ©sultat de recherche d\'Cvs', CV: Cvs, mois: mois });
             console.log(JSON.stringify(Cvs));
         });
 

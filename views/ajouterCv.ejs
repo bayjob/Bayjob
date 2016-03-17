@@ -1,4 +1,4 @@
-<%- include('include/header-connect') %>
+<%- include('include/header') %>
 
 <section class="page-title cyan darken-1 white-text" xmlns="http://www.w3.org/1999/html">
     <div class="container">
@@ -31,6 +31,13 @@
                                     <input name="titre" type="text" length="255">
                                     <h4>Résumé</h4>
                                     <textarea name="resumecv" class="materialize-textarea" length="255  "></textarea>
+                                    <h4>Niveau D'étude</h4>
+                                    <select name="niveauetude">
+                                        <option value="0" selected="selected">Niveau d'étude </option>
+                                        <% for(var i = 0; i<niveauEtude.length; i++) {%>
+                                        <option value="<%=niveauEtude[i].id%>"><%=niveauEtude[i].intitule%></option>
+                                        <%}%>
+                                    </select>
                                     <h4>Compétences</h4>
                                 </div>
                                 <div id="apercucompetence" class="input-field col s12 offset-m2">
