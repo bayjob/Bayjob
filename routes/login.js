@@ -10,8 +10,16 @@ var router = express.Router();
 var sess;
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.render('login', {title: 'Connexion',email:null,mdp:null, message:null, session:null});
-  //req.session.test = "blablabla";
+  if (req.session && req.session.user) {
+    if(req.session.type==='C'){
+      res.redirect('/espaceCandidat');
+    }else{
+      res.redirect('/espaceRecruteur');
+    }
+  }else{
+    res.render('login', {title: 'Connexion',email:null,mdp:null, message:null, session:null});
+  }
+
 });
 
 /* Action executee lorsque l'utilisateur se connecte */
@@ -35,7 +43,7 @@ router.post('/', function (req, res) {
 
     }else{
       var message = 'Login et/ou mot de passe incorrecte. Veuillez re-saisir vos identifiants'
-      res.render('login', {title: 'Connexion',email:null,mdp:null, message:message});
+      res.render('login', {title: 'Connexion',email:null,mdp:null, message:message, session:null});
     }
   });
 });
