@@ -6,19 +6,25 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-    var Pays;
+        var Pays;
 
-    models.Pays.findAll({
-        attributes: ['id','intitule']
-    }).then(function(pays){
-        Pays = pays;
-        models.Niveau_etude.findAll({
-            attributes: ['id','intitule']
-        }).then(function(niveau){
-            niveauEtude = niveau;
-            res.render('ajouterCv', { title: 'AJout d\'un Cv', pays:Pays,niveau: niveauEtude ,session: req.session});
+        models.Pays.findAll({
+            attributes: ['id', 'intitule']
+        }).then(function (pays) {
+            Pays = pays;
+            models.Niveau_etude.findAll({
+                attributes: ['id', 'intitule']
+            }).then(function (niveau) {
+                niveauEtude = niveau;
+                res.render('ajouterCv', {
+                    title: 'Ajout d\'un CV',
+                    pays: Pays,
+                    niveau: niveauEtude,
+                    session: req.session
+                });
+            });
         });
-    });
+
 });
 
 router.post('/', function(req, res, next) {

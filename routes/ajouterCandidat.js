@@ -7,21 +7,44 @@ var crypto = require('crypto');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-    var Pays;
+    if (req.session && req.session.user) {
+        if(req.session.type==='C'){
+            res.redirect('/espaceCandidat');
+        }else{
+            res.redirect('/espaceRecruteur');
+        }
+    }else{
+        var Pays;
 
-    models.Pays.findAll({
-        attributes: ['id','intitule']
-    }).then(function(pays){
-        Pays = pays;
-        models.Departement.findAll({
-            attributes: ['id','intitule']
-        }).then(function(departement){
-            Departement = departement;
-            res.render('ajouterCandidat', { title: 'Inscription d\'un Candidat ',  nom: null, prenom: null, dateNaissance: null,
-                telFixe: null, telMobile:null , adresse:null , ville: null, cp: null, pays:Pays ,departement:Departement, mobilite:null, mail: null,
-                mdp:null, errornum:null});
+        models.Pays.findAll({
+            attributes: ['id', 'intitule']
+        }).then(function (pays) {
+            Pays = pays;
+            models.Departement.findAll({
+                attributes: ['id', 'intitule']
+            }).then(function (departement) {
+                Departement = departement;
+                res.render('ajouterCandidat', {
+                    title: 'Inscription d\'un Candidat ',
+                    nom: null,
+                    prenom: null,
+                    dateNaissance: null,
+                    telFixe: null,
+                    telMobile: null,
+                    adresse: null,
+                    ville: null,
+                    cp: null,
+                    pays: Pays,
+                    departement: Departement,
+                    mobilite: null,
+                    mail: null,
+                    mdp: null,
+                    errornum: null,
+                    session:null
+                });
+            });
         });
-    });
+    }
 });
 router.post('/', function(req, res, next) {
 

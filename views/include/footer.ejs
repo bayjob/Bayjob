@@ -1,31 +1,47 @@
 <footer class="page-footer blue-grey lighten-3">
     <div class="container">
         <div class="row">
-            <div class="col l6 s12">
+            <div class="col m6 s12">
                 <h5 class="black-text">Bayjob</h5>
-                <p class="black-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce hendrerit metus non ante consequat, sit amet vestibulum risus consectetur. Cras et turpis molestie, finibus dui cursus, tincidunt mi. Praesent sodales interdum leo ut semper.</p>
+                <p class="black-text">Bayjob&trade;&reg; est une société, spécialisée dans la recherche d'emploi. Son but est de simplifier la mise en relation entre candidats et recruteurs.</p>
 
 
             </div>
-            <div class="col l3 s12">
-                <h5 class="black-text">Settings</h5>
+            <%if(session && session.type==='R'){%>
+            <div class="col m3 s12">
+                <h5 class="black-text">Pour les recruteurs</h5>
                 <ul>
-                    <li><a class="black-text" href="#!">Link 1</a></li>
-                    <li><a class="black-text" href="#!">Link 2</a></li>
-                    <li><a class="black-text" href="#!">Link 3</a></li>
-                    <li><a class="black-text" href="#!">Link 4</a></li>
+                    <li><a class="black-text" href="/ajouterOffre">Ajouter une offre</a></li>
+                    <li><a class="black-text" href="/rechercheCvs">Rechercher un CV</a></li>
                 </ul>
             </div>
-            <div class="col l3 s12">
-                <h5 class="black-text">Connect</h5>
+            <%}else if(session && session.type==='C'){%>
+            <div class="col m3 s12">
+                <h5 class="black-text">Pour les candidats</h5>
                 <ul>
-                    <li><a class="black-text" href="#!">Link 1</a></li>
-                    <li><a class="black-text" href="#!">Link 2</a></li>
-                    <li><a class="black-text" href="#!">Link 3</a></li>
-                    <li><a class="black-text" href="#!">Link 4</a></li>
+                    <li><a class="black-text" href="/ajouterCv">Ajouter un CV</a></li>
+                    <li><a class="black-text" href="/rechercheOffres">Rechercher une offre</a></li>
                 </ul>
             </div>
-        </div>
+            <%}else{%>
+            <div class="col m3 s12">
+                <h5 class="black-text">Pour les recruteurs</h5>
+                <ul>
+
+                    <li><a class="black-text" href="/ajouterRecruteur">Inscription</a></li>
+                    <li><a class="black-text" href="/rechercheCvs">Rechercher un CV</a></li>
+
+                </ul>
+            </div>
+            <div class="col m3 s12">
+                <h5 class="black-text">Pour les candidats</h5>
+                <ul>
+                    <li><a class="black-text" href="/ajouterCandidat">Inscription</a></li>
+                    <li><a class="black-text" href="/rechercheOffres">Rechercher une offre</a></li>
+                </ul>
+            </div>
+            <%}%>
+            </div>
     </div>
     <div class="footer-copyright">
         <div class="container black-text">
