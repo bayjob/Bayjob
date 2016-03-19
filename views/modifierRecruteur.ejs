@@ -14,25 +14,21 @@
     </div>
 </section>
 
-<!------------------------------------------------------------------------------------------------------------
-Tous les champs sont obligatoires ( geré avec la classe validate )
+<!-- Tous les champs sont obligatoires ( geré avec la classe validate )
     les champs email doivent impérativement etre sous forme d'email avec un "@"
+-->
 
-    au premier chargement de la page les champs sont vides.
-    en cas d'erreur de confirmation des coordonnées de connexions le formulaire est renvoyé avec les valeurs
-    saisies avant l'erreur sauf les champs erronés
--------------------------------------------------------------------------------------------------------------->
-<section class="page-content" id="ajouterRecruteur">
+<section class="page-content" id="modifierRecruteur">
     <div class="container">
 
         <div class="row">
-            <h2 style="text-align: center">Veuillez remplir le formulaire ci-aprés svp.</h2>
+            <h2 style="text-align: center">Veuillez remplir le formulaire ci-apr&egrave;s svp.</h2>
             <div class="col s12 m10 offset-m1">
-                <form method="post" action="/ajouterRecruteur">
+                <form method="post" action="/modifierRecruteur">
                     <ul class="collapsible" data-collapsible="accordion">
                         <li>
                             <div class="collapsible-header active"><i class="material-icons">description</i>Description
-                                générale
+                                g&eacute;cn&eacute;rale
                             </div>
                             <div class="collapsible-body">
                                 <div class=" input-field col s10 offset-m2">
@@ -48,7 +44,7 @@ Tous les champs sont obligatoires ( geré avec la classe validate )
                                         <% if (prenomRecruteur != null) { %>
                                         <input id="prenomRecruteur" value="<%=prenomRecruteur%>" type="text"  name="prenomRecruteur" class="validate" >
                                         <% } else { %>
-                                        <input id="prenomRecruteur" type="text" name="prenomRecruteur" placeholder="Prénom" class="validate" required="" aria-required="true">
+                                        <input id="prenomRecruteur" type="text" name="prenomRecruteur" placeholder="Pr�nom" class="validate" required="" aria-required="true">
                                         <% } %>
                                     </div>
 
@@ -63,7 +59,7 @@ Tous les champs sont obligatoires ( geré avec la classe validate )
                             </div>
                         </li>
                         <li>
-                            <div class="collapsible-header"><i class="material-icons">call</i>Coordonnées téléphoniques</div>
+                            <div class="collapsible-header"><i class="material-icons">call</i>Coordonn&eacute;es t&eacute;l&eacute;phoniques</div>
                             <div id="parent" class="collapsible-body">
                                 <div class=" input-field col s10 offset-m2">
                                     <div  class="input-field col s10">
@@ -103,7 +99,7 @@ Tous les champs sont obligatoires ( geré avec la classe validate )
                                     </div>
 
                                     <div id="locationField" class="input-field col s10">
-                                        <input id="autocomplete" placeholder="Ville" onFocus="geolocate()" name="lieu" type="text" class="validate" required="" aria-required="true">
+                                        <input id="autocomplete" placeholder="Ville" onFocus="geolocate()" name="lieu" type="text" class="validate" aria-required="true">
                                     </div>
                                     <div id="address">
                                         <input type="hidden" name="ville" id="locality" disabled="false"/>
@@ -119,14 +115,13 @@ Tous les champs sont obligatoires ( geré avec la classe validate )
                                     </div>
 
                                     <div  class="input-field col s10">
-
-                                        <!-- Cas 1 : premier chargement de la page -> liste des pays à partir de la base de données
-                                            Cas 2 : formulaire renvoyé en cas d'erreur -> juste la valeur saisie avant l'erreur
-                                        -->
-
+                                        <!-- Cas 1 : premier chargement de la page -> toute la liste avec la valeur du
+                                        pays saisie par le recruteur a son inscription
+                                             Cas 2 : formulaire renvoye en cas d'erreur -> juste la valeur saisie avant l'erreur
+                                         -->
                                         <% if (ErroHandler == 0) {%>
                                         <select id="select_pays" name="pays">
-                                            <option value="72" selected="selected">France </option>
+                                            <option value="<%=paysid%>" selected="selected"><%=paysintitule.intitule%> </option>
                                             <% for(var i = 0; i<pays.length; i++) {%>
                                             <option value="<%=pays[i].id%>"><%=pays[i].intitule%></option>
                                             <%}%>
@@ -136,25 +131,26 @@ Tous les champs sont obligatoires ( geré avec la classe validate )
                                             <option value="<%=pays.id%>" selected="selected"><%=pays.intitule%></option>
                                         </select>
                                         <% } %>
-
                                     </div>
 
                                     <div id="select_departement" class="input-field col s10">
-
-                                        <!-- Cas 1 : premier chargement de la page -> liste des departements à partir de la base de données
-                                            Cas 2 : formulaire renvoyé en cas d'erreur -> juste la valeur saisie avant l'erreur
-                                        -->
+                                        <!-- Cas 1 : premier chargement de la page -> toute la liste avec la valeur du
+                                        pays saisie par le recruteur a son inscription
+                                             Cas 2 : formulaire renvoye en cas d'erreur -> juste la valeur saisie avant l'erreur
+                                         -->
                                         <% if (ErroHandler == 0) {%>
                                         <select  name="dep">
+                                            <option value=<%=departementid%> ><%=departementintitule.intitule%> </option>
                                             <% for(var i = 0; i<departement.length; i++) {%>
                                             <option value="<%=departement[i].id%>"><%=departement[i].intitule%></option>
                                             <%}%>
                                         </select>
                                         <% } else { %>
-                                        <select name="dep">
+                                        <select id="select_pays" name="dep">
                                             <option value="<%=departement.id%>" selected="selected"><%=departement.intitule%></option>
                                         </select>
                                         <% } %>
+
 
                                     </div>
                                 </div>
@@ -162,17 +158,16 @@ Tous les champs sont obligatoires ( geré avec la classe validate )
                         </li>
                         <li>
 
-                            <!------------------------------------------- -----------------------------------------------------------------
-                            Gestion des erreur de confirmation des coordonnées de connexion
-                                  Cas 1 : aucune erreur -> formulaire simple
-                                  Cas 2 : Erreur Confirmation mdp -> renvoyer un formulaire avec toute les valeurs saisies avant l'erreur
-                                          sauf les champs mdp et confirmation mdp avec un warning
-                                  Cas 3 : Erreur Confirmation email -> renvoyer un formulaire avec toute les valeurs saisies avant l'erreur
-                                          sauf les champs email et confirmation email avec un warning
-                                  Cas 2 : Erreur Confirmation mdp -> renvoyer un formulaire avec toute les valeurs saisies avant l'erreur
-                                         sauf les champs email, confirmation email, mdp et confirmation mdp avec un warning
-                           <!--------------------------------------------------------------------------------------------------------- -->
+                            <!-- Gestion des erreur de confirmation des coordonnees de connexion :
 
+                                 Cas 1 : aucune erreur -> formulaire simple
+                                 Cas 2 : Erreur Confirmation mdp -> renvoyer un formulaire avec toute les valeurs saisies avant l'erreur
+                                  sauf les champs mdp et confirmation mdp avec un warning
+                                 Cas 3 : Erreur Confirmation email -> renvoyer un formulaire avec toute les valeurs saisies avant l'erreur
+                                 sauf les champs email et confirmation email avec un warning
+                                 Cas 2 : Erreur Confirmation mdp -> renvoyer un formulaire avec toute les valeurs saisies avant l'erreur
+                                 sauf les champs email, confirmation email, mdp et confirmation mdp avec un warning
+                                 -->
                             <div class="collapsible-header"><i class="material-icons">perm_identity</i>Information de connexion</div>
                             <div id="parent" class="collapsible-body">
                                 <div class="container">
@@ -180,16 +175,16 @@ Tous les champs sont obligatoires ( geré avec la classe validate )
                                     <table>
                                         <tbody>
                                         <tr>
-                                            <td><input type="email" name="mail" placeholder="Email" class="validate" required="" aria-required="true"></td>
+                                            <td><input value="<%=mail%>" type="email" name="mail" placeholder="Email" class="validate" required="" aria-required="true"></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="email" name="retapEmail" placeholder="Confirmation EMail" class="validate" required="" aria-required="true"></td>
+                                            <td><input value="<%=mail%>" type="email" name="retapEmail" placeholder="Confirmation EMail" class="validate" required="" aria-required="true"></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="password" name="mdp" placeholder="Mot de passe" class="validate" required="" aria-required="true"></td>
+                                            <td><input value="<%=mdp%>" type="password" name="mdp" placeholder="Mot de passe" class="validate" required="" aria-required="true"></td>
                                         </tr>
                                         <tr>
-                                            <td> <input type="password" name="retapMdp" placeholder="Confirmation Mot de passe" class="validate" required="" aria-required="true"></td>
+                                            <td> <input value="<%=mdp%>" type="password" name="retapMdp" placeholder="Confirmation Mot de passe" class="validate" required="" aria-required="true"></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -203,7 +198,7 @@ Tous les champs sont obligatoires ( geré avec la classe validate )
                                             <td><input value="<%=mail%>" type="email" name="retapEmail" required="" aria-required="true"></td>
                                         </tr>
                                         <tr>
-                                            <td>Les mots de passe sont différents !</br>
+                                            <td>Les mots de passe sont diff&eacute;rents !</br>
                                                 <input type="password" name="mdp" placeholder="Mot de passe" class="invalid" required="" aria-required="true"></td>
                                         </tr>
                                         <tr>
@@ -215,7 +210,7 @@ Tous les champs sont obligatoires ( geré avec la classe validate )
                                     <table>
                                         <tbody>
                                         <tr>
-                                            <td>Les adresses Email sont différentes !</br>
+                                            <td>Les adresses Email sont diff&eacute;rentes !</br>
                                                 <input type="email" name="mail" placeholder="Mail" class="invalid" required="" aria-required="true" ></td>
                                         </tr>
                                         <tr>
@@ -229,40 +224,18 @@ Tous les champs sont obligatoires ( geré avec la classe validate )
                                         </tr>
                                         </tbody>
                                     </table>
-
-
-                                    <% } else if (mailExist == 1){ %>
-                                    <table>
-                                        <tbody>
-                                        <tr>
-                                            <td>L'adresse mail que vous avez saisie existe déjà !</br>
-                                                <input type="email" name="mail" placeholder="Mail" class="invalid" class="validate" required="" aria-required="true"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="email" name="retapEmail" placeholder="Confirmation Email" class="invalid" class="validate" required="" aria-required="true"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input value="<%=mdp%>" type="password" name="mdp" class="validate" required="" aria-required="true"> </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input value="<%=mdp%>" type="password" name="retapMdp" class="validate" required="" aria-required="true"></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-
-
                                     <% } else if (Err == '3') { %>
                                     <table>
                                         <tbody>
                                         <tr>
-                                            <td> Les adresses Email sont différentes !
+                                            <td> Les adresses Email sont diff&eacute;rentes !
                                                 <input type="email" name="mail" placeholder="EMail" class="invalid" class="validate" required="" aria-required="true"> </td>
                                         </tr>
                                         <tr>
                                             <td><input type="email" name="retapEmail" placeholder="Confirmation Mail" class="invalid" class="validate" required="" aria-required="true"></td>
                                         </tr>
                                         <tr>
-                                            <td> Les mots de passe sont différents !
+                                            <td> Les mots de passe sont diff&eacute;rents !
                                                 <input type="password" name="mdp" placeholder="Mot de passe" class="invalid" class="validate" required="" aria-required="true"> </td>
                                         </tr>
                                         <tr>
@@ -275,10 +248,17 @@ Tous les champs sont obligatoires ( geré avec la classe validate )
                             </div>
                         </li>
                     </ul>
+                    <div id="elements_Recruteur">
+                    </div>
                     <div class="row center-align">
-                        <button class="btn waves-effect waves-light" type="submit" name="enregistrer">Enregistrer
+                        <div class="row center-align">
+                            <a href="#modalmdp" class="modal-trigger  btn-floating btn-large waves-effect waves-light red"><i class="material-icons">done</i></a>
+                        </div>
+                        <p class="center-align">
+                        <button class="btn waves-effect waves-light disabled" type="submit" name="enregistrer">Enregistrer
                             <i class="material-icons right">send</i>
                         </button>
+                        </p>
                     </div>
                 </form>
             </div>
@@ -286,8 +266,28 @@ Tous les champs sont obligatoires ( geré avec la classe validate )
     </div>
 </section>
 
+<!-- Fenetre modale de confirmation de changement d'identifiants -->
+<div id="modalmdp" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>Veuillez saisir ci-dessous votre mot de passe actuel afin de confirmer les changements</h4>
+        <div class="row"
+             style="border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 20px">
+            <div id="modaldata" class="input-field col s12">
+                <div class="input-field col s12">
+                    <input name="mdpancien" type="password" length="50">
+                    <label for="mdpancien">Veuillez saisir votre mot de passe actuel</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row center-align modal-footer">
+        <a href="#!" id="testmdp"  class="modal-action modal-close btn-floating btn-large waves-effect waves-light red"><i class="material-icons">done</i></a>
+    </div>
+</div>
+
 <script src="/js/recruteur-coordinate.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvTewOiQvvKOS9RNOjYIN-qgE9NrcSKy4&signed_in=true&libraries=places&callback=initAutocomplete"
         async defer></script>
 
 <%- include('include/footer') %>
+<script type="text/javascript" src="/js/modifierrecruteur-event.js"></script>

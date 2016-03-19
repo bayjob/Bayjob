@@ -11,9 +11,12 @@ router.get('/', function (req, res, next) {
     if (req.session && req.session.user) {
         //Requête de récupération des notifications envoyées par l'utilisateur
         models.Notification.findAll({
-            include : [{model: models.CV, include: {model: models.Candidat, include:{model: models.Utilisateur}}},{model: models.Offre, include: {model: models.Recruteur, include:{model: models.Utilisateur}}}],
-            where : [{UtilisateurId: req.session.user}, {choix: 1}]
-        }).then(function(notifEnvoyees){
+            include: [{
+                model: models.CV,
+                include: {model: models.Candidat, include: {model: models.Utilisateur}}
+            }, {model: models.Offre, include: {model: models.Recruteur, include: {model: models.Utilisateur}}}],
+            where: [{UtilisateurId: req.session.user}, {choix: 1}]
+        }).then(function (notifEnvoyees) {
 
             //Requête à exécuter quand le candidat est connecté
             if (req.session.type == 'C') {
@@ -30,8 +33,6 @@ router.get('/', function (req, res, next) {
                         {model: models.Offre}],
                     where: {choix: 1}
                 }).then(function (notif) {
-                    console.log(JSON.stringify(notif));
-                    console.log(JSON.stringify(notifEnvoyees));
                     res.render('notification', {
                         title: 'Notification',
                         notificationsRecues: notif,
@@ -55,8 +56,6 @@ router.get('/', function (req, res, next) {
                         {model: models.CV}],
                     where: {choix: 1}
                 }).then(function (notif) {
-                    console.log(JSON.stringify(notif));
-                    console.log(JSON.stringify(notifEnvoyees));
                     res.render('notification', {
                         title: 'Notification',
                         notificationsRecues: notif,
@@ -72,8 +71,6 @@ router.get('/', function (req, res, next) {
     } else {
         res.redirect('/login');
     }
-
-
 });
 
 router.post('/accepterCV', function (req, res, next) {
@@ -137,7 +134,6 @@ router.get('/accepterNotif/:idNotif', function (req, res, next) {
         res.status(200);
         res.redirect('/notification');
     });
-
 });
 
 router.get('/refuserNotif/:idNotif', function (req, res, next) {

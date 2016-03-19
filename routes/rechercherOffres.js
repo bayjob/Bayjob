@@ -60,6 +60,7 @@ router.post('/', function (req, res) {
         res.render('rechercherOffres', { title: 'Recherche d\'offres', messageErr:"Veuillez selectionner au mois un critère" });
     }else{
         var criteres_offre = {};
+        console.log(niv_etude);
 
         //Construction de la requete de recherche
         criteres_offre.include = [{model: models.Contrat_type},
