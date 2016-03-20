@@ -68,8 +68,7 @@
 
                                 <p>Derni&egrave;re mise &agrave; jour
                                     : <%= candidat.CVs[i].updatedAt.getDate() + " " + mois[candidat.CVs[i].updatedAt.getMonth()] + " " + candidat.CVs[i].updatedAt.getFullYear() %></p>
-                                <p><a href="/espaceCandidat/deleteCV/<%=candidat.CVs[i].id%>"><i
-                                                class="tiny material-icons">close</i></a> Supprimer ce CV ?</p>
+                                <a href="/espaceCandidat/deleteCV/<%=candidat.CVs[i].id%>" class="secondary-content"><i class="material-icons">close</i></a>
                             </div>
                         </li>
                         <% } %>

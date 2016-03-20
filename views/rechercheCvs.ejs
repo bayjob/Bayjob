@@ -1,61 +1,102 @@
 <%- include('include/header') %>
-
-<section class="page-title cyan darken-1 white-text">
+<section class="page-title cyan darken-1 white-text" xmlns="http://www.w3.org/1999/html">
     <div class="container">
         <div class="row">
             <div id="logo-title" class="col s3 m1">
                 <i class="medium material-icons">search</i>
             </div>
-
             <div class="col s9 m8">
-                <h3><%= title %></h3>
+                <h3><%=title%></h3>
             </div>
         </div>
-
     </div>
-
 </section>
-
-<section class="page-content" id="rechercherCVs">
+<section class="page-content" id="ajouterCV">
     <div class="container">
         <div class="row">
-            <div class="col s12 m7 offset-m2">
-
-                <h4>CVs  Recherche</h4>
+            <div class="col s12 m10 offset-m1">
                 <% if(messageErr != null){%>
                 <div id="messageErr" class="card-panel teal lighten-2"><%=messageErr%></div>
                 <%}%>
-                <form action="/rechercheCvs" method="post">
+                <form id="elform" method="post" action="/rechercheCvs">
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <!-- PARTIE DESCRIPTION GENERALE DU CV >
+                        <!------------------------------------->
+                        <li>
+                            <div class="collapsible-header active"><i class="material-icons">Niveau_etude</i>Niveau_etude
+
+                            </div>
+                            <div class="collapsible-body">
+                                <div id="infogenerales" class="container">
+                                    <% for(var i = 0; i<niveauEtude.length; i++) {%>
+                                    <p>
+                                        <input type="checkbox" name="nivEtude" value="<%=niveauEtude[i].id%>" id="<%=niveauEtude[i].id%>"/>
+                                        <label for="<%=niveauEtude[i].id%>"><%=niveauEtude[i].intitule%></label>
+                                    </p>
+                                    <%}%>
 
 
-                    <h4>Niveau d'&eacutetude</h4>
-                    <div class="col s12">
-                        <% for(var i = 0; i<niveauEtude.length; i++) {%>
-                        <p>
-                            <input type="checkbox" name="nivEtude" value="<%=niveauEtude[i].id%>" id="<%=niveauEtude[i].id%>"/>
-                            <label for="<%=niveauEtude[i].id%>"><%=niveauEtude[i].intitule%></label>
-                        </p>
-                        <%}%>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">public</i>Compétences</div>
+                            <div class="collapsible-body">
+                                <div id="apercucompetence" class="container">
+                                </div>
+                                <div class="input-field col s12">
+                                    <p class="center-align">
+                                        <a href="#modalCompetence" class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                    <!----------------------------------------------------->
+                    <!-- FIN PARTIE DESCRIPTION Centre Interet De L'OFFRE >
+                    <!------------- DEBUT DIV RECEPTION HIDDEN INPUT >
+                    <------------------------------------------------------->
+                    <div id="elements_Offre">
                     </div>
-
-                    <p class="center-align">
-                        <button type="submit" name="rechercher" class="waves-effect waves-light btn blue-grey darken-1">
-                            <i class="material-icons left">search</i>Rechercher
+                    <div class="row">
+                        <button class="btn waves-effect waves-light blue-grey darken-1" type="submit" name="Recherche">Recherche
+                            <i class="material-icons right">send</i>
                         </button>
-                    </p>
+                    </div>
                 </form>
-            </div>
-
-            <div class="col s12 m3">
-                <!--<p><a class="waves-effect waves-light btn blue-grey darken-1"><i class="material-icons left">info</i>En savoir plus</a></p>-->
             </div>
         </div>
     </div>
 </section>
-
-<script src="/js/autocomplete-gmap.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvTewOiQvvKOS9RNOjYIN-qgE9NrcSKy4&signed_in=true&libraries=places&callback=initAutocomplete"
-        async defer></script>
+<!-- Fenêtre modale de Compétence -->
+<div id="modalCompetence" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>Compétence</h4>
+        <div class="row"
+             style="border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 20px">
+            <div class="input-field col s12">
+                <div class="input-field col s12">
+                    <input name="intituleCompetence" type="text" length="50">
+                    <label for="intituleCompetence">Intitulé de la compétence</label>
+                </div>
+                <div class="input-field col s4">
+                    <select name="niveauCompetence">
+                        <option value="" disabled selected>Niveau de maitrise</option>
+                        <option value="1">nul</option>
+                        <option value="2">Intermédiaire</option>
+                        <option value="3">Bon</option>
+                        <option value="4">Pro</option>
+                        <option value="5">Expert</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" id="btn_ajout_competence" class=" modal-action modal-close waves-effect waves-green btn-flat">Ajouter</a>
+    </div>
+</div>
 
 <%- include('include/footer') %>
-
+<script type="text/javascript" src="/js/ajouterOffre-event.js"></script>

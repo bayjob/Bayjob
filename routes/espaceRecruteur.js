@@ -25,4 +25,10 @@ router.get('/', function(req, res, next) {
     }
 });
 
+router.get('/deleteOffre/:idOffre', function(req, res, next) {
+    models.Offre.destroy({ where: { id: req.params.idOffre }}).then(function(){
+        res.redirect('/espaceRecruteur');
+    });
+});
+
 module.exports = router;
