@@ -32,8 +32,8 @@
                                     <h4>Résumé</h4>
                                     <textarea name="resumecv" class="materialize-textarea" length="255  "></textarea>
                                     <h4>Niveau D'étude</h4>
-                                    <select name="niveauetude">
-                                        <option value="0" selected="selected">Niveau d'étude </option>
+                                    <select name="niveauetude" required>
+                                        <option value="50" selected="selected">BAC </option>
                                         <% for(var i = 0; i<niveauEtude.length; i++) {%>
                                         <option value="<%=niveauEtude[i].id%>"><%=niveauEtude[i].intitule%></option>
                                         <%}%>

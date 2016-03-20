@@ -6,8 +6,8 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-        var Pays;
-
+    var Pays;
+    if (req.session && req.session.user) {
         models.Pays.findAll({
             attributes: ['id', 'intitule']
         }).then(function (pays) {
@@ -16,14 +16,12 @@ router.get('/', function(req, res, next) {
                 attributes: ['id', 'intitule']
             }).then(function (niveau) {
                 niveauEtude = niveau;
-                res.render('ajouterCv', {
-                    title: 'Ajout d\'un CV',
-                    pays: Pays,
-                    niveau: niveauEtude,
-                    session: req.session
-                });
+                res.render('ajouterCv', {title: 'Ajout d\'un CV',pays: Pays, niveau: niveauEtude,session: req.session});
             });
         });
+    }else{
+        res.redirect('/login');
+    }
 
 });
 
