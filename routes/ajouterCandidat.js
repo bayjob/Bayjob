@@ -17,9 +17,14 @@ router.get('/', function(req, res, next) {
             attributes: ['id','intitule']
         }).then(function(departement){
             Departement = departement;
-            res.render('ajouterCandidat', { title: 'Inscription d\'un Candidat ',  nom: null, prenom: null, dateNaissance: null,
-                telFixe: null, telMobile:null , adresse:null , ville: null, cp: null, pays:Pays ,departement:Departement, mobilite:null, mail: null,
-                mdp:null, errornum:null});
+            models.Utilisateur.findAll({
+                attributes: ['mail']
+            }).then(function(listemails){
+                listeMails = listemails;
+                res.render('ajouterCandidat', { title: 'Inscription d\'un Candidat ',  nom: null, prenom: null, dateNaissance: null,
+                    telFixe: null, telMobile:null , adresse:null , ville: null, cp: null, pays:Pays ,departement:Departement, mobilite:null, mail: null,
+                    mdp:null,mails:listeMails, errornum:null});
+            });
         });
     });
 });

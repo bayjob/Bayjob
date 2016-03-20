@@ -7,18 +7,26 @@ var router = express.Router();
 
 router.get('/', function(req, res, next) {
     var Pays;
-
-    models.Pays.findAll({
-        attributes: ['id','intitule']
-    }).then(function(pays){
-        Pays = pays;
-        models.Niveau_etude.findAll({
-            attributes: ['id','intitule']
-        }).then(function(niveau){
-            niveauEtude = niveau;
-            res.render('ajouterCv', { title: 'AJout d\'un Cv', pays:Pays,niveau: niveauEtude ,session: req.session});
+    if (req.session && req.session.user) {
+        models.Pays.findAll({
+            attributes: ['id', 'intitule']
+        }).then(function (pays) {
+            Pays = pays;
+            models.Niveau_etude.findAll({
+                attributes: ['id', 'intitule']
+            }).then(function (niveau) {
+                niveauEtude = niveau;
+                res.render('ajouterCv', {
+                    title: 'AJout d\'un Cv',
+                    pays: Pays,
+                    niveau: niveauEtude,
+                    session: req.session
+                });
+            });
         });
-    });
+    }else{
+        res.redirect('/login');
+    }
 });
 
 router.post('/', function(req, res, next) {

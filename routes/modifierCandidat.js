@@ -8,32 +8,50 @@ var router = express.Router();
 
 router.get('/', function(req, res, next) {
     var Pays;
-    models.Candidat.findOne({
-        include : {model: models.CV},
-        where: {UtilisateurId: req.session.user}
-    }).then(function(candidat){
-        candidat=candidat;
-        models.Pays.findAll({
-            attributes: ['id','intitule']
-        }).then(function(pays){
-            Pays = pays;
-            models.Departement.findAll({
-                attributes: ['id','intitule']
-            }).then(function(departement){
-                Departement = departement;
-                models.Utilisateur.findOne({
-                    where: {id: req.session.user}
-                }).then(function(utilisateur){
-                    utilisateur=utilisateur;
-                    res.render('modifierCandidat', { title: 'Modification d\'un Candidat ',  nom: candidat.nom,
-                        prenom: candidat.prenom, dateNaissance: candidat.dateNaissance, telFixe: candidat.telFixe,
-                        telMobile:candidat.telMobile, adresse:candidat.adresse, ville: candidat.ville, cp: candidat.cp,
-                        pays:Pays ,departement:Departement, mobilite:candidat.mobilite, mail: utilisateur.mail, mdp:utilisateur.mdp,
-                        errornum:null,departementusr:candidat.DepartementId,paysusr:candidat.PayId});
+    if (req.session && req.session.user) {
+        models.Candidat.findOne({
+            include: {model: models.CV},
+            where: {UtilisateurId: req.session.user}
+        }).then(function (candidat) {
+            candidat = candidat;
+            models.Pays.findAll({
+                attributes: ['id', 'intitule']
+            }).then(function (pays) {
+                Pays = pays;
+                models.Departement.findAll({
+                    attributes: ['id', 'intitule']
+                }).then(function (departement) {
+                    Departement = departement;
+                    models.Utilisateur.findOne({
+                        where: {id: req.session.user}
+                    }).then(function (utilisateur) {
+                        utilisateur = utilisateur;
+                        res.render('modifierCandidat', {
+                            title: 'Modification d\'un Candidat ',
+                            nom: candidat.nom,
+                            prenom: candidat.prenom,
+                            dateNaissance: candidat.dateNaissance,
+                            telFixe: candidat.telFixe,
+                            telMobile: candidat.telMobile,
+                            adresse: candidat.adresse,
+                            ville: candidat.ville,
+                            cp: candidat.cp,
+                            pays: Pays,
+                            departement: Departement,
+                            mobilite: candidat.mobilite,
+                            mail: utilisateur.mail,
+                            mdp: utilisateur.mdp,
+                            errornum: null,
+                            departementusr: candidat.DepartementId,
+                            paysusr: candidat.PayId
+                        });
+                    });
                 });
             });
         });
-    });
+    }else{
+        res.redirect('/login');
+    }
 });
 
 router.post('/', function(req, res, next) {

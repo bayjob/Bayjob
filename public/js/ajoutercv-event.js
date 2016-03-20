@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+    $('.modal-trigger').leanModal();
     var competenceIncrement = 0;
     var formationIncrement = 0;
     var expproIncrement = 0;
@@ -7,7 +7,7 @@ $(document).ready(function(){
     var langueIncrement = 0;
     var interetIncrement = 0;
 
-    $('.modal-trigger').leanModal();
+
 
     /**
      * Action du Bouton de la fenêtre modale de la competence

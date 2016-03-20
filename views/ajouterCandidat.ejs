@@ -143,20 +143,25 @@
                             <div class="collapsible-header"><i class="material-icons">perm_identity</i>Information de connexion</div>
                             <div id="parent" class="collapsible-body">
                                 <div class="container">
+                                    <input type="hidden" name="emailslength"  disabled="false" value="<%=mails.length%>"/>
+                                    <% for ( var i = 0; i < mails.length;i++){%>
+                                            <input type="hidden" name="emails[<%=i%>]"  disabled="false" value="<%=mails[i].mail%>"/>
+                                    <%}%>
                                     <% if (errornum == null) { %>
                                     <table>
                                         <tbody>
                                         <tr>
-                                            <td><input type="text" name="mailCandidat" placeholder="Mail"></td>
+                                            <td><input class="mailCandidat" type="text" name="mailCandidat" placeholder="Mail" required></td>
+                                            <td> <a id="test" class=" waves-effect waves-light gray">Existe-il?  <i class="material-icons right">send</i></a></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="text" name="confirmationMailCandidat" placeholder="Confirmation Mail"></td>
+                                            <td><input class="mailCandidat"  type="text" name="confirmationMailCandidat" placeholder="Confirmation Mail" required></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="password" name="mdpCandidat" placeholder="Mot de passe"></td>
+                                            <td><input type="password" name="mdpCandidat" placeholder="Mot de passe" required></td>
                                         </tr>
                                         <tr>
-                                            <td> <input type="password" name="confirmationMdpCandidat" placeholder="Confirmation Mot de passe"></td>
+                                            <td> <input type="password" name="confirmationMdpCandidat" placeholder="Confirmation Mot de passe" required></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -221,7 +226,7 @@
                         </li>
                     </ul>
                     <div class="row center-align">
-                        <button class="btn waves-effect waves-light" type="submit" name="enregistrer">Enregistrer
+                        <button class="btn waves-effect waves-light disabled" type="submit" name="enregistrer">Enregistrer
                             <i class="material-icons right">send</i>
                         </button>
                     </div>
@@ -231,8 +236,10 @@
     </div>
 </section>
 
-<script src="/js/autocomplete-AjoutCandidat.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvTewOiQvvKOS9RNOjYIN-qgE9NrcSKy4&signed_in=true&libraries=places&callback=initAutocomplete"
         async defer></script>
 
 <%- include('include/footer') %>
+
+<script type="text/javascript" src="/js/ajouterCandidat-event.js"></script>
+<script src="/js/autocomplete-AjoutCandidat.js"></script>
