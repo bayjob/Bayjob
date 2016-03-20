@@ -43,7 +43,8 @@ router.get('/', function(req, res, next) {
                             mdp: utilisateur.mdp,
                             errornum: null,
                             departementusr: candidat.DepartementId,
-                            paysusr: candidat.PayId
+                            paysusr: candidat.PayId,
+                            session: req.session
                         });
                     });
                 });
