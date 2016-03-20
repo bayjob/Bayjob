@@ -38,7 +38,7 @@ router.post('/', function (req, res) {
       if(req.session.type === "C"){
         res.redirect("/espaceCandidat");
       }else{
-        res.send("test espace recruteur");
+        res.redirect("/espaceRecruteur");
       }
 
     }else{

@@ -1,74 +1,197 @@
-<%- include('include/header-connect') %>
+<%- include('include/header') %>
 
-<section  class="page-title cyan darken-1 white-text">
+<section class="page-title cyan darken-1 white-text" xmlns="http://www.w3.org/1999/html">
     <div class="container">
         <div class="row">
             <div id="logo-title" class="col s3 m1">
-                <i class="medium material-icons">perm_identity</i>
+                <i class="medium material-icons">search</i>
             </div>
 
             <div class="col s9 m8">
                 <h3><%=title%></h3>
             </div>
         </div>
+
+    </div>
+
+</section>
+
+<section class="page-content" id="ajouterCV">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col s12 m10 offset-m1">
+                <form id="elform" method="post" action="/AjouterOffre">
+
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <!----------------------------------------- >
+                        <!-- PARTIE DESCRIPTION GENERALE De L'OFFRE >
+                        <!----------------------------------------->
+                        <li>
+                            <div class="collapsible-header active"><i class="material-icons">description</i>Description
+                                générale
+                            </div>
+                            <div class="collapsible-body">
+                                <div id="infogenerales" class="container">
+
+                                    <h4>Résumé</h4>
+                                    <textarea name="resume" class="materialize-textarea" length="255" placeholder="Votre offre en bref"></textarea>
+
+                                    <h4>Veuillez remplir les champs suivants</h4>
+
+                                    <input id="titre" type="text" name="titre" class="validate" required="" aria-required="true" placeholder="Titre">
+                                    <input id="xpRequise" type="text" name="xpRequise" class="validate" required="" aria-required="true" placeholder="Expérience requise">
+                                    <input id="tempDeTravail" type="text" name="tempDeTravail" class="validate" required="" aria-required="true" placeholder="Durée">
+                                    <input id="date" type="date" name="dateEmission" class="datepicker" required="" aria-required="true" placeholder="Date de début">
+                                    <input id="salaire" type="text" name="salaire" class="validate" required="" aria-required="true" placeholder="Salaire">
+                                    <input id="ville" type="text" name="ville" class="validate" required="" aria-required="true" placeholder="ville">
+                                    <input id="mail" type="email" name="mail" class="validate" required="" aria-required="true" placeholder="mail">
+                                    <div class="input-field col s12" class="validate" required="" aria-required="true">
+                                        <select name="contrat">
+                                            <option value="" disabled selected>Contrat</option>
+                                            <%
+                                            for(var i = 0; i<contrat.length; i++) {%>
+                                            <option value="<%=contrat[i].id%>"><%=contrat[i].intitule%></option>
+                                            <%}%>
+                                        </select>
+                                    </div>
+                                    <div class="input-field col s12" class="validate" aria-required="true" required="">
+                                        <select name="niveau">
+                                            <option value="" disabled selected>Niveau d'études</option>
+                                            <%
+                                            for(var i = 0; i<NiveauEtud.length; i++) {%>
+                                            <option value="<%=NiveauEtud[i].id%>"><%=NiveauEtud[i].intitule%></option>
+                                            <%}%>
+                                        </select>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <select name="departement">
+                                            <option value="" disabled selected>Departement</option>
+                                            <%
+                                            for(var i = 0; i<Departement.length; i++) {%>
+                                            <option value="<%=Departement[i].id%>"><%=Departement[i].intitule%></option>
+                                            <%}%>
+                                        </select>
+                                    </div>
+
+                                    <br><br>
+                                    <div class="switch ">
+                                        <h5>Adapté aux handicaps</h5>
+                                        <label>
+
+                                            Off
+                                            <input type="checkbox" name="handicap">
+                                            <span class="lever"></span>
+                                            On
+                                        </label>
+                                    </div>
+                                    <br><br>
+                                </div>
+                            </div>
+                        </li>
+                        <!---------------------------------------------->
+                        <!-- FIN PARTIE DESCRIPTION GENERALE DE L'OFFRE >
+                        <!------ DEBUT DESCRIPTION COMPETENCES DE L'OFFRE >
+                        <------------------------------------------------->
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">public</i>Compétences</div>
+                            <div class="collapsible-body">
+                                <div id="apercucompetence" class="container">
+
+                                </div>
+                                <div class="input-field col s12">
+                                    <p class="center-align">
+                                        <a href="#modalCompetence" class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <!------------------------------------------------->
+                        <!-- FIN PARTIE DESCRIPTION COMPETENCES DE L'OFFRE >
+                        <!------ DEBUT DESCRIPTION MISSIONS DE L'OFFRE >
+                        <-------------------------------------------------->
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">chat</i>Mission</div>
+                            <div class="collapsible-body">
+                                <div id="apercumission" class="input-field col s12 offset-m2">
+
+                                </div>
+                                <div class="container">
+                                    <p class="center-align">
+                                        <a href="#modalMission" class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <!----------------------------------------------------->
+                    <!-- FIN PARTIE DESCRIPTION  De L'OFFRE >
+                    <!------------- DEBUT DIV RECEPTION HIDDEN INPUT >
+                    <------------------------------------------------------->
+                    <div id="elements_Offre">
+
+                    </div>
+
+                    <div class="row">
+                        <button class="btn waves-effect waves-light blue-grey darken-1" type="submit" name="enregistrer">Enregistrer
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
     </div>
 </section>
 
-<form method="post" action="/ajouterOffre">
-    <input type="text" name="titre" placeholder="Titre ">
-    <input type="text" name="xpRequise" placeholder="Experience requise">
-    <input type="text" name="tempDeTravail" placeholder="Temps de travail">
-    <input type="text" name="resume" placeholder="Résumé">
-    <input type="text" name="salaire" placeholder="Salaire">
-    <input type="text" name="ville" placeholder="Ville">
-    <input type="text" name="mail" placeholder="Mail">
-    <input type="date" name="dateEmission" class="datepicker" placeholder="Date Emission">
-
-    <div class="switch ">
-        <h5>Adapté aux handicaps</h5>
-        <label>
-
-            Off
-            <input type="checkbox" name="handicap">
-            <span class="lever"></span>
-            On
-        </label>
+<!-- Fenêtre modale de Compétence -->
+<div id="modalCompetence" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>Compétence</h4>
+        <div class="row"
+             style="border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 20px">
+            <div class="input-field col s12">
+                <div class="input-field col s12">
+                    <input name="intituleCompetence" type="text" length="50">
+                    <label for="intituleCompetence">Intitulé de la compétence</label>
+                </div>
+                <div class="input-field col s4">
+                    <select name="niveauCompetence">
+                        <option value="" disabled selected>Niveau de maitrise</option>
+                        <option value="1">nul</option>
+                        <option value="2">Intermédiaire</option>
+                        <option value="3">Bon</option>
+                        <option value="4">Pro</option>
+                        <option value="5">Expert</option>
+                    </select>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="input-field col s12">
-        <select name="niveau">
-            <option value="" disabled selected>Niveau d'études</option>
-            <%
-            for(var i = 0; i<NiveauEtud.length; i++) {%>
-            <option value="<%=NiveauEtud[i].id%>"><%=NiveauEtud[i].intitule%></option>
-            <%}%>
-
-        </select>
+    <div class="modal-footer">
+        <a href="#!" id="btn_ajout_competence" class=" modal-action modal-close waves-effect waves-green btn-flat">Ajouter</a>
     </div>
+</div>
+<!-- Fenêtre modale de Missions -->
 
-    <div class="input-field col s12">
-        <select name="contrat">
-            <option value="" disabled selected>Contrat</option>
-            <%
-            for(var i = 0; i<contrat.length; i++) {%>
-            <option value="<%=contrat[i].id%>"><%=contrat[i].intitule%></option>
-            <%}%>
-        </select>
+<div id="modalMission" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>Mission</h4>
+        <div class="row"
+             style="border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 20px">
+            <div class="input-field col s12">
+                <div class="input-field col s12">
+                    <input name="intituleMission" type="text" length="50">
+                    <label for="intituleMission">Intitulé de la mission</label>
+                </div>
+            </div>
+        </div>
     </div>
-
-
-    <div class="input-field col s12">
-        <select name="departement">
-            <option value="" disabled selected>Departement</option>
-            <%
-            for(var i = 0; i<Departement.length; i++) {%>
-            <option value="<%=Departement[i].id%>"><%=Departement[i].intitule%></option>
-            <%}%>
-        </select>
+    <div class="modal-footer">
+        <a href="#!" id="btn_ajout_mission" class=" modal-action modal-close waves-effect waves-green btn-flat">Ajouter</a>
     </div>
-    <input type="submit">
-</form>
+</div>
 
-<% contrat.id%> <br>
-<%contrat.intitule%>
 <%- include('include/footer') %>
+<script type="text/javascript" src="/js/ajouterOffre-event.js"></script>

@@ -78,10 +78,12 @@
                                 <%
                                 if(session.type === 'R'){ %>
                                 <p>R&eacute;ponse : Acceptée<br/>Contacter le candidat : <a
-                                        href="mailto:<%= notificationsRecues[i].Utilisateur.mail %>"><%= notificationsRecues[i].Utilisateur.mail %></a></p>
+                                            href="mailto:<%= notificationsRecues[i].Utilisateur.mail %>"><%= notificationsRecues[i].Utilisateur.mail %></a>
+                                </p>
                                 <% }else{ %>
                                 <p>R&eacute;ponse : Acceptée<br/>Contacter l'entreprise : <a
-                                        href="mailto:<%= notificationsRecues[i].Utilisateur.mail %>"><%= notificationsRecues[i].Utilisateur.mail %></a></p>
+                                            href="mailto:<%= notificationsRecues[i].Utilisateur.mail %>"><%= notificationsRecues[i].Utilisateur.mail %></a>
+                                </p>
                                 <% } %>
 
                                 <% }else{ %>
@@ -107,7 +109,6 @@
                                 <span class="title">&Agrave; : <a
                                             href="/offre/<%= notificationsEnvoyees[i].OffreId %>"><%= notificationsEnvoyees[i].Offre.titre %>
                                         &nbsp;-&nbsp;<%= notificationsEnvoyees[i].Offre.Recruteur.nomEntreprise %></a></span>
-
                                 <% }else{ %>
                                 <span class="title">&Agrave; : <a
                                             href="/cv/<%= notificationsEnvoyees[i].CVId %>"><%= notificationsEnvoyees[i].CV.Candidat.prenom %>

@@ -18,11 +18,11 @@ var modifierCv = require('./routes/modifierCv');
 var cv = require('./routes/cv');
 var rechercheOffres = require('./routes/rechercherOffres');
 
-//Routes de l'espace candidat
+//Routes de l'espace recruteur
+var espaceRecruteur = require('./routes/espaceRecruteur');
 var ajouterRecruteur = require('./routes/ajouterRecruteur');
 var rechercheCvs = require('./routes/rechercheCvs');
-var ajouterRecruteur = require('./routes/ajouterRecruteur')
-
+var modifierRecruteur = require('./routes/modifierRecruteur');
 var ajouterOffre = require('./routes/ajouterOffre');
 var offre = require('./routes/offres');
 
@@ -84,7 +84,9 @@ app.use('/rechercheCvs',rechercheCvs);
 app.use('/rechercheOffres', rechercheOffres);
 
 //Espace recruteur
+app.use('/espaceRecruteur', espaceRecruteur);
 app.use('/ajouterRecruteur', ajouterRecruteur);
+app.use('/modifierRecruteur', modifierRecruteur);
 app.use('/ajouterOffre', ajouterOffre);
 app.use('/offre', offre);
 
