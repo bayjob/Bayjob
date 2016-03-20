@@ -16,17 +16,13 @@ router.get('/', function(req, res, next) {
                 attributes: ['id', 'intitule']
             }).then(function (niveau) {
                 niveauEtude = niveau;
-                res.render('ajouterCv', {
-                    title: 'AJout d\'un Cv',
-                    pays: Pays,
-                    niveau: niveauEtude,
-                    session: req.session
-                });
+                res.render('ajouterCv', {title: 'Ajout d\'un CV',pays: Pays, niveau: niveauEtude,session: req.session});
             });
         });
     }else{
         res.redirect('/login');
     }
+
 });
 
 router.post('/', function(req, res, next) {
