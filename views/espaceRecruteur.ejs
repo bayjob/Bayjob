@@ -46,6 +46,7 @@
                         <span class="title"><a href="/offre/<%=recruteur.Offres[i].id%>"><%=recruteur.Offres[i].titre%></a></span>
                         <p>Date de cr&eacute;ation : <%=recruteur.Offres[i].createdAt.getDate() + " " + mois[recruteur.Offres[i].createdAt.getMonth()] + " " + recruteur.Offres[i].createdAt.getFullYear()%></p>
                         <p>Derni&egrave;re mise &agrave; jour : <%=recruteur.Offres[i].updatedAt.getDate() + " " + mois[recruteur.Offres[i].updatedAt.getMonth()] + " " + recruteur.Offres[i].updatedAt.getFullYear()%></p>
+                        <a href="/espaceRecruteur/deleteOffre/<%=recruteur.Offres[i].id%>" class="secondary-content"><i class="material-icons">close</i></a>
                     </li>
                     <%}%>
                 </ul>

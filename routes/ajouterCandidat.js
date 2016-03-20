@@ -43,7 +43,8 @@ router.get('/', function(req, res, next) {
                         mail: null,
                         mdp: null,
                         mails: listeMails,
-                        errornum: null
+                        errornum: null,
+                        session: req.session
                     });
 
                 });
@@ -92,18 +93,18 @@ router.post('/', function(req, res, next) {
         res.render('ajouterCandidat', { title:'Inscription d\'un Candidat ', nom: candidat.nom, prenom: candidat.prenom,
             dateNaissance: candidat.dateNaissance, telFixe: candidat.telFixe, telMobile: candidat.telMobile,
             adresse: candidat.adresse, ville: candidat.ville, cp: candidat.cp, pays: candidat.pays,
-            mobilite: candidat.mobilite, mail: mailC, mdp: null , errornum : '1'});
+            mobilite: candidat.mobilite, mail: mailC, mdp: null , errornum : '1', session: req.session});
     } else if (err == 2) {
         res.render('ajouterCandidat', {
             title: 'Inscription d\'un Candidat ', nom: candidat.nom, prenom: candidat.prenom,
             dateNaissance: candidat.dateNaissance, telFixe: candidat.telFixe, telMobile: candidat.telMobile,
             adresse: candidat.adresse, ville: candidat.ville, cp: candidat.cp, pays: candidat.pays,
-            mobilite: candidat.mobilite, mail: null, mdp: mdpC , errornum : '2'});
+            mobilite: candidat.mobilite, mail: null, mdp: mdpC , errornum : '2', session: req.session});
     }else if (err == 3){
         res.render('ajouterCandidat', { title:'Inscription d\'un Candidat ', nom: candidat.nom, prenom: candidat.prenom,
             dateNaissance: candidat.dateNaissance, telFixe: candidat.telFixe, telMobile: candidat.telMobile,
             adresse: candidat.adresse, ville: candidat.ville, cp: candidat.cp, pays: candidat.pays,
-            mobilite: candidat.mobilite, mail:null ,mdp: null, errornum : '3'});
+            mobilite: candidat.mobilite, mail:null ,mdp: null, errornum : '3', session: req.session});
     }
 
 
@@ -114,7 +115,7 @@ router.post('/', function(req, res, next) {
         candidat.setDepartement(req.body.dep);
         candidat.setPay(req.body.pays);
         //console.log(candidat.pays);
-        res.render('login', { title:'Page de connexion', email: utilisateur.mail, mdp : utilisateur.mdp, message:""});
+        res.render('login', { title:'Page de connexion', email: utilisateur.mail, mdp : utilisateur.mdp, message:"", session: req.session});
     })
 });
 module.exports = router;

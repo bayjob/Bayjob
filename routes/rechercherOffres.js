@@ -56,8 +56,8 @@ router.post('/', function (req, res) {
 
     //Vérification s'il y a au moins un critère selectionné
     if(intitule_poste == null && ville == null && departement == null && region == null && niv_etude == null && handicap == null){
-        //Envoie d'un message d'avertissement : Veuillez selectionner au mois un critère
-        res.render('rechercherOffres', { title: 'Recherche d\'offres', messageErr:"Veuillez selectionner au mois un critère" });
+        //Envoie d'un message d'avertissement : Veuillez selectionner au moins un critère
+        res.render('rechercherOffres', { title: 'Recherche d\'offres', messageErr:"Veuillez selectionner au moins un critère" });
     }else{
         var criteres_offre = {};
         console.log(niv_etude);
