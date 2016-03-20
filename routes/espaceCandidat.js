@@ -55,4 +55,10 @@ router.post('/', function(req, res, next) {
     res.redirect('/espaceCandidat');
 });
 
+router.get('/deleteCV/:idCV', function(req, res, next) {
+    models.CV.destroy({ where: { id: req.params.idCV }}).then(function(){
+        res.redirect('/espaceCandidat');
+    });
+});
+
 module.exports = router;
