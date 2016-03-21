@@ -12,7 +12,7 @@ router.get('/', function (req, res, next) {
     }).then(function (niveau) {
         niveauEtude = niveau;
 
-        res.render('rechercheCvs', {title: 'Recherche d\'Cvs', messageErr: null, session: req.session});
+        res.render('rechercheCvs', {title: 'Recherche de CVs', messageErr: null, session: req.session});
     });
 });
 
