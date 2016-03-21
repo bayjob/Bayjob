@@ -1,8 +1,7 @@
-
 /**
  * Created by Soufiane on 05/03/2016.
  */
-var models  = require('../models');
+var models = require('../models');
 var express = require('express');
 var crypto = require('crypto');
 var router = express.Router();
@@ -14,7 +13,7 @@ var ErroHandler;
  * de coordonéés de connexion ( Email existe déjà ou erreur de confirmation de l'email ou du mdp)
  * * */
 
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
 
     ErroHandler = 0;
     var Pays;
@@ -25,10 +24,10 @@ router.get('/', function(req, res, next) {
     var depIntitule;
 
     models.Recruteur.findOne({
-        include : {model: models.Offre},
+        include: {model: models.Offre},
         where: {UtilisateurId: req.session.user}
 
-    }).then(function(recruteur) {
+    }).then(function (recruteur) {
 
         // Objet recruteur selectionné à partir de la base de données (where id = id dans session)
         Recruteur = recruteur;
@@ -62,16 +61,16 @@ router.get('/', function(req, res, next) {
 
                         models.Utilisateur.findOne({
                             where: {id: req.session.user}
-                        }).then(function(utilisateur){
+                        }).then(function (utilisateur) {
 
                             // Objet recruteur selectionné à partir de la base de données (where id = id dans session)
 
-                            Utilisateur=utilisateur;
+                            Utilisateur = utilisateur;
                             res.render('modifierRecruteur',
                                 {
 
                                     // information retournées via le formulaire dans la page : modifierRecruteur
-                                    title: 'Inscription' ,
+                                    title: 'Inscription',
                                     nomRecruteur: Recruteur.nomRecruteur,
                                     prenomRecruteur: Recruteur.prenomRecruteur,
                                     nomEntreprise: Recruteur.nomEntreprise,
@@ -82,14 +81,14 @@ router.get('/', function(req, res, next) {
                                     telMobile: Recruteur.telMobile,
                                     mail: Utilisateur.mail,
                                     mdp: Utilisateur.mdp,
-                                    pays : Pays,
-                                    departement : Departements,
-                                    departementid : Recruteur.DepartementId,
-                                    departementintitule : depIntitule,
-                                    paysid : Recruteur.PayId,
-                                    paysintitule : paysIntitule,
-                                    ErroHandler : ErroHandler,
-                                    Err : null,
+                                    pays: Pays,
+                                    departement: Departements,
+                                    departementid: Recruteur.DepartementId,
+                                    departementintitule: depIntitule,
+                                    paysid: Recruteur.PayId,
+                                    paysintitule: paysIntitule,
+                                    ErroHandler: ErroHandler,
+                                    Err: null,
                                     session: req.session
 
                                 });
@@ -101,7 +100,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', function (req, res, next) {
 
     ErroHandler = 1;
 
@@ -138,26 +137,26 @@ router.post('/', function(req, res, next) {
     }
     // Modification de l'objet recruteur
 
-    if(err == 0) {
+    if (err == 0) {
 
         var mois = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
 
         // Modification de l'utilisateur en cas de modification des coordonées de connexions ( email et mdp )
         models.Utilisateur.update(
-
             {
                 mail: mail,
                 mdp: crypto.createHash('md5').update(req.body.mdp).digest("hex"),
-                type : "R"
+                type: "R"
             },
 
-            { where : {
-                id: req.session.user }
+            {
+                where: {
+                    id: req.session.user
+                }
             });
 
         // Modification des coordonnées du recruteur
         models.Recruteur.update(
-
             {
                 nomRecruteur: nomRecruteur,
                 prenomRecruteur: prenomRecruteur,
@@ -169,29 +168,31 @@ router.post('/', function(req, res, next) {
                 telMobile: telMobile,
                 mail: mail,
                 mdp: mdp,
-                departementId : dep,
-                paysId : pays
+                departementId: dep,
+                paysId: pays
             },
 
-            { where : {
-                UtilisateurId: req.session.user }
+            {
+                where: {
+                    UtilisateurId: req.session.user
+                }
 
-            }).then(function(recruteur){
+            }).then(function (recruteur) {
 
-                models.Recruteur.findOne({
-                    include : {model: models.Offre},
-                    where: {UtilisateurId: req.session.user}
-                }).then(function(recruteur){
+            models.Recruteur.findOne({
+                include: {model: models.Offre},
+                where: {UtilisateurId: req.session.user}
+            }).then(function (recruteur) {
 
-                    res.render('espaceRecruteur', {
-                        title: 'Espace recruteur',
-                        recruteur: recruteur,
-                        mois: mois,
-                        session: req.session
-                    });
+                res.render('espaceRecruteur', {
+                    title: 'Espace recruteur',
+                    recruteur: recruteur,
+                    mois: mois,
+                    session: req.session
                 });
-
             });
+
+        });
 
 
     }
@@ -204,19 +205,19 @@ router.post('/', function(req, res, next) {
 
         console.log(err);
         models.Pays.findOne({
-            attributes: ['id','intitule'],
-            where: {id : pays}
-        }).then(function(Pays){
+            attributes: ['id', 'intitule'],
+            where: {id: pays}
+        }).then(function (Pays) {
             paysHandleError = Pays;
             models.Departement.findOne({
-                attributes: ['id','intitule'],
-                where : {id : dep}
-            }).then(function(departement){
+                attributes: ['id', 'intitule'],
+                where: {id: dep}
+            }).then(function (departement) {
                 Departement = departement;
                 res.render('modifierRecruteur', {
 
-                    title: 'Inscription' ,
-                    ErroHandler : ErroHandler,
+                    title: 'Inscription',
+                    ErroHandler: ErroHandler,
                     nomRecruteur: nomRecruteur,
                     prenomRecruteur: prenomRecruteur,
                     nomEntreprise: nomEntreprise,
@@ -224,34 +225,34 @@ router.post('/', function(req, res, next) {
                     ville: ville,
                     cp: cp,
                     pays: paysHandleError,
-                    departement : Departement,
+                    departement: Departement,
                     telFixe: telFixe,
                     telMobile: telMobile,
                     mail: mail,
                     mdp: null,
-                    Err : 1,
+                    Err: 1,
                     session: req.session
                 });
             });
         });
 
-    }else if(err == 2) {
+    } else if (err == 2) {
 
         console.log(err);
         models.Pays.findOne({
-            attributes: ['id','intitule'],
-            where: {id : pays}
-        }).then(function(Pays){
+            attributes: ['id', 'intitule'],
+            where: {id: pays}
+        }).then(function (Pays) {
             paysHandleError = Pays;
             models.Departement.findOne({
-                attributes: ['id','intitule'],
-                where : {id : dep}
-            }).then(function(departement){
+                attributes: ['id', 'intitule'],
+                where: {id: dep}
+            }).then(function (departement) {
                 Departement = departement;
                 res.render('modifierRecruteur', {
 
-                    title: 'Inscription' ,
-                    ErroHandler : ErroHandler,
+                    title: 'Inscription',
+                    ErroHandler: ErroHandler,
                     nomRecruteur: nomRecruteur,
                     prenomRecruteur: prenomRecruteur,
                     nomEntreprise: nomEntreprise,
@@ -259,49 +260,49 @@ router.post('/', function(req, res, next) {
                     ville: ville,
                     cp: cp,
                     pays: paysHandleError,
-                    departement : Departement,
+                    departement: Departement,
                     telFixe: telFixe,
                     telMobile: telMobile,
                     mail: null,
                     mdp: mdp,
-                    Err : 2,
+                    Err: 2,
                     session: req.session
                 });
             });
         });
 
 
-    }else if(err == 3) {
+    } else if (err == 3) {
 
         console.log(err);
 
         console.log(err);
         models.Pays.findOne({
-            attributes: ['id','intitule'],
-            where: {id : pays}
-        }).then(function(Pays){
+            attributes: ['id', 'intitule'],
+            where: {id: pays}
+        }).then(function (Pays) {
             paysHandleError = Pays;
             models.Departement.findOne({
-                attributes: ['id','intitule'],
-                where : {id : dep}
-            }).then(function(departement){
+                attributes: ['id', 'intitule'],
+                where: {id: dep}
+            }).then(function (departement) {
                 Departement = departement;
                 res.render('modifierRecruteur', {
 
-                    title: 'Inscription' ,
-                    ErroHandler : ErroHandler,
+                    title: 'Inscription',
+                    ErroHandler: ErroHandler,
                     nomRecruteur: nomRecruteur,
                     prenomRecruteur: prenomRecruteur,
                     nomEntreprise: nomEntreprise,
                     adresse: adresse,
                     ville: ville,
                     cp: cp,
-                    departement : Departement,
+                    departement: Departement,
                     telFixe: telFixe,
                     telMobile: telMobile,
                     mail: null,
                     mdp: null,
-                    Err : 3,
+                    Err: 3,
                     session: req.session
                 });
             });

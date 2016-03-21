@@ -11,6 +11,7 @@ var mois = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","
 
 /* GET home page. */
 router.get('/:idCv', function(req, res, next) {
+    /*On recherche le cv qui doit etre modifier*/
     models.CV.findOne({
         where:{id: req.params.idCv},
         include:[{model: models.Competence_CV},
@@ -30,6 +31,7 @@ router.get('/:idCv', function(req, res, next) {
 router.post('/', function (req, res) {
     console.log((JSON.stringify(req.body)));
 
+    /* On recherche le cv dans la base puis on modifie les infos*/
     models.CV.findOne( {
         where:{id: req.body.cvid},
         include:[{model: models.Competence_CV},
@@ -47,13 +49,14 @@ router.post('/', function (req, res) {
         }
     });
 
+    /* En construction...*/
     var i;
     var tailleformation = req.body.tailleformation;
    for ( i = 0; i< tailleformation;i++){
        console.log(i+"test")
        console.log(req.body.formation[i].id+ " YOOO"); // undefined
         models.Formation.findOne( {
-            where:{cvId: req.body.cvid, id:req.body.formation[i].id},
+            where: {cvId: req.body.cvid, id: req.body.formation[i].id},
             include:[{model: models.CV}]
         }).then(function(formation) {
             //var i=0;

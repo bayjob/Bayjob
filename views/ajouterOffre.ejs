@@ -6,24 +6,18 @@
             <div id="logo-title" class="col s3 m1">
                 <i class="medium material-icons">search</i>
             </div>
-
             <div class="col s9 m8">
-                <h3><%=title%></h3>
+                <h3><%= title %></h3>
             </div>
         </div>
-
     </div>
-
 </section>
 
 <section class="page-content" id="ajouterCV">
-
     <div class="container">
-
         <div class="row">
             <div class="col s12 m10 offset-m1">
                 <form id="elform" method="post" action="/AjouterOffre">
-
                     <ul class="collapsible" data-collapsible="accordion">
                         <!----------------------------------------- >
                         <!-- PARTIE DESCRIPTION GENERALE De L'OFFRE >
@@ -34,52 +28,55 @@
                             </div>
                             <div class="collapsible-body">
                                 <div id="infogenerales" class="container">
-
                                     <h4>Résumé</h4>
-                                    <textarea name="resume" class="materialize-textarea" length="255" placeholder="Votre offre en bref"></textarea>
-
+                                    <textarea name="resume" class="materialize-textarea" length="255"
+                                              placeholder="Votre offre en bref"></textarea>
                                     <h4>Veuillez remplir les champs suivants</h4>
-
-                                    <input id="titre" type="text" name="titre" class="validate" required="" aria-required="true" placeholder="Titre">
-                                    <input id="xpRequise" type="text" name="xpRequise" class="validate" required="" aria-required="true" placeholder="Expérience requise">
-                                    <input id="tempDeTravail" type="text" name="tempDeTravail" class="validate" required="" aria-required="true" placeholder="Durée">
-                                    <input id="date" type="date" name="dateEmission" class="datepicker" required="" aria-required="true" placeholder="Date de début">
-                                    <input id="salaire" type="text" name="salaire" class="validate" required="" aria-required="true" placeholder="Salaire">
-                                    <input id="ville" type="text" name="ville" class="validate" required="" aria-required="true" placeholder="ville">
-                                    <input id="mail" type="email" name="mail" class="validate" required="" aria-required="true" placeholder="mail">
+                                    <input id="titre" type="text" name="titre" class="validate" required=""
+                                           aria-required="true" placeholder="Titre">
+                                    <input id="xpRequise" type="text" name="xpRequise" class="validate" required=""
+                                           aria-required="true" placeholder="Expérience requise">
+                                    <input id="tempDeTravail" type="text" name="tempDeTravail" class="validate"
+                                           required="" aria-required="true" placeholder="Durée">
+                                    <input id="date" type="date" name="dateEmission" class="datepicker" required=""
+                                           aria-required="true" placeholder="Date de début">
+                                    <input id="salaire" type="text" name="salaire" class="validate" required=""
+                                           aria-required="true" placeholder="Salaire">
+                                    <input id="ville" type="text" name="ville" class="validate" required=""
+                                           aria-required="true" placeholder="ville">
+                                    <input id="mail" type="email" name="mail" class="validate" required=""
+                                           aria-required="true" placeholder="mail">
                                     <div class="input-field col s12" class="validate" required="" aria-required="true">
                                         <select name="contrat">
                                             <option value="" disabled selected>Contrat</option>
                                             <%
-                                            for(var i = 0; i<contrat.length; i++) {%>
-                                            <option value="<%=contrat[i].id%>"><%=contrat[i].intitule%></option>
-                                            <%}%>
+                                            for(var i = 0; i < contrat.length; i++) { %>
+                                            <option value="<%= contrat[i].id %>"><%= contrat[i].intitule %></option>
+                                            <% } %>
                                         </select>
                                     </div>
                                     <div class="input-field col s12" class="validate" aria-required="true" required="">
                                         <select name="niveau">
                                             <option value="" disabled selected>Niveau d'études</option>
                                             <%
-                                            for(var i = 0; i<NiveauEtud.length; i++) {%>
-                                            <option value="<%=NiveauEtud[i].id%>"><%=NiveauEtud[i].intitule%></option>
-                                            <%}%>
+                                            for(var i = 0; i < NiveauEtud.length; i++) { %>
+                                            <option value="<%= NiveauEtud[i].id %>"><%= NiveauEtud[i].intitule %></option>
+                                            <% } %>
                                         </select>
                                     </div>
                                     <div class="input-field col s12">
                                         <select name="departement">
                                             <option value="" disabled selected>Departement</option>
                                             <%
-                                            for(var i = 0; i<Departement.length; i++) {%>
-                                            <option value="<%=Departement[i].id%>"><%=Departement[i].intitule%></option>
-                                            <%}%>
+                                            for(var i = 0; i < Departement.length; i++) { %>
+                                            <option value="<%= Departement[i].id %>"><%= Departement[i].intitule %></option>
+                                            <% } %>
                                         </select>
                                     </div>
-
                                     <br><br>
                                     <div class="switch ">
                                         <h5>Adapté aux handicaps</h5>
                                         <label>
-
                                             Off
                                             <input type="checkbox" name="handicap">
                                             <span class="lever"></span>
@@ -98,11 +95,12 @@
                             <div class="collapsible-header"><i class="material-icons">public</i>Compétences</div>
                             <div class="collapsible-body">
                                 <div id="apercucompetence" class="container">
-
                                 </div>
                                 <div class="input-field col s12">
                                     <p class="center-align">
-                                        <a href="#modalCompetence" class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                                        <a href="#modalCompetence"
+                                           class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i
+                                                    class="material-icons">add</i></a>
                                     </p>
                                 </div>
                             </div>
@@ -115,26 +113,29 @@
                             <div class="collapsible-header"><i class="material-icons">chat</i>Mission</div>
                             <div class="collapsible-body">
                                 <div id="apercumission" class="input-field col s12 offset-m2">
-
                                 </div>
                                 <div class="container">
                                     <p class="center-align">
-                                        <a href="#modalMission" class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                                        <a href="#modalMission"
+                                           class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i
+                                                    class="material-icons">add</i></a>
                                     </p>
                                 </div>
                             </div>
                         </li>
                     </ul>
-                    <!----------------------------------------------------->
-                    <!-- FIN PARTIE DESCRIPTION  De L'OFFRE >
+                    <!----------------------------------------------->
+                    <!----------- FIN PARTIE DESCRIPTION  De L'OFFRE >
                     <!------------- DEBUT DIV RECEPTION HIDDEN INPUT >
-                    <------------------------------------------------------->
+                    <------------------------------------------------>
                     <div id="elements_Offre">
-
                     </div>
-
+                    <!----------------------------------------------->
+                    <!---------------- FIN DIV RECEPTION HIDDEN INPUT>
+                    <------------------------------------------------>
                     <div class="row">
-                        <button class="btn waves-effect waves-light blue-grey darken-1" type="submit" name="enregistrer">Enregistrer
+                        <button class="btn waves-effect waves-light blue-grey darken-1" type="submit"
+                                name="enregistrer">Enregistrer
                             <i class="material-icons right">send</i>
                         </button>
                     </div>
@@ -189,7 +190,8 @@
         </div>
     </div>
     <div class="modal-footer">
-        <a href="#!" id="btn_ajout_mission" class=" modal-action modal-close waves-effect waves-green btn-flat">Ajouter</a>
+        <a href="#!" id="btn_ajout_mission"
+           class=" modal-action modal-close waves-effect waves-green btn-flat">Ajouter</a>
     </div>
 </div>
 

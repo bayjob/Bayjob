@@ -8,7 +8,9 @@ var router = express.Router();
 
 router.get('/', function(req, res, next) {
     var Pays;
+    /*Si un utilisateur est connecte*/
     if (req.session && req.session.user) {
+        /*On cherche le candidat qui est pret a etre modifie ( ainsi que toutes informations necessaires a son affichage*/
         models.Candidat.findOne({
             include: {model: models.CV},
             where: {UtilisateurId: req.session.user}
@@ -50,6 +52,7 @@ router.get('/', function(req, res, next) {
                 });
             });
         });
+    /* Sinon on le redirige vers le login*/
     }else{
         res.redirect('/login');
     }
@@ -63,13 +66,16 @@ router.post('/', function(req, res, next) {
     var mdpC = req.body.mdpCandidat;
 
     var err = null;
-
+    /* si aucune erreur de mdp ou de mail*/
     if (cMailC == mailC && cMdpC == mdpC)
         err = 0;
+    /* si aucune erreur de mail mais erreur de mdp*/
     if (cMailC == mailC && cMdpC != mdpC)
         err = 1;
+    /* si aucune erreur de mdp mais erreur de mail*/
     if (cMailC != mailC && cMdpC == mdpC)
         err = 2;
+    /* si  erreur de mdp et de mail*/
     if (cMailC != mailC && cMdpC != mdpC)
         err = 3;
 

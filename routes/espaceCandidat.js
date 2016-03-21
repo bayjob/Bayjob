@@ -33,10 +33,10 @@ router.get('/', function (req, res, next) {
 
 });
 
-router.post('/', function(req, res, next) {
-    var test =  JSON.stringify(req.body);
-    var i =0;
-    var taille =req.body.tailleCV;
+router.post('/', function (req, res, next) {
+    var test = JSON.stringify(req.body);
+    var i = 0;
+    var taille = req.body.tailleCV;
     console.log(test.match(/varCVid[0-9][0-9]/g));
     var expression = /varCVid[0-9][0-9]/g;
     var body = JSON.stringify(req.body);
@@ -55,8 +55,9 @@ router.post('/', function(req, res, next) {
     res.redirect('/espaceCandidat');
 });
 
-router.get('/deleteCV/:idCV', function(req, res, next) {
-    models.CV.destroy({ where: { id: req.params.idCV }}).then(function(){
+/* Suppression du cv selon l'id de celui cis*/
+router.get('/deleteCV/:idCV', function (req, res, next) {
+    models.CV.destroy({where: {id: req.params.idCV}}).then(function () {
         res.redirect('/espaceCandidat');
     });
 });

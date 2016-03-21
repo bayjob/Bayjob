@@ -8,7 +8,7 @@
             </div>
 
             <div class="col s9 m8">
-                <h3><%=title%></h3>
+                <h3><%= title %></h3>
             </div>
         </div>
     </div>
@@ -32,49 +32,59 @@
                             </div>
                             <div class="collapsible-body">
                                 <div class=" input-field col s10 offset-m2">
-                                    <div  class="input-field col s10">
+                                    <div class="input-field col s10">
                                         <% if (nomRecruteur != null) { %>
-                                        <input id="nomRecruteur" value="<%=nomRecruteur%>" type="text" name="nomRecruteur"  class="validate">
+                                        <input id="nomRecruteur" value="<%= nomRecruteur %>" type="text"
+                                               name="nomRecruteur" class="validate">
                                         <% } else { %>
-                                        <input id="nomRecruteur" type="text" name="nomRecruteur" placeholder="Nom" class="validate" required="" aria-required="true">
+                                        <input id="nomRecruteur" type="text" name="nomRecruteur" placeholder="Nom"
+                                               class="validate" required="" aria-required="true">
                                         <% } %>
                                     </div>
 
-                                    <div  class="input-field col s10">
+                                    <div class="input-field col s10">
                                         <% if (prenomRecruteur != null) { %>
-                                        <input id="prenomRecruteur" value="<%=prenomRecruteur%>" type="text"  name="prenomRecruteur" class="validate" >
+                                        <input id="prenomRecruteur" value="<%= prenomRecruteur %>" type="text"
+                                               name="prenomRecruteur" class="validate">
                                         <% } else { %>
-                                        <input id="prenomRecruteur" type="text" name="prenomRecruteur" placeholder="Pr�nom" class="validate" required="" aria-required="true">
+                                        <input id="prenomRecruteur" type="text" name="prenomRecruteur"
+                                               placeholder="Pr�nom" class="validate" required="" aria-required="true">
                                         <% } %>
                                     </div>
 
-                                    <div  class="input-field col s10">
+                                    <div class="input-field col s10">
                                         <% if (nomEntreprise != null) { %>
-                                        <input id="nomEntreprise" type="text" value="<%=nomEntreprise%>" name="nomEntreprise">
+                                        <input id="nomEntreprise" type="text" value="<%= nomEntreprise %>"
+                                               name="nomEntreprise">
                                         <% } else { %>
-                                        <input id="nomEntreprise" type="text" name="nomEntreprise" placeholder="Nom de l'entreprise" class="validate" required="" aria-required="true">
+                                        <input id="nomEntreprise" type="text" name="nomEntreprise"
+                                               placeholder="Nom de l'entreprise" class="validate" required=""
+                                               aria-required="true">
                                         <% } %>
                                     </div>
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <div class="collapsible-header"><i class="material-icons">call</i>Coordonn&eacute;es t&eacute;l&eacute;phoniques</div>
+                            <div class="collapsible-header"><i class="material-icons">call</i>Coordonn&eacute;es t&eacute;l&eacute;phoniques
+                            </div>
                             <div id="parent" class="collapsible-body">
                                 <div class=" input-field col s10 offset-m2">
-                                    <div  class="input-field col s10">
+                                    <div class="input-field col s10">
                                         <% if (telFixe != null) { %>
-                                        <input id="telFixe" value="<%=telFixe%>" type="tel" name="telFixe">
+                                        <input id="telFixe" value="<%= telFixe %>" type="tel" name="telFixe">
                                         <% } else { %>
-                                        <input id="telFixe" type="tel" name="telFixe" placeholder="Telephone Fix" class="validate" required="" aria-required="true">
+                                        <input id="telFixe" type="tel" name="telFixe" placeholder="Telephone Fix"
+                                               class="validate" required="" aria-required="true">
                                         <% } %>
                                     </div>
 
-                                    <div  class="input-field col s10">
+                                    <div class="input-field col s10">
                                         <% if (telMobile != null) { %>
-                                        <input id="telMobile" value="<%=telMobile%>" type="tel" name="telMobile">
+                                        <input id="telMobile" value="<%= telMobile %>" type="tel" name="telMobile">
                                         <% } else { %>
-                                        <input id="telMobile" type="tel" name="telMobile" placeholder="Telephone Mobile" class="validate" required="" aria-required="true">
+                                        <input id="telMobile" type="tel" name="telMobile" placeholder="Telephone Mobile"
+                                               class="validate" required="" aria-required="true">
                                         <% } %>
                                     </div>
                                 </div>
@@ -84,51 +94,56 @@
                             <div class="collapsible-header"><i class="material-icons">navigation</i>Adresse</div>
                             <div id="parent" class="collapsible-body">
                                 <div class=" input-field col s10 offset-m2">
-                                    <div  class="input-field col s10">
+                                    <div class="input-field col s10">
                                         <% if (adresse != null) { %>
-                                        <input id="adresse" value="<%=adresse%>" type="text" name="adresse">
+                                        <input id="adresse" value="<%= adresse %>" type="text" name="adresse">
                                         <% } else { %>
-                                        <input id="adresse" type="text" name="adresse" placeholder="Adresse" class="validate" required="" aria-required="true">
+                                        <input id="adresse" type="text" name="adresse" placeholder="Adresse"
+                                               class="validate" required="" aria-required="true">
                                         <% } %>
                                     </div>
 
-                                    <div  class="input-field col s10">
+                                    <div class="input-field col s10">
                                         <% if (ville != null) { %>
-                                        <input id="ville" value="<%=ville%>" type="text" name="ville" >
+                                        <input id="ville" value="<%= ville %>" type="text" name="ville">
                                         <% } else { %>
                                     </div>
 
                                     <div id="locationField" class="input-field col s10">
-                                        <input id="autocomplete" placeholder="Ville" onFocus="geolocate()" name="lieu" type="text" class="validate" aria-required="true">
+                                        <input id="autocomplete" placeholder="Ville" onFocus="geolocate()" name="lieu"
+                                               type="text" class="validate" aria-required="true">
                                     </div>
                                     <div id="address">
                                         <input type="hidden" name="ville" id="locality" disabled="false"/>
                                     </div>
                                     <% } %>
 
-                                    <div  class="input-field col s10">
+                                    <div class="input-field col s10">
                                         <% if (cp != null) { %>
-                                        <input id="cp" value="<%=cp%>" type="text" name="cp" class="validate">
+                                        <input id="cp" value="<%= cp %>" type="text" name="cp" class="validate">
                                         <% } else { %>
-                                        <input id="cp" type="text" name="cp" placeholder="Code Postale" class="validate" required="" aria-required="true">
+                                        <input id="cp" type="text" name="cp" placeholder="Code Postale" class="validate"
+                                               required="" aria-required="true">
                                         <% } %>
                                     </div>
 
-                                    <div  class="input-field col s10">
+                                    <div class="input-field col s10">
                                         <!-- Cas 1 : premier chargement de la page -> toute la liste avec la valeur du
                                         pays saisie par le recruteur a son inscription
                                              Cas 2 : formulaire renvoye en cas d'erreur -> juste la valeur saisie avant l'erreur
                                          -->
-                                        <% if (ErroHandler == 0) {%>
+                                        <% if (ErroHandler == 0) { %>
                                         <select id="select_pays" name="pays">
-                                            <option value="<%=paysid%>" selected="selected"><%=paysintitule.intitule%> </option>
-                                            <% for(var i = 0; i<pays.length; i++) {%>
-                                            <option value="<%=pays[i].id%>"><%=pays[i].intitule%></option>
-                                            <%}%>
+                                            <option value="<%= paysid %>"
+                                                    selected="selected"><%= paysintitule.intitule %> </option>
+                                            <% for(var i = 0; i < pays.length; i++) { %>
+                                            <option value="<%= pays[i].id %>"><%= pays[i].intitule %></option>
+                                            <% } %>
                                         </select>
                                         <% } else { %>
                                         <select id="select_pays" name="pays">
-                                            <option value="<%=pays.id%>" selected="selected"><%=pays.intitule%></option>
+                                            <option value="<%= pays.id %>"
+                                                    selected="selected"><%= pays.intitule %></option>
                                         </select>
                                         <% } %>
                                     </div>
@@ -138,19 +153,19 @@
                                         pays saisie par le recruteur a son inscription
                                              Cas 2 : formulaire renvoye en cas d'erreur -> juste la valeur saisie avant l'erreur
                                          -->
-                                        <% if (ErroHandler == 0) {%>
-                                        <select  name="dep">
-                                            <option value=<%=departementid%> ><%=departementintitule.intitule%> </option>
-                                            <% for(var i = 0; i<departement.length; i++) {%>
-                                            <option value="<%=departement[i].id%>"><%=departement[i].intitule%></option>
-                                            <%}%>
+                                        <% if (ErroHandler == 0) { %>
+                                        <select name="dep">
+                                            <option value=<%= departementid %>><%= departementintitule.intitule %> </option>
+                                            <% for(var i = 0; i < departement.length; i++) { %>
+                                            <option value="<%= departement[i].id %>"><%= departement[i].intitule %></option>
+                                            <% } %>
                                         </select>
                                         <% } else { %>
                                         <select id="select_pays" name="dep">
-                                            <option value="<%=departement.id%>" selected="selected"><%=departement.intitule%></option>
+                                            <option value="<%= departement.id %>"
+                                                    selected="selected"><%= departement.intitule %></option>
                                         </select>
                                         <% } %>
-
 
                                     </div>
                                 </div>
@@ -168,23 +183,32 @@
                                  Cas 2 : Erreur Confirmation mdp -> renvoyer un formulaire avec toute les valeurs saisies avant l'erreur
                                  sauf les champs email, confirmation email, mdp et confirmation mdp avec un warning
                                  -->
-                            <div class="collapsible-header"><i class="material-icons">perm_identity</i>Information de connexion</div>
+                            <div class="collapsible-header"><i class="material-icons">perm_identity</i>Information de
+                                connexion
+                            </div>
                             <div id="parent" class="collapsible-body">
                                 <div class="container">
                                     <% if (Err == null) { %>
                                     <table>
                                         <tbody>
                                         <tr>
-                                            <td><input value="<%=mail%>" type="email" name="mail" placeholder="Email" class="validate" required="" aria-required="true"></td>
+                                            <td><input value="<%= mail %>" type="email" name="mail" placeholder="Email"
+                                                       class="validate" required="" aria-required="true"></td>
                                         </tr>
                                         <tr>
-                                            <td><input value="<%=mail%>" type="email" name="retapEmail" placeholder="Confirmation EMail" class="validate" required="" aria-required="true"></td>
+                                            <td><input value="<%= mail %>" type="email" name="retapEmail"
+                                                       placeholder="Confirmation EMail" class="validate" required=""
+                                                       aria-required="true"></td>
                                         </tr>
                                         <tr>
-                                            <td><input value="<%=mdp%>" type="password" name="mdp" placeholder="Mot de passe" class="validate" required="" aria-required="true"></td>
+                                            <td><input value="<%= mdp %>" type="password" name="mdp"
+                                                       placeholder="Mot de passe" class="validate" required=""
+                                                       aria-required="true"></td>
                                         </tr>
                                         <tr>
-                                            <td> <input value="<%=mdp%>" type="password" name="retapMdp" placeholder="Confirmation Mot de passe" class="validate" required="" aria-required="true"></td>
+                                            <td><input value="<%= mdp %>" type="password" name="retapMdp"
+                                                       placeholder="Confirmation Mot de passe" class="validate"
+                                                       required="" aria-required="true"></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -192,17 +216,22 @@
                                     <table>
                                         <tbody>
                                         <tr>
-                                            <td><input value="<%=mail%>" type="email" name="mail" required="" aria-required="true"></td>
+                                            <td><input value="<%= mail %>" type="email" name="mail" required=""
+                                                       aria-required="true"></td>
                                         </tr>
                                         <tr>
-                                            <td><input value="<%=mail%>" type="email" name="retapEmail" required="" aria-required="true"></td>
+                                            <td><input value="<%= mail %>" type="email" name="retapEmail" required=""
+                                                       aria-required="true"></td>
                                         </tr>
                                         <tr>
                                             <td>Les mots de passe sont diff&eacute;rents !</br>
-                                                <input type="password" name="mdp" placeholder="Mot de passe" class="invalid" required="" aria-required="true"></td>
+                                                <input type="password" name="mdp" placeholder="Mot de passe"
+                                                       class="invalid" required="" aria-required="true"></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="password" name="retapMdp" placeholder="Confirmation Mot de passe" class="invalid" required="" aria-required="true"> </td>
+                                            <td><input type="password" name="retapMdp"
+                                                       placeholder="Confirmation Mot de passe" class="invalid"
+                                                       required="" aria-required="true"></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -211,16 +240,20 @@
                                         <tbody>
                                         <tr>
                                             <td>Les adresses Email sont diff&eacute;rentes !</br>
-                                                <input type="email" name="mail" placeholder="Mail" class="invalid" required="" aria-required="true" ></td>
+                                                <input type="email" name="mail" placeholder="Mail" class="invalid"
+                                                       required="" aria-required="true"></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="email" name="retapEmail" placeholder="Confirmation Email" class="invalid" required="" aria-required="true"></td>
+                                            <td><input type="email" name="retapEmail" placeholder="Confirmation Email"
+                                                       class="invalid" required="" aria-required="true"></td>
                                         </tr>
                                         <tr>
-                                            <td><input value="<%=mdp%>" type="password" name="mdp" required="" aria-required="true"> </td>
+                                            <td><input value="<%= mdp %>" type="password" name="mdp" required=""
+                                                       aria-required="true"></td>
                                         </tr>
                                         <tr>
-                                            <td><input value="<%=mdp%>" type="password" name="retapMdp" required="" aria-required="true"></td>
+                                            <td><input value="<%= mdp %>" type="password" name="retapMdp" required=""
+                                                       aria-required="true"></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -229,17 +262,24 @@
                                         <tbody>
                                         <tr>
                                             <td> Les adresses Email sont diff&eacute;rentes !
-                                                <input type="email" name="mail" placeholder="EMail" class="invalid" class="validate" required="" aria-required="true"> </td>
+                                                <input type="email" name="mail" placeholder="EMail" class="invalid"
+                                                       class="validate" required="" aria-required="true"></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="email" name="retapEmail" placeholder="Confirmation Mail" class="invalid" class="validate" required="" aria-required="true"></td>
+                                            <td><input type="email" name="retapEmail" placeholder="Confirmation Mail"
+                                                       class="invalid" class="validate" required=""
+                                                       aria-required="true"></td>
                                         </tr>
                                         <tr>
                                             <td> Les mots de passe sont diff&eacute;rents !
-                                                <input type="password" name="mdp" placeholder="Mot de passe" class="invalid" class="validate" required="" aria-required="true"> </td>
+                                                <input type="password" name="mdp" placeholder="Mot de passe"
+                                                       class="invalid" class="validate" required=""
+                                                       aria-required="true"></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="password" name="retapMdp" placeholder="Confirmation Mot de passe" class="invalid" class="validate" required="" aria-required="true"></td>
+                                            <td><input type="password" name="retapMdp"
+                                                       placeholder="Confirmation Mot de passe" class="invalid"
+                                                       class="validate" required="" aria-required="true"></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -252,12 +292,15 @@
                     </div>
                     <div class="row center-align">
                         <div class="row center-align">
-                            <a href="#modalmdp" class="modal-trigger  btn-floating btn-large waves-effect waves-light red"><i class="material-icons">done</i></a>
+                            <a href="#modalmdp"
+                               class="modal-trigger  btn-floating btn-large waves-effect waves-light red"><i
+                                        class="material-icons">done</i></a>
                         </div>
                         <p class="center-align">
-                        <button class="btn waves-effect waves-light disabled" type="submit" name="enregistrer">Enregistrer
-                            <i class="material-icons right">send</i>
-                        </button>
+                            <button class="btn waves-effect waves-light disabled" type="submit" name="enregistrer">
+                                Enregistrer
+                                <i class="material-icons right">send</i>
+                            </button>
                         </p>
                     </div>
                 </form>
@@ -281,7 +324,9 @@
         </div>
     </div>
     <div class="row center-align modal-footer">
-        <a href="#!" id="testmdp"  class="modal-action modal-close btn-floating btn-large waves-effect waves-light red"><i class="material-icons">done</i></a>
+        <a href="#!" id="testmdp"
+           class="modal-action modal-close btn-floating btn-large waves-effect waves-light red"><i
+                    class="material-icons">done</i></a>
     </div>
 </div>
 

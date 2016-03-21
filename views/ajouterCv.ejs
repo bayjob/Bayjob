@@ -7,7 +7,7 @@
                 <i class="medium material-icons">search</i>
             </div>
             <div class="col s9 m8">
-                <h3><%=title%></h3>
+                <h3><%= title %></h3>
             </div>
         </div>
     </div>
@@ -33,19 +33,20 @@
                                     <textarea name="resumecv" class="materialize-textarea" length="255  "></textarea>
                                     <h4>Niveau D'étude</h4>
                                     <select name="niveauetude" required>
-                                        <option value="50" selected="selected">BAC </option>
-                                        <% for(var i = 0; i<niveauEtude.length; i++) {%>
-                                        <option value="<%=niveauEtude[i].id%>"><%=niveauEtude[i].intitule%></option>
-                                        <%}%>
+                                        <option value="50" selected="selected">BAC</option>
+                                        <% for(var i = 0; i < niveauEtude.length; i++) { %>
+                                        <option value="<%= niveauEtude[i].id %>"><%= niveauEtude[i].intitule %></option>
+                                        <% } %>
                                     </select>
                                     <h4>Compétences</h4>
                                 </div>
                                 <div id="apercucompetence" class="input-field col s12 offset-m2">
-
                                 </div>
                                 <div class="input-field col s12">
                                     <p class="center-align">
-                                        <a href="#modalCompetence" class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                                        <a href="#modalCompetence"
+                                           class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i
+                                                    class="material-icons">add</i></a>
                                     </p>
                                 </div>
                             </div>
@@ -58,11 +59,12 @@
                             <div class="collapsible-header"><i class="material-icons">school</i>Formation</div>
                             <div id="parent" class="collapsible-body">
                                 <div id="apercuformation" class="input-field col s12 offset-m2">
-
                                 </div>
                                 <div class="input-field col s12">
                                     <p class="center-align">
-                                        <a href="#modalFormation" class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                                        <a href="#modalFormation"
+                                           class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i
+                                                    class="material-icons">add</i></a>
                                     </p>
                                 </div>
                             </div>
@@ -77,11 +79,12 @@
                             </div>
                             <div id="parent" class="collapsible-body">
                                 <div id="apercuexppro" class="input-field col s12 offset-m2">
-
                                 </div>
                                 <div class="input-field col s12">
                                     <p class="center-align">
-                                        <a href="#modalExpPro" class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                                        <a href="#modalExpPro"
+                                           class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i
+                                                    class="material-icons">add</i></a>
                                     </p>
                                 </div>
                             </div>
@@ -94,11 +97,12 @@
                             <div class="collapsible-header"><i class="material-icons">chat</i>Langues</div>
                             <div class="collapsible-body">
                                 <div id="aperculangue" class="input-field col s12 offset-m2">
-
                                 </div>
                                 <div class="input-field col s12">
                                     <p class="center-align">
-                                        <a href="#modalLangue" class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                                        <a href="#modalLangue"
+                                           class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i
+                                                    class="material-icons">add</i></a>
                                     </p>
                                 </div>
                             </div>
@@ -111,11 +115,12 @@
                             <div class="collapsible-header"><i class="material-icons">chat</i>Centre d'Interet</div>
                             <div class="collapsible-body">
                                 <div id="apercuinteret" class="input-field col s12 offset-m2">
-
                                 </div>
                                 <div class="container">
                                     <p class="center-align">
-                                        <a href="#modalInteret" class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                                        <a href="#modalInteret"
+                                           class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i
+                                                    class="material-icons">add</i></a>
                                     </p>
                                 </div>
                             </div>
@@ -127,9 +132,12 @@
                     <------------------------------------------------>
                     <div id="elements_CV">
                     </div>
-
+                    <!----------------------------------------------->
+                    <!--------------- FIN DIV RECEPTION HIDDEN INPUT >
+                    <------------------------------------------------>
                     <div class="row">
-                        <button class="btn waves-effect waves-light blue-grey darken-1" type="submit" name="enregistrer">Enregistrer
+                        <button class="btn waves-effect waves-light blue-grey darken-1" type="submit"
+                                name="enregistrer">Enregistrer
                             <i class="material-icons right">send</i>
                         </button>
                     </div>
@@ -165,7 +173,7 @@
         </div>
     </div>
     <div class="modal-footer">
-    <a href="#!" id="btn_ajout_competence" class=" modal-action modal-close waves-effect waves-green btn-flat">Ajouter</a>
+        <a href="#!" id="btn_ajout_competence" class=" modal-action modal-close waves-effect waves-green btn-flat">Ajouter</a>
     </div>
 </div>
 
@@ -190,7 +198,7 @@
                     <label for="annee">Annee</label>
                 </div>
                 <div class="input-field col s12">
-                    <input name="encours" type="checkbox" id="encours" />
+                    <input name="encours" type="checkbox" id="encours"/>
                     <label for="encours">En cours?</label>
                 </div>
                 <div class="input-field col s12">
@@ -247,10 +255,10 @@
                 </div>
                 <div class="input-field col s12">
                     <select name="pays">
-                        <option value="72" selected="selected">France </option>
-                        <% for(var i = 0; i<pays.length; i++) {%>
-                        <option value="<%=pays[i].id%>"><%=pays[i].intitule%></option>
-                        <%}%>
+                        <option value="72" selected="selected">France</option>
+                        <% for(var i = 0; i < pays.length; i++) { %>
+                        <option value="<%= pays[i].id %>"><%= pays[i].intitule %></option>
+                        <% } %>
                     </select>
                 </div>
             </div>
@@ -275,7 +283,8 @@
         </div>
     </div>
     <div class="modal-footer">
-        <a href="#!" id="btn_ajout_Exppro" class=" modal-action modal-close waves-effect waves-green btn-flat">Ajouter</a>
+        <a href="#!" id="btn_ajout_Exppro"
+           class=" modal-action modal-close waves-effect waves-green btn-flat">Ajouter</a>
     </div>
 </div>
 
@@ -293,7 +302,7 @@
                 <div class="input-field col s12">
                     <select name="niveauLangue">
                         <option value="" disabled selected>Niveau de maitrise</option>
-                        <option value="1">Debutant (Niveau A1/A2) </option>
+                        <option value="1">Debutant (Niveau A1/A2)</option>
                         <option value="2">Bonnes notions (Niveau B1)</option>
                         <option value="3">Moyen (Niveau B2 - Base)</option>
                         <option value="4">Courant (Niveau C1)</option>
@@ -304,7 +313,8 @@
         </div>
     </div>
     <div class="modal-footer">
-        <a href="#!" id="btn_ajout_Langue" class=" modal-action modal-close waves-effect waves-green btn-flat">Ajouter</a>
+        <a href="#!" id="btn_ajout_Langue"
+           class=" modal-action modal-close waves-effect waves-green btn-flat">Ajouter</a>
     </div>
 </div>
 
@@ -323,7 +333,8 @@
         </div>
     </div>
     <div class="modal-footer">
-        <a href="#!" id="btn_ajout_Interet" class=" modal-action modal-close waves-effect waves-green btn-flat">Ajouter</a>
+        <a href="#!" id="btn_ajout_Interet"
+           class=" modal-action modal-close waves-effect waves-green btn-flat">Ajouter</a>
     </div>
 </div>
 

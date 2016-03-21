@@ -51,10 +51,12 @@ router.post('/', function(req, res, next) {
 
         include : [
             {model: models.Offre},
-            {model : models.Utilisateur,
-                where : {id : sess.user}}]
+            {
+                model: models.Utilisateur,
+                where: {id: sess.user}
+            }]
 
-    }).then(function(rec){
+    }).then(function (rec) {
 
         recId = rec;
         console.log(recId);

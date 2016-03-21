@@ -6,7 +6,7 @@
                 <i class="medium material-icons">search</i>
             </div>
             <div class="col s9 m8">
-                <h3><%=title%></h3>
+                <h3><%= title %></h3>
             </div>
         </div>
     </div>
@@ -15,9 +15,9 @@
     <div class="container">
         <div class="row">
             <div class="col s12 m10 offset-m1">
-                <% if(messageErr != null){%>
-                <div id="messageErr" class="card-panel teal lighten-2"><%=messageErr%></div>
-                <%}%>
+                <% if(messageErr != null){ %>
+                <div id="messageErr" class="card-panel teal lighten-2"><%= messageErr %></div>
+                <% } %>
                 <form id="elform" method="post" action="/rechercheCvs">
                     <ul class="collapsible" data-collapsible="accordion">
                         <!-- PARTIE DESCRIPTION GENERALE DU CV >
@@ -28,13 +28,13 @@
                             </div>
                             <div class="collapsible-body">
                                 <div id="infogenerales" class="container">
-                                    <% for(var i = 0; i<niveauEtude.length; i++) {%>
+                                    <% for(var i = 0; i < niveauEtude.length; i++) { %>
                                     <p>
-                                        <input type="checkbox" name="nivEtude" value="<%=niveauEtude[i].id%>" id="<%=niveauEtude[i].id%>"/>
-                                        <label for="<%=niveauEtude[i].id%>"><%=niveauEtude[i].intitule%></label>
+                                        <input type="checkbox" name="nivEtude" value="<%= niveauEtude[i].id %>"
+                                               id="<%= niveauEtude[i].id %>"/>
+                                        <label for="<%= niveauEtude[i].id %>"><%= niveauEtude[i].intitule %></label>
                                     </p>
-                                    <%}%>
-
+                                    <% } %>
 
                                 </div>
                             </div>
@@ -46,7 +46,9 @@
                                 </div>
                                 <div class="input-field col s12">
                                     <p class="center-align">
-                                        <a href="#modalCompetence" class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                                        <a href="#modalCompetence"
+                                           class="modal-trigger btn-floating btn-large waves-effect waves-light red"><i
+                                                    class="material-icons">add</i></a>
                                     </p>
                                 </div>
                             </div>
@@ -60,7 +62,8 @@
                     <div id="elements_Offre">
                     </div>
                     <div class="row">
-                        <button class="btn waves-effect waves-light blue-grey darken-1" type="submit" name="Recherche">Recherche
+                        <button class="btn waves-effect waves-light blue-grey darken-1" type="submit" name="Recherche">
+                            Recherche
                             <i class="material-icons right">send</i>
                         </button>
                     </div>

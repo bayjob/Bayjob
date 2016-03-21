@@ -22,9 +22,9 @@
             <div class="col s12 m7 offset-m2">
 
                 <h4>Poste recherché</h4>
-                <% if(messageErr != null){%>
-                    <div id="messageErr" class="card-panel teal lighten-2"><%=messageErr%></div>
-                <%}%>
+                <% if(messageErr != null){ %>
+                <div id="messageErr" class="card-panel teal lighten-2"><%= messageErr %></div>
+                <% } %>
                 <form action="/rechercheOffres" method="post">
                     <div class="input-field col s12">
                         <p>Intitulé du poste</p>
@@ -34,7 +34,8 @@
 
                     <div id="locationField" class="input-field col s12">
                         <p>Lieu du poste</p>
-                        <input id="autocomplete" placeholder="Pays, région, département ou ville" onFocus="geolocate()" name="lieu" type="text" class="validate">
+                        <input id="autocomplete" placeholder="Pays, région, département ou ville" onFocus="geolocate()"
+                               name="lieu" type="text" class="validate">
 
                     </div>
 
@@ -47,12 +48,13 @@
 
                     <h4>Niveau d'étude</h4>
                     <div class="col s12">
-                        <% for(var i = 0; i<niveauEtude.length; i++) {%>
+                        <% for(var i = 0; i < niveauEtude.length; i++) { %>
                         <p>
-                            <input type="checkbox" name="nivEtude" value="<%=niveauEtude[i].id%>" id="<%=niveauEtude[i].id%>"/>
-                            <label for="<%=niveauEtude[i].id%>"><%=niveauEtude[i].intitule%></label>
+                            <input type="checkbox" name="nivEtude" value="<%= niveauEtude[i].id %>"
+                                   id="<%= niveauEtude[i].id %>"/>
+                            <label for="<%= niveauEtude[i].id %>"><%= niveauEtude[i].intitule %></label>
                         </p>
-                        <%}%>
+                        <% } %>
                     </div>
 
 
