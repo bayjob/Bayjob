@@ -1,6 +1,5 @@
 <%- include('include/header') %>
 
-
 <section class="page-title cyan darken-1 white-text">
     <div class="container">
         <div class="row">
@@ -12,9 +11,7 @@
                 <h3><%= title %></h3>
             </div>
         </div>
-
     </div>
-
 </section>
 
 <section class="page-content" id="rechercherOffres">
@@ -22,35 +19,47 @@
         <div class="row">
             <div class="col s12 m6">
                 <h4>Informations du recruteur</h4>
-
                 <blockquote>
-                    <h5><%=recruteur.nomRecruteur + " " + recruteur.prenomRecruteur%></h5>
-                    <p><strong><%=recruteur.nomEntreprise%></strong></p>
-                    <p><strong>Adresse : </strong><%=recruteur.adresse%> - <%=recruteur.cp + " " + recruteur.ville%></p>
-                    <p><strong>T&eacute;l fixe : </strong><%=recruteur.telFixe%><br/>
-                        <strong>T&eacute;l mobile : </strong><%=recruteur.telMobile%>
-                    <p class="right-align"><a  href="/modifierRecruteur" class="waves-effect waves-light btn"><i class="material-icons left">edit</i>Modifier les informations</a></p>
+                    <h5><%= recruteur.nomRecruteur + " " + recruteur.prenomRecruteur %></h5>
+                    <p><strong><%= recruteur.nomEntreprise %></strong></p>
+                    <p><strong>Adresse : </strong><%= recruteur.adresse %> - <%= recruteur.cp + " " + recruteur.ville %>
+                    </p>
+                    <p><strong>T&eacute;l fixe : </strong><%= recruteur.telFixe %><br/>
+                        <strong>T&eacute;l mobile : </strong><%= recruteur.telMobile %>
+                    <p class="right-align"><a href="/modifierRecruteur" class="waves-effect waves-light btn"><i
+                                    class="material-icons left">edit</i>Modifier les informations</a></p>
                 </blockquote>
 
                 <h4>Consultation aléatoire de CV</h4>
-                <p class="right-align"><a href="/cv" class="waves-effect waves-light btn"><i class="material-icons left">slideshow</i>Parcourir les CV</a></p>
+                <p class="right-align"><a href="/cv" class="waves-effect waves-light btn"><i
+                                class="material-icons left">slideshow</i>Parcourir les CV</a></p>
             </div>
             <div class="col s12 m6">
                 <h4>Mes Offres</h4>
 
                 <ul class="collection">
-
-                    <% for(var i=0; i<recruteur.Offres.length;i++){%>
+                    <!------------------------------------------------>
+                    <!---------- DEBUT APERCU DES OFFRES DU RECRUTEUR >
+                    <------------------------------------------------->
+                    <% for(var i = 0; i < recruteur.Offres.length;i++){ %>
                     <li class="collection-item avatar">
                         <img src="/img/avatar.png" width="42px" height="42px" alt="" class="circle">
-                        <span class="title"><a href="/offre/<%=recruteur.Offres[i].id%>"><%=recruteur.Offres[i].titre%></a></span>
-                        <p>Date de cr&eacute;ation : <%=recruteur.Offres[i].createdAt.getDate() + " " + mois[recruteur.Offres[i].createdAt.getMonth()] + " " + recruteur.Offres[i].createdAt.getFullYear()%></p>
-                        <p>Derni&egrave;re mise &agrave; jour : <%=recruteur.Offres[i].updatedAt.getDate() + " " + mois[recruteur.Offres[i].updatedAt.getMonth()] + " " + recruteur.Offres[i].updatedAt.getFullYear()%></p>
-                        <a href="/espaceRecruteur/deleteOffre/<%=recruteur.Offres[i].id%>" class="secondary-content"><i class="material-icons">close</i></a>
+                        <span class="title"><a
+                                    href="/offre/<%= recruteur.Offres[i].id %>"><%= recruteur.Offres[i].titre %></a></span>
+                        <p>Date de cr&eacute;ation
+                            : <%= recruteur.Offres[i].createdAt.getDate() + " " + mois[recruteur.Offres[i].createdAt.getMonth()] + " " + recruteur.Offres[i].createdAt.getFullYear() %></p>
+                        <p>Derni&egrave;re mise &agrave; jour
+                            : <%= recruteur.Offres[i].updatedAt.getDate() + " " + mois[recruteur.Offres[i].updatedAt.getMonth()] + " " + recruteur.Offres[i].updatedAt.getFullYear() %></p>
+                        <a href="/espaceRecruteur/deleteOffre/<%= recruteur.Offres[i].id %>"
+                           class="secondary-content"><i class="material-icons">close</i></a>
                     </li>
-                    <%}%>
+                    <% } %>
+                    <!------------------------------------------------>
+                    <!------------- FIN APERCU DES OFFRES DU RECRUTEUR>
+                    <------------------------------------------------->
                 </ul>
-                <p class="right-align"><a href="ajouterOffre" class="waves-effect waves-light btn"><i class="material-icons left">add</i>Ajouter une Offre</a></p>
+                <p class="right-align"><a href="ajouterOffre" class="waves-effect waves-light btn"><i
+                                class="material-icons left">add</i>Ajouter une Offre</a></p>
             </div>
         </div>
     </div>

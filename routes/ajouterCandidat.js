@@ -7,12 +7,14 @@ var crypto = require('crypto');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
+    /*Si l'utilisateur est connecté on le redirige vers son espace*/
     if (req.session && req.session.user) {
         if(req.session.type==='C'){
             res.redirect('/espaceCandidat');
         }else{
             res.redirect('/espaceRecruteur');
         }
+    /*sinon on continue normalements*/
     }else {
         var Pays;
         models.Pays.findAll({
@@ -72,23 +74,27 @@ router.post('/', function(req, res, next) {
     var mdpC = req.body.mdpCandidat;
 
     var err = null;
-
+    /* Si aucune erreur sur mail et sur mdp*/
     if(cMailC == mailC && cMdpC == mdpC )
         err = 0;
+    /* Si aucune erreur sur mail mais erreur sur mdp*/
     if(cMailC == mailC && cMdpC != mdpC )
         err = 1;
+    /* Si aucune erreur sur mdp mais erreur sur mail*/
     if(cMailC != mailC && cMdpC == mdpC )
         err = 2;
+    /* Si  erreur sur mail et sur mdp*/
     if(cMailC != mailC && cMdpC != mdpC )
         err = 3;
 
-
+    /* Si erreur 0 alors on insere  */
     if (err == 0 ) {
         var utilisateur = models.Utilisateur.build({
             mail: req.body.mailCandidat,
             mdp: crypto.createHash('md5').update(req.body.mdpCandidat).digest("hex"),
             type: "C"
         });
+    /* sinon selon l'erreur on renvoi la page avec differents parametres*/
     } else if (err == 1) {
         res.render('ajouterCandidat', { title:'Inscription d\'un Candidat ', nom: candidat.nom, prenom: candidat.prenom,
             dateNaissance: candidat.dateNaissance, telFixe: candidat.telFixe, telMobile: candidat.telMobile,
@@ -109,7 +115,7 @@ router.post('/', function(req, res, next) {
 
 
     utilisateur.save();
-
+    /* On insere le candidat*/
     candidat.save().then(function() {
         utilisateur.setCandidat(candidat);
         candidat.setDepartement(req.body.dep);

@@ -5,8 +5,9 @@ var models = require('../models');
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
     var Pays;
+    /*Si l'utilisateur est connecte, on le renvoie sur la bonne page d'ajout de CV*/
     if (req.session && req.session.user) {
         models.Pays.findAll({
             attributes: ['id', 'intitule']
@@ -16,25 +17,31 @@ router.get('/', function(req, res, next) {
                 attributes: ['id', 'intitule']
             }).then(function (niveau) {
                 niveauEtude = niveau;
-                res.render('ajouterCv', {title: 'Ajout d\'un CV',pays: Pays, niveau: niveauEtude,session: req.session});
+                res.render('ajouterCv', {
+                    title: 'Ajout d\'un CV',
+                    pays: Pays,
+                    niveau: niveauEtude,
+                    session: req.session
+                });
             });
         });
-    }else{
+        /* Sinon on le redirige vers le login */
+    } else {
         res.redirect('/login');
     }
 
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', function (req, res, next) {
     console.log(JSON.stringify(req.body));
     var candidatId;
     var titrecv = req.body.titre;
-    console.log( req.session.user + " id candidat");
+    console.log(req.session.user + " id candidat");
     var resumecv = req.body.resumecv;
     var etudeniveau = req.body.niveauetude;
 
     models.Candidat.findOne({
-        where: {UtilisateurId:  req.session.user}
+        where: {UtilisateurId: req.session.user}
     }).then(function (rec) {
 
         candidatId = rec;
@@ -45,13 +52,14 @@ router.post('/', function(req, res, next) {
         titre: titrecv,
         resume: resumecv,
         CandidatId: candidatId,
-        NiveauEtudeId:etudeniveau
+        NiveauEtudeId: etudeniveau
     });
-    cv.save().then(function(){
+    cv.save().then(function () {
         cv.setCandidat(candidatId);
         //cv.setNiveauEtude(etudeniveau);
-        if (req.body.competence != undefined){
-            for(var i = 0; i<req.body.competence.length;i++){
+        /*Si la(les) competence(s) est(sont) définie(s) on l(es)'insere*/
+        if (req.body.competence != undefined) {
+            for (var i = 0; i < req.body.competence.length; i++) {
                 var intitulecompetence = req.body.competence[i].intitule;
                 var niveaucompetence = req.body.competence[i].niveau;
 
@@ -61,12 +69,12 @@ router.post('/', function(req, res, next) {
                     CVId: cv.id
                 });
 
-                competence_CV.save().then(function() {
+                competence_CV.save().then(function () {
                     competence_CV.setCV(cv);
                 });
             }
         }
-
+        /*Si la(les) formation(s) est(sont) définie(s) on l(es)'insere*/
         if (req.body.formation != undefined) {
             for (var i = 0; i < req.body.formation.length; i++) {
                 var intitulediplome = req.body.formation[i].intitule;
@@ -88,17 +96,18 @@ router.post('/', function(req, res, next) {
 
                 formation.save().then(function () {
                     formation.setCV(cv)
-                });;
+                });
+                ;
             }
         }
-
-        if (req.body.exppro != undefined){
+        /*Si la(les) experience(s) est(sont) définie(s) on l(es)'insere*/
+        if (req.body.exppro != undefined) {
             for (var i = 0; i < req.body.exppro.length; i++) {
                 var entreprisenom = req.body.exppro[i].entreprise;
                 var posteentreprise = req.body.exppro[i].poste;
                 var dureeposte = null;
                 var datedebut = req.body.exppro[i].datedebut;
-                var datefin= req.body.exppro[i].datefin;
+                var datefin = req.body.exppro[i].datefin;
                 var villeposte = req.body.exppro[i].ville;
                 var paysposte = req.body.exppro[i].pays;
                 var contrattypeid = req.body.exppro[i].contrattype;
@@ -112,8 +121,9 @@ router.post('/', function(req, res, next) {
                     ContratTypeId: parseInt(contrattypeid),
                     CVId: cv.id
                 });
-                experience_pro.save().then(function() {
+                experience_pro.save().then(function () {
                     experience_pro.setCV(cv);
+                    /*Si la(les) mission(s) est(sont) définie(s) on l(es)'insere*/
                     if (req.body.mission != undefined) {
                         for (var i = 0; i < req.body.mission.length; i++) {
                             var intitulemission = req.body.mission[i].intitule;
@@ -129,15 +139,13 @@ router.post('/', function(req, res, next) {
                     }
                 });
 
-
-
             }
         }
-
-        if (req.body.langue != undefined){
+        /*Si la(les) langue(s) est(sont) définie(s) on l(es)'insere*/
+        if (req.body.langue != undefined) {
             for (var i = 0; i < req.body.langue.length; i++) {
                 var langue = req.body.langue[i].langue;
-                var niveau= req.body.langue[i].niveau;
+                var niveau = req.body.langue[i].niveau;
 
                 var langue = models.Langue.build({
                     intitule: langue,
@@ -145,13 +153,13 @@ router.post('/', function(req, res, next) {
                     CVId: cv.id
                 });
 
-                langue.save().then(function() {
+                langue.save().then(function () {
                     langue.setCV(cv);
                 });
             }
         }
-
-        if (req.body.interet != undefined){
+        /*Si le(s) centre(s) d'interet est(sont) défini(s) on l(es)'insere*/
+        if (req.body.interet != undefined) {
             for (var i = 0; i < req.body.interet.length; i++) {
                 var intituleinteret = req.body.interet[i].intitule;
 
@@ -160,14 +168,13 @@ router.post('/', function(req, res, next) {
                     CVId: cv.id
                 });
 
-                centre_interet.save().then(function() {
+                centre_interet.save().then(function () {
                     centre_interet.setCV(cv);
                 });
             }
         }
         res.redirect("/espaceCandidat");
     });
-
 
 });
 module.exports = router;

@@ -66,9 +66,9 @@ router.get('/', function (req, res, next) {
                     }
                 }
             }).then(function (offre) {
-                if(offre === null){
+                if (offre === null) {
                     res.redirect("/espaceCandidat");
-                }else{
+                } else {
                     models.Offre.findOne({
                         where: {id: offre.id},
                         include: [

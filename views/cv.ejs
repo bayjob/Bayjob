@@ -8,14 +8,12 @@
                     <p><img class="circle" src="/img/avatar.png" width="110px" height="110px"/></p>
                 </div>
             </div>
-
             <div class="col s8 m8">
                 <h3><%= cv.Candidat.prenom %> <%= cv.Candidat.nom %></h3>
                 <h5><%= cv.titre %></h5>
             </div>
-
             <!--<div class="col s12 m2">-->
-                <!--<p class="center-align"><span class="taux">78%</span><br/> de compatibilité</p>-->
+            <!--<p class="center-align"><span class="taux">78%</span><br/> de compatibilité</p>-->
             <!--</div>-->
 
             <!------------------------------------------------------------------------------------------->
@@ -24,7 +22,6 @@
 
             <!-- Vérification si l'utilisateur est connecté -->
             <% if(session.user != null){
-
                 /*Vérification si l'utilisateur connecté est l'auteur du CV : si c'est le cas, on fait apparaitre
                  un bouton de modification du CV au lieu des boutons de validation*/
             if(cv.Candidat.UtilisateurId === session.user){ %>
@@ -48,20 +45,19 @@
                        data-position="bottom" data-delay="50" data-tooltip="Accepter ce CV">
                         <i class="large material-icons">thumb_up</i>
                     </a>
-
                 </p>
             </div>
 
             <div class="col s6 m1">
                 <p class="center-align">
-                    <form method="post" action="/notification/refuserCV">
-                        <input type="hidden" name="utilisateurSession" value="<%= session.user %>">
-                        <input type="hidden" name="CVId" value="<%= cv.id %>">
-                        <button type="submit" style="margin-top: 20px;"
-                                class="btn-floating btn-large waves-effect waves-light white tooltipped"
-                                data-position="bottom" data-delay="50" data-tooltip="Refuser ce CV"><i
-                                    class="large material-icons blue-grey-text text-darken-1">thumb_down</i></button>
-                    </form>
+                <form method="post" action="/notification/refuserCV">
+                    <input type="hidden" name="utilisateurSession" value="<%= session.user %>">
+                    <input type="hidden" name="CVId" value="<%= cv.id %>">
+                    <button type="submit" style="margin-top: 20px;"
+                            class="btn-floating btn-large waves-effect waves-light white tooltipped"
+                            data-position="bottom" data-delay="50" data-tooltip="Refuser ce CV"><i
+                                class="large material-icons blue-grey-text text-darken-1">thumb_down</i></button>
+                </form>
                 </p>
             </div>
             <% }
@@ -72,11 +68,15 @@
 
 <section class="page-content" id="cv">
     <div class="container">
-
         <div class="row">
             <div class="col s12 m10 offset-m1">
-
+                <!------------------------------------------------------>
+                <!-- CHAQUE PARTIE CORRESPOND AU CV D UN CANDIDAT DONNE >
+                <------------------------------------------------------->
                 <ul class="collapsible" data-collapsible="accordion">
+                    <!------------------------------------------------>
+                    <!-------------- DEBUT DESCRIPTION GENERALE DU CV >
+                    <------------------------------------------------->
                     <li>
                         <div class="collapsible-header active"><i class="material-icons">description</i>Description
                             générale
@@ -84,14 +84,12 @@
                         <div class="collapsible-body">
                             <div class="container">
                                 <h4>Résumé</h4>
-
                                 <%= cv.resume %>
-
                                 <h4>Compétences</h4>
                                 <table>
                                     <tbody>
                                     <% for(var i = 0; i < cv.Competence_CVs.length; i++) { %>
-                                    <%if (cv.Competence_CVs[i].intitule != null){%>
+                                    <% if (cv.Competence_CVs[i].intitule != null){ %>
                                     <tr>
                                         <td><%= cv.Competence_CVs[i].intitule %></td>
                                         <td>
@@ -110,11 +108,14 @@
                             </div>
                         </div>
                     </li>
+                    <!------------------------------------------------>
+                    <!----------------- FIN DESCRIPTION GENERALE DU CV>
+                    <!-------------- DEBUT FORMATION (SCOLAIRE) DU CV >
+                    <------------------------------------------------->
                     <li>
                         <div class="collapsible-header"><i class="material-icons">school</i>Formation</div>
                         <div class="collapsible-body">
                             <div class="container">
-
                                 <% for(var i = 0; i < cv.Formations.length; i++) {
                                 if(cv.Formations[i].annee!=null && cv.Formations[i].intitule_diplome != null && cv.Formations[i].etablissement != null){%>
                                 <div class="row"
@@ -128,36 +129,38 @@
                                         Mention <%= cv.Formations[i].mention %>
                                     </div>
                                 </div>
-
                                 <% }} %>
                             </div>
                         </div>
                     </li>
+                    <!------------------------------------------------>
+                    <!----------------- FIN FORMATION (SCOLAIRE) DU CV>
+                    <!------- DEBUT EXPERIENCES PROFESSIONNELLES DU CV>
+                    <------------------------------------------------->
                     <li>
                         <div class="collapsible-header"><i class="material-icons">work</i>Expériences
                             professionnelles
                         </div>
                         <div class="collapsible-body">
                             <div class="container">
-
                                 <% for(var i = 0; i < cv.Experience_pros.length; i++) { %>
                                 <div class="row"
                                      style="border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 20px">
-                                    <%if (cv.Experience_pros[i].datedebut != null){%>
-                                    <%if ( cv.Experience_pros[i].datefin != null){%>
-                                        <div class="col s12 m2">
-                                            <%- mois[cv.Experience_pros[i].datedebut.getMonth()] + " " + cv.Experience_pros[i].datedebut.getFullYear() + " - " + mois[cv.Experience_pros[i].datefin.getMonth()] + " " + cv.Experience_pros[i].datefin.getFullYear() %>
-                                        </div>
-                                    <%}else{%>
-                                        <div class="col s12 m2 " style="font-size: 10px" >
-                                            Date de fin Manquante !
-                                        </div>
-                                   <% }
-                                    } else {%>
-                                        <div class="col s12 m2" style="font-size: 10px">
-                                            Date de debut Manquante !
-                                        </div>
-                                    <%}%>
+                                    <% if (cv.Experience_pros[i].datedebut != null){ %>
+                                    <% if ( cv.Experience_pros[i].datefin != null){ %>
+                                    <div class="col s12 m2">
+                                        <%- mois[cv.Experience_pros[i].datedebut.getMonth()] + " " + cv.Experience_pros[i].datedebut.getFullYear() + " - " + mois[cv.Experience_pros[i].datefin.getMonth()] + " " + cv.Experience_pros[i].datefin.getFullYear() %>
+                                    </div>
+                                    <% }else{ %>
+                                    <div class="col s12 m2 " style="font-size: 10px">
+                                        Date de fin Manquante !
+                                    </div>
+                                    <% }
+                                    } else { %>
+                                    <div class="col s12 m2" style="font-size: 10px">
+                                        Date de debut Manquante !
+                                    </div>
+                                    <% } %>
                                     <div class="col s12 m10">
                                         <strong><%= cv.Experience_pros[i].poste %></strong><br/>
                                         <%= cv.Experience_pros[i].entreprise %> - <%= cv.Experience_pros[i].ville %>
@@ -172,11 +175,14 @@
                                         </ul>
                                     </div>
                                 </div>
-
                                 <% } %>
                             </div>
                         </div>
                     </li>
+                    <!------------------------------------------------>
+                    <!---------- FIN EXPERIENCE PROFESSIONNELLES DU CV>
+                    <!--------------------------- DEBUT LANGUES DU CV >
+                    <------------------------------------------------->
                     <li>
                         <div class="collapsible-header"><i class="material-icons">chat</i>Langues</div>
                         <div class="collapsible-body">
@@ -203,6 +209,10 @@
                             </div>
                         </div>
                     </li>
+                    <!------------------------------------------------>
+                    <!------------------------------ FIN LANGUE  DU CV>
+                    <!----------------- DEBUT CENTRES D INTERET DU CV >
+                    <------------------------------------------------->
                     <li>
                         <div class="collapsible-header"><i class="material-icons">public</i>Centres d'intérêt</div>
                         <div class="collapsible-body">
@@ -221,18 +231,12 @@
                         </div>
                     </li>
                 </ul>
-
+                <!------------------------------------------------>
+                <!-------------------- FIN CENTRES D INTERET DU CV>
+                <------------------------------------------------->
             </div>
-
         </div>
-
-        <!--<div class="col s12 m3">
-            <p><a class="waves-effect waves-light btn blue-grey darken-1"><i class="material-icons left">info</i>En savoir plus</a></p>
-        </div>-->
     </div>
-    </div>
-
-
 </section>
 
 <!-- Modal Structure -->
@@ -241,7 +245,6 @@
     <form action="/notification/accepterCV" method="post">
         <div class="modal-content">
             <h4>Selection d'une offre</h4>
-
             <p>Veuillez choisir une offre correspondante au CV</p>
             <select name="listeOffresCV">
                 <option value="" disabled selected>Choisissez une offre</option>
@@ -251,12 +254,9 @@
             </select>
         </div>
         <div class="modal-footer">
-
             <input type="hidden" name="utilisateurSession" value="<%= session.user %>">
             <input type="hidden" name="CVId" value="<%= cv.id %>">
             <input type="submit" class=" modal-action modal-close waves-effect waves-green btn-flat" value="Valider"/>
-
-
         </div>
     </form>
 </div>
@@ -264,6 +264,3 @@
 
 <%- include('include/footer') %>
 <script type="text/javascript" src="/js/cv-offre-event.js"></script>
-
-
-

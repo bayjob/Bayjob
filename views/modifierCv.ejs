@@ -19,12 +19,16 @@
 
 <section class="page-content" id="cv">
     <div class="container">
-
         <div class="row">
             <div class="col s12 m10 offset-m1">
                 <form method="post" action="/modifierCv">
-
+                    <!------------------------------------------------------>
+                    <!-- CHAQUE PARTIE CORRESPOND AU CV D UN CANDIDAT DONNE >
+                    <------------------------------------------------------->
                 <ul class="collapsible" data-collapsible="accordion">
+                    <!------------------------------------------------>
+                    <!------------- DEBUT MODIFICATION GENERALE DU CV >
+                    <------------------------------------------------->
                     <li>
                         <div class="collapsible-header active"><i class="material-icons">description</i>Description
                             générale
@@ -59,6 +63,10 @@
                             </div>
                         </div>
                     </li>
+                    <!--------------------------------------------------->
+                    <!------------------- FIN MODIFICATION GENERALE DU CV>
+                    <!-------------- DEBUT MODIFICATION (SCOLAIRE) DU CV >
+                    <---------------------------------------------------->
                     <li>
                         <div class="collapsible-header"><i class="material-icons">school</i>Formation</div>
                         <div class="collapsible-body">
@@ -68,7 +76,7 @@
                                 <div class="row"
                                      style="border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 20px">
                                     <div id="res " class="col s12 m2">
-                                        <input value="<%= cv.Formations[i].annee %>" type="number" id="Formation_<%=i%>_anneeFormation" >
+                                    <input value="<%= cv.Formations[i].annee %>" type="number" id="Formation_<%=i%>_anneeFormation" >
                                         <input value="<%= cv.Formations[i].id %>" type="hidden" id="Formation_<%=i%>_idformation" >
                                     </div>
                                     <div class="col s12 m10">
@@ -101,6 +109,10 @@
                             </div>
                         </div>
                     </li>
+                    <!---------------------------------------------------------->
+                    <!------------------------ FIN MODIFICATION (SCOLAIRE) DU CV>
+                    <!---- DEBUT MODIFICATION EXPERIENCES PROFESSIONNELLES DU CV>
+                    <----------------------------------------------------------->
                     <li>
                         <div class="collapsible-header"><i class="material-icons">work</i>Expériences
                             professionnelles
@@ -155,6 +167,10 @@
                             </div>
                         </div>
                     </li>
+                    <!------------------------------------------------------>
+                    <!--- FIN MODIFICATION EXPERIENCE PROFESSIONNELLES DU CV>
+                    <!-------------------- DEBUT MODIFICATION LANGUES DU CV >
+                    <------------------------------------------------------->
                     <li>
                         <div class="collapsible-header"><i class="material-icons">chat</i>Langues</div>
                         <div class="collapsible-body">
@@ -183,6 +199,10 @@
                             </div>
                         </div>
                     </li>
+                    <!----------------------------------------------------->
+                    <!---------------------- FIN MODIFICATION LANGUE  DU CV>
+                    <!--------- DEBUT MODIFICATION CENTRES D INTERET DU CV >
+                    <------------------------------------------------------>
                     <li>
                         <div class="collapsible-header"><i class="material-icons">public</i>Centres d'intérêt</div>
                         <div class="collapsible-body">
@@ -202,10 +222,14 @@
                             </div>
                         </div>
                     </li>
+                    <!--------------------------------------------------->
+                    <!---------- FIN MODIFICATION CENTRES D INTERET DU CV>
+                    <---------------------------------------------------->
                 </ul>
-                <div id="elements_CV">
 
+                <div id="elements_CV">
                 </div>
+
                 <div class="row">
                     <button class="btn waves-effect waves-light blue-grey darken-1" type="submit" name="enregistrer">Enregistrer
                         <i class="material-icons right">send</i>
