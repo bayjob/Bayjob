@@ -116,7 +116,8 @@
                         <div class="collapsible-header"><i class="material-icons">school</i>Formation</div>
                         <div class="collapsible-body">
                             <div class="container">
-                                <% for(var i = 0; i < cv.Formations.length; i++) { %>
+                                <% for(var i = 0; i < cv.Formations.length; i++) {
+                                if(cv.Formations[i].annee!=null && cv.Formations[i].intitule_diplome != null && cv.Formations[i].etablissement != null){%>
                                 <div class="row"
                                      style="border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 20px">
                                     <div class="col s12 m2">
@@ -128,7 +129,7 @@
                                         Mention <%= cv.Formations[i].mention %>
                                     </div>
                                 </div>
-                                <% } %>
+                                <% }} %>
                             </div>
                         </div>
                     </li>
@@ -145,7 +146,6 @@
                                 <% for(var i = 0; i < cv.Experience_pros.length; i++) { %>
                                 <div class="row"
                                      style="border-bottom: 1px solid #ddd; padding-bottom: 20px; padding-top: 20px">
-                                    <% console.log(cv.Experience_pros[i].datedebut + "date debut") %>
                                     <% if (cv.Experience_pros[i].datedebut != null){ %>
                                     <% if ( cv.Experience_pros[i].datefin != null){ %>
                                     <div class="col s12 m2">
@@ -240,6 +240,7 @@
 </section>
 
 <!-- Modal Structure -->
+<%if(session.type == 'R'){%>
 <div id="selectionOffre" class="modal modal-fixed-footer">
     <form action="/notification/accepterCV" method="post">
         <div class="modal-content">
@@ -259,6 +260,7 @@
         </div>
     </form>
 </div>
+<%}%>
 
 <%- include('include/footer') %>
 <script type="text/javascript" src="/js/cv-offre-event.js"></script>
