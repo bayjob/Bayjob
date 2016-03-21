@@ -30,8 +30,6 @@ router.get('/', function(req, res, next) {
             cvsUser.push(notifUtilisateur[i].CVId);
         }
 
-        console.log(cvsUser);
-
         if(cvsUser.length==0 && notifUtilisateur.length == 0){
             models.CV.findOne({
                 attributes: ['id']
