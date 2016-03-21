@@ -1,7 +1,7 @@
 /**
  * Created by Soufiane on 05/02/2016.
  */
-var models  = require('../models');
+var models = require('../models');
 var express = require('express');
 var crypto = require('crypto');
 var router = express.Router();
@@ -11,28 +11,29 @@ var router = express.Router();
  * ou bien 1 lors du chargement de la page en cas d'erreur
  * de coordonéés de connexion ( Email existe déjà ou erreur de confirmation de l'email ou du mdp
  * * */
-var ErroHandler ;
+var ErroHandler;
 
 
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
 
     ErroHandler = 0;
     var Pays;
 
     models.Pays.findAll({
-        attributes: ['id','intitule']
-    }).then(function(pays){
+        attributes: ['id', 'intitule']
+    }).then(function (pays) {
         Pays = pays;
         models.Departement.findAll({
-            attributes: ['id','intitule']
-        }).then(function(departement){
+            attributes: ['id', 'intitule']
+        }).then(function (departement) {
             Departement = departement;
 
             res.render('ajouterRecruteur',
-                { title: 'Inscription' ,
-                    departement : Departement,
-                    pays : Pays,
-                    ErroHandler : ErroHandler,
+                {
+                    title: 'Inscription d\'un recruteur',
+                    departement: Departement,
+                    pays: Pays,
+                    ErroHandler: ErroHandler,
                     nomRecruteur: null,
                     prenomRecruteur: null,
                     nomEntreprise: null,
@@ -43,8 +44,8 @@ router.get('/', function(req, res, next) {
                     telMobile: null,
                     mail: null,
                     mdp: null,
-                    Err : null,
-                    mailExist : null,
+                    Err: null,
+                    mailExist: null,
                     session: req.session
                 });
         });
@@ -53,7 +54,7 @@ router.get('/', function(req, res, next) {
 
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', function (req, res, next) {
 
     ErroHandler = 1;
 
@@ -95,28 +96,26 @@ router.post('/', function(req, res, next) {
         telMobile: telMobile,
         mail: mail,
         mdp: mdp,
-        PayId : pays,
-        DepartementId : dep,
-        mailExist : null
+        PayId: pays,
+        DepartementId: dep,
+        mailExist: null
 
     });
     // Retourne le pays selectionné ( renvoyé au formulaire dans le cas d'une erreur )
     models.Pays.findOne({
-        attributes: ['id','intitule'],
-        where: {id : pays}
-    }).then(function(Pays){
+        attributes: ['id', 'intitule'],
+        where: {id: pays}
+    }).then(function (Pays) {
         paysHandleError = Pays;
     });
     // Retourne le departement selectionné ( renvoyé au formulaire dans le cas d'une erreur )
 
     models.Departement.findOne({
-        attributes: ['id','intitule'],
-        where : {id : dep}
-    }).then(function(departement){
+        attributes: ['id', 'intitule'],
+        where: {id: dep}
+    }).then(function (departement) {
         Departement = departement;
     });
-
-
 
 
 // different type d'erreur de confirmation de coordonées de connexion
@@ -138,25 +137,27 @@ router.post('/', function(req, res, next) {
     }).then(function (userList) {
 
         // Si l'email existe -> impossible de créer le compte + inviter l'utilisateur à saisir un autre email
+        if (userList.length == 0) {
+            mailExist = 0;
+        } else {
+            for (var i = 0; i < userList.length; i++) {
 
-        for (var i = 0; i < userList.length; i++) {
+                if (userList[i].mail == mail) {
 
-            if (userList[i].mail == mail) {
+                    mailExist = 1;
+                    break;
 
-                mailExist = 1;
-                break;
-
-            } else {
-                mailExist = 0;
+                } else {
+                    mailExist = 0;
+                }
             }
         }
 
+
         // Si l'Email n'existe pas et la confirmation de l'email et du mot de passe est correcte -> Créer le compte recruteur
 
-        if(mailExist == 0) {
-
+        if (mailExist == 0) {
             if (err == 0) {
-
                 var utilisateur = models.Utilisateur.build({
                     mail: mail,
                     mdp: crypto.createHash('md5').update(req.body.mdp).digest("hex"),
@@ -171,7 +172,7 @@ router.post('/', function(req, res, next) {
                 console.log(err);
                 res.render('ajouterRecruteur', {
 
-                    title: 'Inscription' ,
+                    title: 'Inscription d\'un recruteur',
                     nomRecruteur: recruteur.nomRecruteur,
                     prenomRecruteur: recruteur.prenomRecruteur,
                     nomEntreprise: recruteur.nomEntreprise,
@@ -179,14 +180,14 @@ router.post('/', function(req, res, next) {
                     ville: recruteur.ville,
                     cp: recruteur.cp,
                     pays: paysHandleError,
-                    departement : Departement,
+                    departement: Departement,
                     telFixe: recruteur.telFixe,
                     telMobile: recruteur.telMobile,
                     mail: mail,
                     mdp: null,
-                    Err : 1,
-                    ErroHandler : ErroHandler,
-                    mailExist : mailExist,
+                    Err: 1,
+                    ErroHandler: ErroHandler,
+                    mailExist: mailExist,
                     session: req.session
                 });
             } else if (err == 2) {
@@ -195,7 +196,7 @@ router.post('/', function(req, res, next) {
                 console.log(err);
                 res.render('ajouterRecruteur', {
 
-                    title: 'Inscription' ,
+                    title: 'Inscription d\'un recruteur',
                     nomRecruteur: recruteur.nomRecruteur,
                     prenomRecruteur: recruteur.prenomRecruteur,
                     nomEntreprise: recruteur.nomEntreprise,
@@ -203,14 +204,14 @@ router.post('/', function(req, res, next) {
                     ville: recruteur.ville,
                     cp: recruteur.cp,
                     pays: paysHandleError,
-                    departement : Departement,
+                    departement: Departement,
                     telFixe: recruteur.telFixe,
                     telMobile: recruteur.telMobile,
                     mail: null,
                     mdp: mdp,
-                    Err : 2,
-                    ErroHandler : ErroHandler,
-                    mailExist : mailExist,
+                    Err: 2,
+                    ErroHandler: ErroHandler,
+                    mailExist: mailExist,
                     session: req.session
 
                 });
@@ -220,7 +221,7 @@ router.post('/', function(req, res, next) {
                 console.log(err);
                 res.render('ajouterRecruteur', {
 
-                    title: 'Inscription' ,
+                    title: 'Inscription d\'un recruteur',
                     nomRecruteur: recruteur.nomRecruteur,
                     prenomRecruteur: recruteur.prenomRecruteur,
                     nomEntreprise: recruteur.nomEntreprise,
@@ -228,22 +229,22 @@ router.post('/', function(req, res, next) {
                     ville: recruteur.ville,
                     cp: recruteur.cp,
                     pays: paysHandleError,
-                    departement : Departement,
+                    departement: Departement,
                     telFixe: recruteur.telFixe,
                     telMobile: recruteur.telMobile,
                     mail: null,
                     mdp: null,
-                    Err : 3,
-                    ErroHandler : ErroHandler,
-                    mailExist : mailExist,
+                    Err: 3,
+                    ErroHandler: ErroHandler,
+                    mailExist: mailExist,
                     session: req.session
                 });
             }
-        } else if (mailExist == 1){
+        } else if (mailExist == 1) {
 
             res.render('ajouterRecruteur', {
 
-                title: 'Inscription' ,
+                title: 'Inscription d\'un recruteur',
                 nomRecruteur: recruteur.nomRecruteur,
                 prenomRecruteur: recruteur.prenomRecruteur,
                 nomEntreprise: recruteur.nomEntreprise,
@@ -251,14 +252,14 @@ router.post('/', function(req, res, next) {
                 ville: recruteur.ville,
                 cp: recruteur.cp,
                 pays: paysHandleError,
-                departement : Departement,
+                departement: Departement,
                 telFixe: recruteur.telFixe,
                 telMobile: recruteur.telMobile,
                 mail: null,
                 mdp: null,
-                Err : 4,
-                ErroHandler : ErroHandler,
-                mailExist : mailExist,
+                Err: 4,
+                ErroHandler: ErroHandler,
+                mailExist: mailExist,
                 session: req.session
 
             });
@@ -271,10 +272,10 @@ router.post('/', function(req, res, next) {
             utilisateur.setRecruteur(recruteur);
             res.render('login', {
                 title: 'Page de connexion',
-                message: "test",
+                message: '',
                 email: utilisateur.mail,
                 mdp: utilisateur.mdp,
-                session : req.session
+                session: req.session
             });
         })
     });
