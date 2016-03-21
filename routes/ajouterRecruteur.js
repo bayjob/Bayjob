@@ -274,7 +274,7 @@ router.post('/', function (req, res, next) {
                 title: 'Page de connexion',
                 message: '',
                 email: utilisateur.mail,
-                mdp: utilisateur.mdp,
+                mdp: null,
                 session: req.session
             });
         })
