@@ -11,7 +11,8 @@ router.get('/', function(req, res, next) {
 
     var NiveauEtude;
     var Departement;
-
+    var Contrat;
+    var Pays;
     models.Departement.findAll({
 
         attributes: ['id', 'intitule']
@@ -30,8 +31,16 @@ router.get('/', function(req, res, next) {
                 attributes: ['id', 'intitule']
 
             }).then(function(contrat){
+                Contrat = contrat;
 
-                res.render('ajouterOffre', { title: 'Ajoutez votre offre' , contrat : contrat, NiveauEtud: NiveauEtude, Departement : Departement, session: req.session});
+                models.Pays.findAll({
+
+                    attributes: ['id', 'intitule']
+
+                }).then(function(pays) {
+                    Pays = pays;
+                    res.render('ajouterOffre', { title: 'Ajoutez votre offre' , pays : Pays, contrat : Contrat, NiveauEtud: NiveauEtude, Departement : Departement, session: req.session});
+                });
             });
         });
     });
@@ -77,8 +86,10 @@ router.post('/', function(req, res, next) {
     var mail = req.body.mail;
     var contrat = req.body.contrat;
     var NE = req.body.niveau;
+    var payss = req.body.pays;
     var dep = req.body.departement;
 
+    console.log(payss);
 
     if(handicap == "on") {
         handicapBool = true;
@@ -102,6 +113,7 @@ router.post('/', function(req, res, next) {
         ContratTypeId : contrat,
         RecruteurId : recId,
         NiveauEtudeId : NE,
+        PayId : payss,
         DepartementId : dep
 
     });
