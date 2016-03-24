@@ -198,7 +198,7 @@ router.post('/', function(req, res, next) {
                         /**
                          *  Si les nouveaux mail et mdp sont identiques aux anciens
                          */
-                        if(req.body.oldmail == req.body.mailCandidat && req.body.oldmdp == req.body.mdpCandidat){
+                        if((req.body.oldmail == req.body.mailCandidat && req.body.oldmdp == req.body.mdpCandidat) || (req.body.mailCandidat == null && req.body.mdpCandidat==null)){
                             res.render('espaceCandidat', {
                                 title: 'Espace candidat',
                                 candidat: candidat,
@@ -209,9 +209,7 @@ router.post('/', function(req, res, next) {
                         /**
                          * Si le nouveau mail est différent de l'ancien
                          */
-                        console.log(req.body.oldmail + " -> " + req.body.mailCandidat);
-                        if(req.body.oldmail != req.body.mailCandidat && req.body.oldmdp == req.body.mdpCandidat){
-                            console.log(req.body.oldmail + " -> " + req.body.mailCandidat);
+                        if((req.body.oldmail != req.body.mailCandidat && req.body.mailCandidat != "" )&& (req.body.oldmdp == req.body.mdpCandidat || req.body.mdpCandidat == "")){
                             utilisateur.update({
                                 mail: req.body.mailCandidat
                             });
@@ -219,8 +217,7 @@ router.post('/', function(req, res, next) {
                         /**
                          * Si le nouveau mdp est différent de l'ancien
                          */
-                        if(req.body.oldmail == req.body.mailCandidat && req.body.oldmdp != req.body.mdpCandidat){
-                            console.log(req.body.oldmdp + " -> " + req.body.mdpCandidat);
+                        if((req.body.oldmail == req.body.mailCandidat || req.body.mailCandidat == "")&&(req.body.oldmdp != req.body.mdpCandidat && req.body.mdpCandidat != "")){
                             utilisateur.update({
                                 mdp: crypto.createHash('md5').update(req.body.mdpCandidat).digest("hex"),
                             });
@@ -228,12 +225,13 @@ router.post('/', function(req, res, next) {
                         /**
                          * Si les nouveaux mail et mdp sont différents des anciens
                          */
-                        if(req.body.oldmail != req.body.mailCandidat && req.body.oldmdp != req.body.mdpCandidat){
-                            console.log(req.body.oldmdp + " -> " + req.body.mdpCandidat);
-                            utilisateur.update({
-                                mail: req.body.mailCandidat,
-                                mdp: crypto.createHash('md5').update(req.body.mdpCandidat).digest("hex")
-                            });
+                        if((req.body.oldmail != req.body.mailCandidat) &&(req.body.oldmdp != req.body.mdpCandidat) ){
+                           if((req.body.mailCandidat != "") && (req.body.mdpCandidat != "")){
+                               utilisateur.update({
+                                   mail: req.body.mailCandidat,
+                                   mdp: crypto.createHash('md5').update(req.body.mdpCandidat).digest("hex")
+                               });
+                           }
                         }
                     } else if (err == 1) {
                         res.render('modifierCandidat', {
