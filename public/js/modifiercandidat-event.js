@@ -32,8 +32,6 @@ $(document).ready(function(){
     $('.modal-trigger').leanModal();
 
      $("#testmdp").click(function() {
-         console.log(CryptoJS.MD5('123456') + "-> hash a la main");
-         console.log($('input[name=oldmdp]').val() + " -> hash de la base");
          //si le hash de la base est égale au hash du mdp saisi
         if($('input[name=oldmdp]').val() == CryptoJS.MD5($('input[name=mdpancien]').val())){
             $("button[name=enregistrer]").removeClass("disabled");
