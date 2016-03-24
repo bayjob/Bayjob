@@ -42,8 +42,9 @@
                                            aria-required="true" placeholder="Date de début">
                                     <input id="salaire" type="text" name="salaire" class="validate" required=""
                                            aria-required="true" placeholder="Salaire">
-                                    <input id="ville" type="text" name="ville" class="validate" required=""
-                                           aria-required="true" placeholder="ville">
+
+                                    <input id="autocomplete" placeholder="Ville" onFocus="geolocate()" name="lieu" type="text" class="validate" required="" aria-required="true">
+
                                     <input id="mail" type="email" name="mail" class="validate" required=""
                                            aria-required="true" placeholder="mail">
                                     <div class="input-field col s12" class="validate" required="" aria-required="true">
@@ -65,8 +66,18 @@
                                         </select>
                                     </div>
                                     <div class="input-field col s12">
-                                        <select name="departement">
-                                            <option value="" disabled selected>Departement</option>
+                                        <select id="select_pays" name="pays">
+                                            <option value="72" selected="selected">France</option>
+
+                                            <%
+                                            for(var i = 0; i < pays.length; i++) { %>
+                                            <option value="<%= pays[i].id %>"><%= pays[i].intitule %></option>
+                                            <% } %>
+                                        </select>
+                                    </div>
+                                    <div class="input-field col s12" id="select_departement">
+                                        <select id="select_departement" name="departement">
+
                                             <%
                                             for(var i = 0; i < Departement.length; i++) { %>
                                             <option value="<%= Departement[i].id %>"><%= Departement[i].intitule %></option>
@@ -133,9 +144,8 @@
                     <!----------------------------------------------->
                     <!---------------- FIN DIV RECEPTION HIDDEN INPUT>
                     <------------------------------------------------>
-                    <div class="row">
-                        <button class="btn waves-effect waves-light blue-grey darken-1" type="submit"
-                                name="enregistrer">Enregistrer
+                    <div class="row center-align">
+                        <button class="btn waves-effect waves-light" type="submit" name="enregistrer">Enregistrer
                             <i class="material-icons right">send</i>
                         </button>
                     </div>
@@ -194,6 +204,10 @@
            class=" modal-action modal-close waves-effect waves-green btn-flat">Ajouter</a>
     </div>
 </div>
+
+<script src="/js/recruteur-coordinate.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvTewOiQvvKOS9RNOjYIN-qgE9NrcSKy4&signed_in=true&libraries=places&callback=initAutocomplete"
+        async defer></script>
 
 <%- include('include/footer') %>
 <script type="text/javascript" src="/js/ajouterOffre-event.js"></script>

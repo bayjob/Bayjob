@@ -121,7 +121,7 @@ router.post('/', function(req, res, next) {
         candidat.setDepartement(req.body.dep);
         candidat.setPay(req.body.pays);
         //console.log(candidat.pays);
-        res.render('login', { title:'Page de connexion', email: utilisateur.mail, mdp : utilisateur.mdp, message:"", session: req.session});
+        res.render('login', { title:'Page de connexion', email: utilisateur.mail, mdp :null , message:"", session: req.session});
     })
 });
 module.exports = router;

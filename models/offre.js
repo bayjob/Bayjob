@@ -15,6 +15,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         Offre.belongsTo(models.Recruteur);
         Offre.belongsTo(models.Departement);
+        Offre.belongsTo(models.Pays);
         Offre.belongsTo(models.Contrat_type);
         Offre.belongsTo(models.Niveau_etude);
         Offre.hasMany(models.Mission_offre);
