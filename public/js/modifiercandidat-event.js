@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    $('.modal-trigger').leanModal();
+
     var nom = $('input[name=nomCandidat]').val();
     var prenom= $('input[name=prenomCandidat]').val();
     var datenaissance = $('input[name=dateNaissanceCandidat]').val();
@@ -28,8 +30,6 @@ $(document).ready(function(){
     $('#elements_Candidat').append('<input type="hidden" name="oldmdp" value="' + mdp+ '">');
 
     $('#modaldata').append('<input type="hidden" name="oldmdp" value="' + mdp+ '">');
-
-    $('.modal-trigger').leanModal();
 
      $("#testmdp").click(function() {
          //si le hash de la base est égale au hash du mdp saisi
