@@ -193,7 +193,8 @@ router.post('/', function(req, res, next) {
                     /**
                      * Si il n'y a aucune erreur lors de la saisie des nouveaux identifiants
                      */
-                    if (err == 0 && req.body.mdpancien == req.body.oldmdp) {
+                    if (err == 0 ) {
+                        console.log("Yolo");
                         /**
                          *  Si les nouveaux mail et mdp sont identiques aux anciens
                          */
@@ -208,6 +209,7 @@ router.post('/', function(req, res, next) {
                         /**
                          * Si le nouveau mail est différent de l'ancien
                          */
+                        console.log(req.body.oldmail + " -> " + req.body.mailCandidat);
                         if(req.body.oldmail != req.body.mailCandidat && req.body.oldmdp == req.body.mdpCandidat){
                             console.log(req.body.oldmail + " -> " + req.body.mailCandidat);
                             utilisateur.update({
@@ -220,7 +222,7 @@ router.post('/', function(req, res, next) {
                         if(req.body.oldmail == req.body.mailCandidat && req.body.oldmdp != req.body.mdpCandidat){
                             console.log(req.body.oldmdp + " -> " + req.body.mdpCandidat);
                             utilisateur.update({
-                                mdp: req.body.mdpCandidat
+                                mdp: crypto.createHash('md5').update(req.body.mdpCandidat).digest("hex"),
                             });
                         }
                         /**
@@ -230,7 +232,7 @@ router.post('/', function(req, res, next) {
                             console.log(req.body.oldmdp + " -> " + req.body.mdpCandidat);
                             utilisateur.update({
                                 mail: req.body.mailCandidat,
-                                mdp: req.body.mdpCandidat
+                                mdp: crypto.createHash('md5').update(req.body.mdpCandidat).digest("hex")
                             });
                         }
                     } else if (err == 1) {
